@@ -1,0 +1,14 @@
+apply plugin: 'kotlin'
+apply plugin: CanonicalizerPlugin
+
+dependencies {
+    compile project(':core')
+}
+
+sourceSets {
+    test {
+        resources {
+            srcDir "../../config/test"
+        }
+    }
+}

@@ -1,0 +1,161 @@
+apply plugin: 'kotlin'
+apply plugin: 'java'
+apply plugin: 'net.corda.plugins.quasar-utils'
+apply plugin: 'net.corda.plugins.publish-utils'
+
+description 'Corda node modules'
+
+//noinspection GroovyAssignabilityCheck
+configurations {
+    // we don't want isolated.jar in classPath, since we want to test jar being dynamically loaded as an attachment
+    runtime.exclude module: 'isolated'
+
+    compile {
+        // We don't need these because we already include netty-all.
+        exclude group: 'io.netty', module: 'netty-transport'
+        exclude group: 'io.netty', module: 'netty-handler'
+    }
+
+    testCompile {
+        // Excluding javassist:javassist because it clashes with Hibernate's
+        // transitive org.javassist:javassist dependency.
+        // TODO: Remove this exclusion once junit-quickcheck 0.8 is released.
+        exclude group: 'javassist', module: 'javassist'
+    }
+
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+sourceSets {
+    integrationTest {
+        kotlin {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/kotlin')
+        }
+    }
+    test {
+        resources {
+            srcDir "../config/test"
+        }
+    }
+    main {
+        resources {
+            srcDir "../config/dev"
+        }
+    }
+}
+
+// To find potential version conflicts, run "gradle htmlDependencyReport" and then look in
+// build/reports/project/dependencies/index.html for green highlighted parts of the tree.
+
+dependencies {
+    compile project(':finance')
+    compile project(':node-schemas')
+    compile project(':node-api')
+    compile project(':client:rpc')
+
+    compile "com.google.code.findbugs:jsr305:3.0.1"
+
+    // Log4J: logging framework (with SLF4J bindings)
+    compile "org.apache.logging.log4j:log4j-slf4j-impl:${log4j_version}"
+    compile "org.apache.logging.log4j:log4j-web:${log4j_version}"
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+
+    compile "com.google.guava:guava:$guava_version"
+
+    // JOpt: for command line flags.
+    compile "net.sf.jopt-simple:jopt-simple:$jopt_simple_version"
+
+    // Artemis: for reliable p2p message queues.
+    compile "org.apache.activemq:artemis-server:${artemis_version}"
+    compile "org.apache.activemq:artemis-core-client:${artemis_version}"
+    runtime "org.apache.activemq:artemis-amqp-protocol:${artemis_version}"
+
+    // JAnsi: for drawing things to the terminal in nicely coloured ways.
+    compile "org.fusesource.jansi:jansi:$jansi_version"
+
+    // Manifests: for reading stuff from the manifest file
+    compile "com.jcabi:jcabi-manifests:1.1"
+
+    // GraphStream: For visualisation
+    testCompile "org.graphstream:gs-core:1.3"
+    testCompile("org.graphstream:gs-ui:1.3") {
+        exclude group: "bouncycastle"
+    }
+    compile("com.intellij:forms_rt:7.0.3") {
+        exclude group: "asm"
+    }
+
+    // Jackson support: serialisation to/from JSON, YAML, etc
+    compile project(':client:jackson')
+
+    // Coda Hale's Metrics: for monitoring of key statistics
+    compile "io.dropwizard.metrics:metrics-core:3.1.2"
+
+    // JimFS: in memory java.nio filesystem. Used for test and simulation utilities.
+    compile "com.google.jimfs:jimfs:1.1"
+
+    // TypeSafe Config: for simple and human friendly config files.
+    compile "com.typesafe:config:$typesafe_config_version"
+
+    // Unit testing helpers.
+    testCompile "junit:junit:$junit_version"
+    testCompile "org.assertj:assertj-core:${assertj_version}"
+    testCompile "com.pholser:junit-quickcheck-core:$quickcheck_version"
+    testCompile "com.nhaarman:mockito-kotlin:1.1.0"
+    testCompile project(':test-utils')
+    testCompile project(':client:jfx')
+
+    // For H2 database support in persistence
+    compile "com.h2database:h2:$h2_version"
+
+    // Exposed: Kotlin SQL library - under evaluation
+    // TODO: Upgrade to Exposed 0.7 (has API changes)
+    compile "org.jetbrains.exposed:exposed:0.5.0"
+
+    // SQL connection pooling library
+    compile "com.zaxxer:HikariCP:2.5.1"
+
+    // Hibernate: an object relational mapper for writing state objects to the database automatically.
+    compile "org.hibernate:hibernate-core:$hibernate_version"
+    compile "org.hibernate:hibernate-java8:$hibernate_version"
+
+    // Capsule is a library for building independently executable fat JARs.
+    compile 'co.paralleluniverse:capsule:1.0.3'
+
+    // Java Atomix: RAFT library
+    compile 'io.atomix.copycat:copycat-client:1.2.3'
+    compile 'io.atomix.copycat:copycat-server:1.2.3'
+    compile 'io.atomix.catalyst:catalyst-netty:1.1.2'
+
+    // Netty: All of it.
+    compile "io.netty:netty-all:$netty_version"
+
+    // CRaSH: An embeddable monitoring and admin shell with support for adding new commands written in Groovy.
+    compile("com.github.corda.crash:crash.shell:9d242da2a10e686f33a3aefc69e4768824ad0716") {
+        exclude group: "org.slf4j", module: "slf4j-jdk14"
+    }
+
+    // OkHTTP: Simple HTTP library.
+    compile "com.squareup.okhttp3:okhttp:$okhttp_version"
+
+    // BFT-SMaRt
+    compile 'commons-codec:commons-codec:1.10'
+    compile 'com.github.bft-smart:library:master-v1.1-beta-g6215ec8-87'
+
+    // Requery: object mapper for Kotlin
+    compile "io.requery:requery-kotlin:$requery_version"
+
+    // Integration test helpers
+    integrationTestCompile "junit:junit:$junit_version"
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}

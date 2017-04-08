@@ -1,0 +1,134 @@
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+apply plugin: 'net.corda.plugins.quasar-utils'
+apply plugin: 'net.corda.plugins.publish-utils'
+apply plugin: 'net.corda.plugins.cordformation'
+apply plugin: 'maven-publish'
+
+ext {
+    deployTo = "./build/nodes"
+    notaryType = "corda.notary.validating.raft"
+    notaryName = "Raft"
+    advertisedNotary = "$notaryType|$notaryName"
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir "../../config/dev"
+        }
+    }
+    test {
+        resources {
+            srcDir "../../config/test"
+        }
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    testCompile "junit:junit:$junit_version"
+
+    // Corda integration dependencies
+    runtime project(path: ":node:capsule", configuration: 'runtimeArtifacts')
+    runtime project(path: ":webserver:webcapsule", configuration: 'runtimeArtifacts')
+    compile project(':core')
+    compile project(':client:jfx')
+    compile project(':client:rpc')
+    compile project(':test-utils')
+
+    // Javax is required for webapis
+    compile "org.glassfish.jersey.core:jersey-server:${jersey_version}"
+}
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}
+
+publishing {
+    publications {
+        jarAndSources(MavenPublication) {
+            from components.java
+            artifactId 'raftnotarydemo'
+
+            artifact sourceJar
+            artifact javadocJar
+        }
+    }
+}
+
+task generateNotaryIdentity(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = "net.corda.node.utilities.ServiceIdentityGeneratorKt"
+    def nodeDirs = ["$deployTo/Notary1", "$deployTo/Notary2", "$deployTo/Notary3"].join(",")
+    args = [nodeDirs, notaryType, notaryName]
+}
+
+task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build', 'generateNotaryIdentity']) {
+    directory deployTo
+    networkMap "Notary 1"
+    node {
+        name "Party"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10002
+        rpcPort 10003
+        cordapps = []
+        rpcUsers = [['user': "demo", 'password': "demo", 'permissions': [
+                'StartFlow.net.corda.notarydemo.flows.DummyIssueAndMove',
+                'StartFlow.net.corda.flows.NotaryFlow$Client'
+        ]]]
+    }
+    node {
+        name "Counterparty"
+        nearestCity "New York"
+        advertisedServices = []
+        p2pPort 10005
+        rpcPort 10006
+        cordapps = []
+    }
+    node {
+        name "Notary 1"
+        nearestCity "London"
+        advertisedServices = [advertisedNotary]
+        p2pPort 10008
+        rpcPort 10009
+        cordapps = []
+        notaryNodePort 11002
+    }
+    node {
+        name "Notary 2"
+        nearestCity "London"
+        advertisedServices = [advertisedNotary]
+        p2pPort 10011
+        rpcPort 10012
+        cordapps = []
+        notaryNodePort 11004
+        notaryClusterAddresses = ["localhost:11002"]
+    }
+    node {
+        name "Notary 3"
+        nearestCity "London"
+        advertisedServices = [advertisedNotary]
+        p2pPort 10014
+        rpcPort 10015
+        cordapps = []
+        notaryNodePort 11006
+        notaryClusterAddresses = ["localhost:11002"]
+    }
+}
+
+task notarise(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'net.corda.notarydemo.NotaryDemoKt'
+}
+
