@@ -139,9 +139,15 @@ task runSeller(type: JavaExec) {
     args '--role'
     args 'SELLER'
     args '--amount'
-    args '$150'
+    if (project.hasProperty("amt")){
+        args amt
+    }
     args '--quantity'
-    args '2'
+    if (project.hasProperty("qty")){
+        args qty
+    }
     args '--ticker'
-    args 'AAPL'
+    if (project.hasProperty("tck")){
+        args tck
+    }
 }

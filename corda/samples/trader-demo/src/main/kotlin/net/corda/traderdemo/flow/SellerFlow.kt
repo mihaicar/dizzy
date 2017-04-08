@@ -5,7 +5,6 @@ import net.corda.contracts.ShareContract
 import net.corda.contracts.asset.DUMMY_CASH_ISSUER
 import net.corda.core.contracts.*
 import net.corda.core.crypto.*
-import net.corda.core.days
 import net.corda.core.flows.FlowLogic
 import net.corda.core.node.NodeInfo
 import net.corda.core.seconds
@@ -46,21 +45,21 @@ class SellerFlow(val otherParty: Party,
 
         val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
         val cpOwnerKey = serviceHub.legalIdentityKey
-        val commercialPaper = selfIssueSomeCommercialPaper(cpOwnerKey.public.composite, notary, qty, ticker)
+        val shareContract = selfIssueShareContract(cpOwnerKey.public.composite, notary, qty, ticker)
 
         progressTracker.currentStep = TRADING
-        println("Balance check follows...")
-        val balances = serviceHub.vaultService.cashBalances.entries.map { "${it.key.currencyCode} ${it.value}" }
-        println("Remaining balance: ${balances.joinToString()}")
 
-        // Send the offered amount, quantity and ticker
+        val balances = serviceHub.vaultService.cashBalances.entries.map { "${it.key.currencyCode} ${it.value}" }
+        println("Balance of the Seller previous to the trade is: ${balances.joinToString()}")
+
+        // Send the offered amount, quantity and ticker - these come from gradle and, higher, a JS page (//TODO)
         val items = listOf(amount, qty, ticker)
         // amount - what the buyer has to pay - could be a diff between exchange and gradle input!
         send(otherParty, items)
         val seller = TwoPartyTradeFlow.Seller(
                 otherParty,
                 notary,
-                commercialPaper,
+                shareContract,
                 amount,
                 qty,
                 ticker,
@@ -70,20 +69,23 @@ class SellerFlow(val otherParty: Party,
     }
 
     @Suspendable
-    fun selfIssueSomeCommercialPaper(ownedBy: CompositeKey, notaryNode: NodeInfo, qty: Long, ticker: String): StateAndRef<ShareContract.State> {
-        // Make a fake company that's issued its own paper.
+    fun selfIssueShareContract(ownedBy: CompositeKey, notaryNode: NodeInfo, qty: Long, ticker: String): StateAndRef<ShareContract.State> {
+        // Make a fake company that's issued its own paper, given a ticker
+        // This is for DEMO PURPOSES ONLY: in reality, the issuing would only be done by the company owning the ticker
+        // However, we are not interested in the financial side of the trade, but the programming part.
         val keyPair = generateKeyPair()
         val party = Party(ticker, keyPair.public)
-        println("We have the party as $ticker and $keyPair")
         val issuance: SignedTransaction = run {
-            // 1100 - how much the share is worth (should be the same as the amount though!
-            // For shares - check equality-ish
-            // Of course - when issuing the share, get price from exchange!!! for the given ticker and qty
-            val realAmount = Amount.parseCurrency("$" + StockFetch.getPrice("AAPL"))
-            val tx = ShareContract().generateIssue(party.ref(1, 2, 3), realAmount * qty `issued by` DUMMY_CASH_ISSUER,
-                    Instant.now() + 10.seconds, notaryNode.notaryIdentity, qty, ticker)
+            // MC: we get the realAmount from the exchange (ideally; here, x = Yahoo)
+            // The value of the contract is the amount times the no of shares in it.
+            // Need to check the offered price is good for the value of the contract, i.e.
+            // assert paid > value
+            val realAmount = Amount.parseCurrency("$" + StockFetch.getPrice(ticker))
+            val value = realAmount * qty
+            val tx = ShareContract().generateIssue(party.ref(1, 2, 3), value `issued by` DUMMY_CASH_ISSUER,
+                    Instant.now(), notaryNode.notaryIdentity, qty, ticker)
 
-            println("generated...")
+            println("We have generated a ShareContract worth $value.")
             // TODO: Consider moving these two steps below into generateIssue.
 
             // Attach the prospectus.

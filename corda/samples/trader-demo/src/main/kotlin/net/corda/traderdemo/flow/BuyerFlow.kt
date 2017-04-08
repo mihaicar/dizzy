@@ -42,14 +42,12 @@ class BuyerFlow(val otherParty: Party,
 
         // Receive the offered amount and automatically agree to it (in reality this would be a longer negotiation)
         // MC: we're also automatically agreeing to the qty/ticker - why?
-        //val amount = receive<Amount<Currency>>(otherParty).unwrap { it }
         val items = receive<List<Any>>(otherParty).unwrap { it }
-        // Check casts or find differenty way to do it
-        val amount : Amount<Currency> = items.get(0) as Amount<Currency>
-        val qty : Long = items.get(1) as Long
-        val ticker : String = items.get(2) as String
-        //MC: Conditions checker for the triple! threshold for amount, qty and ticker must be same as what the buyer wants
-
+        // Check casts or find different way to do it
+        val amount : Amount<Currency> = items[0] as Amount<Currency>
+        val qty : Long = items[1] as Long
+        val ticker : String = items[2] as String
+        // MC: the agreement is already done - left to check amount and value are similar
         val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
         val buyer = TwoPartyTradeFlow.Buyer(
                 otherParty,
@@ -70,14 +68,11 @@ class BuyerFlow(val otherParty: Party,
         logIssuanceAttachment(tradeTX)
         logBalance()
 
-
-
-
     }
 
     private fun logBalance() {
         val balances = serviceHub.vaultService.cashBalances.entries.map { "${it.key.currencyCode} ${it.value}" }
-        println("Remaining balance: ${balances.joinToString()}")
+        println("Remaining balance of Buyer is: ${balances.joinToString()}")
     }
 
     private fun logIssuanceAttachment(tradeTX: SignedTransaction) {

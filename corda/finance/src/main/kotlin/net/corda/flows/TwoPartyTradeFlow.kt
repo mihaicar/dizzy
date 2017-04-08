@@ -191,15 +191,15 @@ object TwoPartyTradeFlow {
                 val asset = it.assetForSale.state.data
                 val assetTypeName = asset.javaClass.name
                 println ( "Got trade request for a $assetTypeName: ${it.assetForSale}" )
+
                 if (it.price > acceptablePrice)
                     throw UnacceptablePriceException(it.price)
                 if (it.qty != qty)
                     throw UnacceptableQuantityException(it.qty, qty)
-                if (!it.ticker.equals(ticker))
+                if (it.ticker != ticker)
                     throw AssetMismatchException(it.ticker, ticker)
                 if (!typeToBuy.isInstance(asset))
                     throw AssetMismatchException(typeToBuy.name, assetTypeName)
-
                 // Check that the state being sold to us is in a valid chain of transactions, i.e. that the
                 // seller has a valid chain of custody proving that they own the thing they're selling.
                 subFlow(ResolveTransactionsFlow(setOf(it.assetForSale.ref.txhash), otherParty))
