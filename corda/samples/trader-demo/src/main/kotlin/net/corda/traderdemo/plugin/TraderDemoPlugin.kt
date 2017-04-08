@@ -10,7 +10,7 @@ import java.util.function.Function
 class TraderDemoPlugin : CordaPluginRegistry() {
     // A list of Flows that are required for this cordapp
     override val requiredFlows: Map<String, Set<String>> = mapOf(
-            SellerFlow::class.java.name to setOf(Party::class.java.name, Amount::class.java.name)
+            SellerFlow::class.java.name to setOf(Party::class.java.name, Amount::class.java.name, Long::class.java.name, String::class.java.name)
     )
     override val servicePlugins = listOf(Function(BuyerFlow::Service))
 }

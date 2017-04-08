@@ -138,4 +138,10 @@ task runSeller(type: JavaExec) {
     main = 'net.corda.traderdemo.TraderDemoKt'
     args '--role'
     args 'SELLER'
+    args '--amount'
+    args '$150'
+    args '--quantity'
+    args '2'
+    args '--ticker'
+    args 'AAPL'
 }

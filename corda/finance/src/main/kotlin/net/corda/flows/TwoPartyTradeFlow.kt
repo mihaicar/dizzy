@@ -39,7 +39,9 @@ object TwoPartyTradeFlow {
     // TODO: Common elements in multi-party transaction consensus and signing should be refactored into a superclass of this
     // and [AbstractStateReplacementFlow].
 
-    class UnacceptablePriceException(givenPrice: Amount<Currency>) : FlowException("Unacceptable price: $givenPrice")
+    class UnacceptablePriceException(givenPrice: Amount<Currency>, accPrice: Amount<Currency> = 0.DOLLARS) : FlowException("Unacceptable price: $givenPrice != $accPrice")
+
+    class UnacceptableQuantityException(givenQty: Long, accQty: Long) : FlowException("Unacceptable quantity: $givenQty != $accQty")
 
     class AssetMismatchException(val expectedTypeName: String, val typeName: String) : FlowException() {
         override fun toString() = "The submitted asset didn't match the expected type: $expectedTypeName vs $typeName"
@@ -50,6 +52,8 @@ object TwoPartyTradeFlow {
     data class SellerTradeInfo(
             val assetForSale: StateAndRef<OwnableState>,
             val price: Amount<Currency>,
+            val qty: Long,
+            val ticker: String,
             val sellerOwnerKey: CompositeKey
     )
 
@@ -61,6 +65,8 @@ object TwoPartyTradeFlow {
                       val notaryNode: NodeInfo,
                       val assetToSell: StateAndRef<OwnableState>,
                       val price: Amount<Currency>,
+                      val qty: Long,
+                      val ticker: String,
                       val myKeyPair: KeyPair,
                       override val progressTracker: ProgressTracker = Seller.tracker()) : FlowLogic<SignedTransaction>() {
 
@@ -96,7 +102,7 @@ object TwoPartyTradeFlow {
 
             val myPublicKey = myKeyPair.public.composite
             // Make the first message we'll send to kick off the flow.
-            val hello = SellerTradeInfo(assetToSell, price, myPublicKey)
+            val hello = SellerTradeInfo(assetToSell, price, qty, ticker, myPublicKey)
             // What we get back from the other side is a transaction that *might* be valid and acceptable to us,
             // but we must check it out thoroughly before we sign!
             val untrustedSTX = sendAndReceive<SignedTransaction>(otherParty, hello)
@@ -140,6 +146,8 @@ object TwoPartyTradeFlow {
     open class Buyer(val otherParty: Party,
                      val notary: Party,
                      val acceptablePrice: Amount<Currency>,
+                     val qty: Long,
+                     val ticker: String,
                      val typeToBuy: Class<out OwnableState>) : FlowLogic<SignedTransaction>() {
         // DOCSTART 2
         object RECEIVING : ProgressTracker.Step("Waiting for seller trading info")
@@ -182,10 +190,13 @@ object TwoPartyTradeFlow {
                 // What is the seller trying to sell us?
                 val asset = it.assetForSale.state.data
                 val assetTypeName = asset.javaClass.name
-                logger.trace { "Got trade request for a $assetTypeName: ${it.assetForSale}" }
-
+                println ( "Got trade request for a $assetTypeName: ${it.assetForSale}" )
                 if (it.price > acceptablePrice)
                     throw UnacceptablePriceException(it.price)
+                if (it.qty != qty)
+                    throw UnacceptableQuantityException(it.qty, qty)
+                if (!it.ticker.equals(ticker))
+                    throw AssetMismatchException(it.ticker, ticker)
                 if (!typeToBuy.isInstance(asset))
                     throw AssetMismatchException(typeToBuy.name, assetTypeName)
 

@@ -31,14 +31,18 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         val me = rpc.nodeIdentity()
         val amounts = calculateRandomlySizedAmounts(amount, 3, 10, Random())
         // issuer random amounts of currency totaling 30000.DOLLARS in parallel
+        println("About to request money issuance in the Buyer.")
+
+        // The IssuanceRequester is just a testing feature to enable asset mvm - not to be used in production.
         val resultFutures = amounts.map { pennies ->
             rpc.startFlow(::IssuanceRequester, Amount(pennies, amount.token), me.legalIdentity, OpaqueBytes.of(1), bankOfCordaParty).returnValue
         }
 
         Futures.allAsList(resultFutures).getOrThrow()
+        println("Requested and received.")
     }
 
-    fun runSeller(amount: Amount<Currency> = 1000.0.DOLLARS, counterparty: String) {
+    fun runSeller(amount: Amount<Currency> = 1000.0.DOLLARS, counterparty: String, qty: Long, ticker: String) {
         val otherParty = rpc.partyFromName(counterparty) ?: throw IllegalStateException("Don't know $counterparty")
         // The seller will sell some commercial paper to the buyer, who will pay with (self issued) cash.
         //
@@ -54,7 +58,8 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         }
 
         // The line below blocks and waits for the future to resolve.
-        val stx = rpc.startFlow(::SellerFlow, otherParty, amount).returnValue.getOrThrow()
-        logger.info("Sale completed - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx.tx)}")
+        println("About to start seller flow.")
+        val stx = rpc.startFlow(::SellerFlow, otherParty, amount, qty, ticker).returnValue.getOrThrow()
+        println("Sale completed in API - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx.tx)}")
     }
 }

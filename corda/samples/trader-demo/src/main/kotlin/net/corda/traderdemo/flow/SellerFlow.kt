@@ -1,7 +1,7 @@
 package net.corda.traderdemo.flow
 
 import co.paralleluniverse.fibers.Suspendable
-import net.corda.contracts.CommercialPaper
+import net.corda.contracts.ShareContract
 import net.corda.contracts.asset.DUMMY_CASH_ISSUER
 import net.corda.core.contracts.*
 import net.corda.core.crypto.*
@@ -13,13 +13,17 @@ import net.corda.core.transactions.SignedTransaction
 import net.corda.core.utilities.ProgressTracker
 import net.corda.flows.NotaryFlow
 import net.corda.flows.TwoPartyTradeFlow
+import net.corda.stockinfo.StockFetch
 import java.time.Instant
 import java.util.*
 
+
 class SellerFlow(val otherParty: Party,
                  val amount: Amount<Currency>,
+                 val qty: Long,
+                 val ticker: String,
                  override val progressTracker: ProgressTracker) : FlowLogic<SignedTransaction>() {
-    constructor(otherParty: Party, amount: Amount<Currency>) : this(otherParty, amount, tracker())
+    constructor(otherParty: Party, amount: Amount<Currency>, qty: Long, ticker: String) : this(otherParty, amount, qty, ticker, tracker())
 
     companion object {
         val PROSPECTUS_HASH = SecureHash.parse("decd098666b9657314870e192ced0c3519c2c9d395507a238338f8d003929de9")
@@ -42,39 +46,51 @@ class SellerFlow(val otherParty: Party,
 
         val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
         val cpOwnerKey = serviceHub.legalIdentityKey
-        val commercialPaper = selfIssueSomeCommercialPaper(cpOwnerKey.public.composite, notary)
+        val commercialPaper = selfIssueSomeCommercialPaper(cpOwnerKey.public.composite, notary, qty, ticker)
 
         progressTracker.currentStep = TRADING
+        println("Balance check follows...")
+        val balances = serviceHub.vaultService.cashBalances.entries.map { "${it.key.currencyCode} ${it.value}" }
+        println("Remaining balance: ${balances.joinToString()}")
 
-        // Send the offered amount.
-        send(otherParty, amount)
+        // Send the offered amount, quantity and ticker
+        val items = listOf(amount, qty, ticker)
+        // amount - what the buyer has to pay - could be a diff between exchange and gradle input!
+        send(otherParty, items)
         val seller = TwoPartyTradeFlow.Seller(
                 otherParty,
                 notary,
                 commercialPaper,
                 amount,
+                qty,
+                ticker,
                 cpOwnerKey,
                 progressTracker.getChildProgressTracker(TRADING)!!)
         return subFlow(seller, shareParentSessions = true)
     }
 
     @Suspendable
-    fun selfIssueSomeCommercialPaper(ownedBy: CompositeKey, notaryNode: NodeInfo): StateAndRef<CommercialPaper.State> {
+    fun selfIssueSomeCommercialPaper(ownedBy: CompositeKey, notaryNode: NodeInfo, qty: Long, ticker: String): StateAndRef<ShareContract.State> {
         // Make a fake company that's issued its own paper.
         val keyPair = generateKeyPair()
-        val party = Party("Bank of London", keyPair.public)
-
+        val party = Party(ticker, keyPair.public)
+        println("We have the party as $ticker and $keyPair")
         val issuance: SignedTransaction = run {
-            val tx = CommercialPaper().generateIssue(party.ref(1, 2, 3), 1100.DOLLARS `issued by` DUMMY_CASH_ISSUER,
-                    Instant.now() + 10.days, notaryNode.notaryIdentity)
+            // 1100 - how much the share is worth (should be the same as the amount though!
+            // For shares - check equality-ish
+            // Of course - when issuing the share, get price from exchange!!! for the given ticker and qty
+            val realAmount = Amount.parseCurrency("$" + StockFetch.getPrice("AAPL"))
+            val tx = ShareContract().generateIssue(party.ref(1, 2, 3), realAmount * qty `issued by` DUMMY_CASH_ISSUER,
+                    Instant.now() + 10.seconds, notaryNode.notaryIdentity, qty, ticker)
 
+            println("generated...")
             // TODO: Consider moving these two steps below into generateIssue.
 
             // Attach the prospectus.
             tx.addAttachment(serviceHub.storageService.attachments.openAttachment(PROSPECTUS_HASH)!!.id)
 
             // Requesting timestamping, all CP must be timestamped.
-            tx.setTime(Instant.now(), 30.seconds)
+            tx.setTime(Instant.now(), 5.seconds)
 
             // Sign it as ourselves.
             tx.signWith(keyPair)
@@ -93,7 +109,7 @@ class SellerFlow(val otherParty: Party,
         // Now make a dummy transaction that moves it to a new key, just to show that resolving dependencies works.
         val move: SignedTransaction = run {
             val builder = TransactionType.General.Builder(notaryNode.notaryIdentity)
-            CommercialPaper().generateMove(builder, issuance.tx.outRef(0), ownedBy)
+            ShareContract().generateMove(builder, issuance.tx.outRef(0), ownedBy)
             builder.signWith(keyPair)
             val notarySignature = subFlow(NotaryFlow.Client(builder.toSignedTransaction(false)))
             notarySignature.forEach { builder.addSignatureUnchecked(it) }

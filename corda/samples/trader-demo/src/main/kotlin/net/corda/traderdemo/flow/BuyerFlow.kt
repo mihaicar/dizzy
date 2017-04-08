@@ -1,13 +1,14 @@
 package net.corda.traderdemo.flow
 
 import co.paralleluniverse.fibers.Suspendable
-import net.corda.contracts.CommercialPaper
+import net.corda.contracts.ShareContract
 import net.corda.core.contracts.Amount
 import net.corda.core.contracts.TransactionGraphSearch
 import net.corda.core.crypto.Party
 import net.corda.core.flows.FlowLogic
 import net.corda.core.node.NodeInfo
 import net.corda.core.node.PluginServiceHub
+import net.corda.core.node.services.Vault
 import net.corda.core.serialization.SingletonSerializeAsToken
 import net.corda.core.transactions.SignedTransaction
 import net.corda.core.utilities.Emoji
@@ -21,7 +22,7 @@ class BuyerFlow(val otherParty: Party,
                 private val attachmentsPath: Path,
                 override val progressTracker: ProgressTracker = ProgressTracker(STARTING_BUY)) : FlowLogic<Unit>() {
 
-    object STARTING_BUY : ProgressTracker.Step("Seller connected, purchasing commercial paper asset")
+    object STARTING_BUY : ProgressTracker.Step("Seller connected, purchasing shares")
 
     class Service(services: PluginServiceHub) : SingletonSerializeAsToken() {
         init {
@@ -40,13 +41,23 @@ class BuyerFlow(val otherParty: Party,
         progressTracker.currentStep = STARTING_BUY
 
         // Receive the offered amount and automatically agree to it (in reality this would be a longer negotiation)
-        val amount = receive<Amount<Currency>>(otherParty).unwrap { it }
+        // MC: we're also automatically agreeing to the qty/ticker - why?
+        //val amount = receive<Amount<Currency>>(otherParty).unwrap { it }
+        val items = receive<List<Any>>(otherParty).unwrap { it }
+        // Check casts or find differenty way to do it
+        val amount : Amount<Currency> = items.get(0) as Amount<Currency>
+        val qty : Long = items.get(1) as Long
+        val ticker : String = items.get(2) as String
+        //MC: Conditions checker for the triple! threshold for amount, qty and ticker must be same as what the buyer wants
+
         val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
         val buyer = TwoPartyTradeFlow.Buyer(
                 otherParty,
                 notary.notaryIdentity,
                 amount,
-                CommercialPaper.State::class.java)
+                qty,
+                ticker,
+                ShareContract.State::class.java)
 
         // This invokes the trading flow and out pops our finished transaction.
         val tradeTX: SignedTransaction = subFlow(buyer, shareParentSessions = true)
@@ -58,6 +69,10 @@ class BuyerFlow(val otherParty: Party,
 
         logIssuanceAttachment(tradeTX)
         logBalance()
+
+
+
+
     }
 
     private fun logBalance() {
@@ -66,18 +81,17 @@ class BuyerFlow(val otherParty: Party,
     }
 
     private fun logIssuanceAttachment(tradeTX: SignedTransaction) {
-        // Find the original CP issuance.
+        // Find the original share issuance - TGS
+        // MC: Explore the complexity of TGS
         val search = TransactionGraphSearch(serviceHub.storageService.validatedTransactions, listOf(tradeTX.tx))
-        search.query = TransactionGraphSearch.Query(withCommandOfType = CommercialPaper.Commands.Issue::class.java,
-                followInputsOfType = CommercialPaper.State::class.java)
+        search.query = TransactionGraphSearch.Query(withCommandOfType = ShareContract.Commands.Issue::class.java,
+                followInputsOfType = ShareContract.State::class.java)
         val cpIssuance = search.call().single()
 
         cpIssuance.attachments.first().let {
             val p = attachmentsPath.toAbsolutePath().resolve("$it.jar")
             println("""
-
-The issuance of the commercial paper came with an attachment. You can find it expanded in this directory:
-$p
+Attachment for the Share - any legal physical contract.
 
 ${Emoji.renderIfSupported(cpIssuance)}""")
         }
