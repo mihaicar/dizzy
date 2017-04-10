@@ -7,3 +7,7 @@ echo
 
 #./gradlew samples:trader-demo:runSeller -Pamt=$1 -Pqty=$2 -Ptck=$3
 ./gradlew samples:trader-demo:runSeller -Pamt="\$300" -Pqty=2 -Ptck=AAPL
+#./gradlew samples:trader-demo:runSeller -Pamt="\$10000" -Pqty=2 -Ptck=AAPL
+
+
+

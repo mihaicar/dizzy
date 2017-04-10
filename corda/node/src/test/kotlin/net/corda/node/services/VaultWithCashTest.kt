@@ -78,7 +78,7 @@ class VaultWithCashTest {
     fun splits() {
         databaseTransaction(database) {
             // Fix the PRNG so that we get the same splits every time.
-            services.fillWithSomeTestCash(100.DOLLARS, DUMMY_NOTARY, 3, 3, Random(0L))
+            //services.fillWithSomeTestCash(100.DOLLARS, DUMMY_NOTARY, 3, 3, Random(0L))
 
             val w = vault.unconsumedStates<Cash.State>().toList()
             assertEquals(3, w.size)

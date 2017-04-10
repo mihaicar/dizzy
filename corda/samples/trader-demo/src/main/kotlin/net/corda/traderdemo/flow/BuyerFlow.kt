@@ -39,7 +39,7 @@ class BuyerFlow(val otherParty: Party,
     @Suspendable
     override fun call() {
         progressTracker.currentStep = STARTING_BUY
-
+        logBalance()
         // Receive the offered amount and automatically agree to it (in reality this would be a longer negotiation)
         // MC: we're also automatically agreeing to the qty/ticker - why?
         val items = receive<List<Any>>(otherParty).unwrap { it }
@@ -72,7 +72,7 @@ class BuyerFlow(val otherParty: Party,
 
     private fun logBalance() {
         val balances = serviceHub.vaultService.cashBalances.entries.map { "${it.key.currencyCode} ${it.value}" }
-        println("Remaining balance of Buyer is: ${balances.joinToString()}")
+        println("Balance of Buyer is: ${balances.joinToString()}")
     }
 
     private fun logIssuanceAttachment(tradeTX: SignedTransaction) {

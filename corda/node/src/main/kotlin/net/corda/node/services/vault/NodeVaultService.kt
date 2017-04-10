@@ -462,7 +462,12 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         //
         // Finally, we add the states to the provided partial transaction.
 
-        // Retrieve unspent and unlocked cash states that meet our spending criteria.
+        // Retrieve unspent and unlocked cash states that meet our spending criteria
+
+        // MC: Chunks that we can take money from - the vault is fragmented, we need to get as many unconsumed states
+        // as we can to satisfy the amount requirement - if we even have that much. The more we need, the more input states
+        // will appear in the transaction. The final tx's output states will contain a reference to a Cash state that
+        // represents gatheredAmount - required amount (>0). Hence, we need extra information in the transaction.
         val acceptableCoins = unconsumedStatesForSpending<Cash.State>(amount, onlyFromParties, tx.notary, tx.lockId)
 
         // TODO: We should be prepared to produce multiple transactions spending inputs from
@@ -473,7 +478,6 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         tx.notary = acceptableCoins.firstOrNull()?.state?.notary
 
         val (gathered, gatheredAmount) = gatherCoins(acceptableCoins, amount)
-
         val takeChangeFrom = gathered.firstOrNull()
         val change = if (takeChangeFrom != null && gatheredAmount > amount) {
             Amount(gatheredAmount.quantity - amount.quantity, takeChangeFrom.state.data.amount.token)
@@ -504,8 +508,12 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
                     }
         } else states
 
-        for (state in gathered) tx.addInputState(state)
-        for (state in outputs) tx.addOutputState(state)
+        for (state in gathered) {
+            tx.addInputState(state)
+        }
+        for (state in outputs) {
+            tx.addOutputState(state)
+        }
 
         // What if we already have a move command with the right keys? Filter it out here or in platform code?
         tx.addCommand(Cash().generateMoveCommand(), keysUsed)

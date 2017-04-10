@@ -106,7 +106,6 @@ object TwoPartyTradeFlow {
             // What we get back from the other side is a transaction that *might* be valid and acceptable to us,
             // but we must check it out thoroughly before we sign!
             val untrustedSTX = sendAndReceive<SignedTransaction>(otherParty, hello)
-
             progressTracker.currentStep = VERIFYING
             return untrustedSTX.unwrap {
                 // Check that the tx proposed by the buyer is valid.
@@ -116,7 +115,6 @@ object TwoPartyTradeFlow {
                 // Download and check all the things that this transaction depends on and verify it is contract-valid,
                 // even though it is missing signatures.
                 subFlow(ResolveTransactionsFlow(wtx, otherParty))
-
                 if (wtx.outputs.map { it.data }.sumCashBy(myPublicKey).withoutIssuer() != price)
                     throw FlowException("Transaction is not sending us the right amount of cash")
 
@@ -170,7 +168,6 @@ object TwoPartyTradeFlow {
             progressTracker.currentStep = SIGNING
             val (ptx, cashSigningPubKeys) = assembleSharedTX(tradeRequest)
             val stx = signWithOurKeys(cashSigningPubKeys, ptx)
-
             // Send the signed transaction to the seller, who must then sign it themselves and commit
             // it to the ledger by sending it to the notary.
             progressTracker.currentStep = SENDING_SIGNATURES
@@ -190,8 +187,6 @@ object TwoPartyTradeFlow {
                 // What is the seller trying to sell us?
                 val asset = it.assetForSale.state.data
                 val assetTypeName = asset.javaClass.name
-                println ( "Got trade request for a $assetTypeName: ${it.assetForSale}" )
-
                 if (it.price > acceptablePrice)
                     throw UnacceptablePriceException(it.price)
                 if (it.qty != qty)
@@ -226,16 +221,14 @@ object TwoPartyTradeFlow {
 
             // Add inputs/outputs/a command for the movement of the asset.
             tx.addInputState(tradeRequest.assetForSale)
-
             // Just pick some new public key for now. This won't be linked with our identity in any way, which is what
             // we want for privacy reasons: the key is here ONLY to manage and control ownership, it is not intended to
             // reveal who the owner actually is. The key management service is expected to derive a unique key from some
             // initial seed in order to provide privacy protection.
             val freshKey = serviceHub.keyManagementService.freshKey()
             val (command, state) = tradeRequest.assetForSale.state.data.withNewOwner(freshKey.public.composite)
-            tx.addOutputState(state, tradeRequest.assetForSale.state.notary)
-            tx.addCommand(command, tradeRequest.assetForSale.state.data.owner)
-
+            tx.addOutputState(state, tradeRequest.assetForSale.state.notary) // adds the SC as an output
+            tx.addCommand(command, tradeRequest.assetForSale.state.data.owner) // modifies the owner
             // And add a request for timestamping: it may be that none of the contracts need this! But it can't hurt
             // to have one.
             val currentTime = serviceHub.clock.instant()

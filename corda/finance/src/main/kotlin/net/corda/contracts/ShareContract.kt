@@ -1,5 +1,7 @@
 package net.corda.contracts
 
+import net.corda.contracts.asset.DUMMY_CASH_ISSUER
+import net.corda.stockinfo.StockFetch
 import net.corda.contracts.asset.sumCashBy
 import net.corda.contracts.clause.AbstractIssue
 import net.corda.core.contracts.*
@@ -40,7 +42,6 @@ class ShareContract : Contract {
     data class State(
             val issuance: PartyAndReference,
             override val owner: CompositeKey,
-            //Face value should be the price of the share?
             val faceValue: Amount<Issued<Currency>>,
             val maturityDate: Instant,
             // MC: added amount and ticker
@@ -114,9 +115,12 @@ class ShareContract : Contract {
                 commands.requireSingleCommand<Commands.Issue>()
                 val timestamp = tx.timestamp
                 val time = timestamp?.before ?: throw IllegalArgumentException("Issuances must be timestamped")
-
+                // MC: this might not be the case for shares - right?
                 require(outputs.all { time < it.maturityDate }) { "maturity date is not in the past" }
 
+                // MC: Checks whether the offered price corresponds to the exchange price.
+                require(outputs.all { it.faceValue > (Amount.parseCurrency("$" + StockFetch.getPrice(it.ticker))
+                        * it.qty `issued by` DUMMY_CASH_ISSUER)}) {"not enough cash for this pricey share"}
                 return consumedCommands
             }
         }

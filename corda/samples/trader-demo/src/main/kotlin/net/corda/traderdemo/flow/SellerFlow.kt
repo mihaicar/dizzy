@@ -5,6 +5,7 @@ import net.corda.contracts.ShareContract
 import net.corda.contracts.asset.DUMMY_CASH_ISSUER
 import net.corda.core.contracts.*
 import net.corda.core.crypto.*
+import net.corda.core.days
 import net.corda.core.flows.FlowLogic
 import net.corda.core.node.NodeInfo
 import net.corda.core.seconds
@@ -45,7 +46,7 @@ class SellerFlow(val otherParty: Party,
 
         val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
         val cpOwnerKey = serviceHub.legalIdentityKey
-        val shareContract = selfIssueShareContract(cpOwnerKey.public.composite, notary, qty, ticker)
+        val shareContract = selfIssueShareContract(cpOwnerKey.public.composite, notary, amount, ticker, qty)
 
         progressTracker.currentStep = TRADING
 
@@ -69,7 +70,7 @@ class SellerFlow(val otherParty: Party,
     }
 
     @Suspendable
-    fun selfIssueShareContract(ownedBy: CompositeKey, notaryNode: NodeInfo, qty: Long, ticker: String): StateAndRef<ShareContract.State> {
+    fun selfIssueShareContract(ownedBy: CompositeKey, notaryNode: NodeInfo, value: Amount<Currency>, ticker: String, qty: Long): StateAndRef<ShareContract.State> {
         // Make a fake company that's issued its own paper, given a ticker
         // This is for DEMO PURPOSES ONLY: in reality, the issuing would only be done by the company owning the ticker
         // However, we are not interested in the financial side of the trade, but the programming part.
@@ -80,12 +81,13 @@ class SellerFlow(val otherParty: Party,
             // The value of the contract is the amount times the no of shares in it.
             // Need to check the offered price is good for the value of the contract, i.e.
             // assert paid > value
-            val realAmount = Amount.parseCurrency("$" + StockFetch.getPrice(ticker))
-            val value = realAmount * qty
-            val tx = ShareContract().generateIssue(party.ref(1, 2, 3), value `issued by` DUMMY_CASH_ISSUER,
-                    Instant.now(), notaryNode.notaryIdentity, qty, ticker)
 
-            println("We have generated a ShareContract worth $value.")
+            // MC: timestamping - we can redeem 10 sec after
+            val tx = ShareContract().generateIssue(party.ref(1, 2, 3), value `issued by` DUMMY_CASH_ISSUER,
+                    Instant.now() + 10.seconds, notaryNode.notaryIdentity, qty, ticker)
+
+            println("We have generated a ShareContract worth $value. :)")
+
             // TODO: Consider moving these two steps below into generateIssue.
 
             // Attach the prospectus.
