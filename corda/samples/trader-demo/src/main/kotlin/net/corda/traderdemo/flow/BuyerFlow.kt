@@ -33,6 +33,7 @@ class BuyerFlow(val otherParty: Party,
                 it.storePath
             }
             services.registerFlowInitiator(SellerFlow::class.java) { BuyerFlow(it, attachmentsPath) }
+            services.registerFlowInitiator(SellerTransferFlow::class.java) { BuyerFlow(it, attachmentsPath)}
         }
     }
 
@@ -86,7 +87,7 @@ class BuyerFlow(val otherParty: Party,
         cpIssuance.attachments.first().let {
             val p = attachmentsPath.toAbsolutePath().resolve("$it.jar")
             println("""
-Attachment for the Share - any legal physical contract.
+Attachment for the Share => any legal physical contract. Follows the initial issuance of the shares.
 
 ${Emoji.renderIfSupported(cpIssuance)}""")
         }

@@ -77,7 +77,7 @@ fun main(args: Array<String>) {
         exitProcess(0)
     }
 
-    drawBanner(nodeVersionInfo)
+    //drawBanner(nodeVersionInfo)
 
     val dir: Path = cmdlineOptions.baseDirectory
     System.setProperty("log-path", (dir / "logs").toString())

@@ -19,7 +19,8 @@ fun main(args: Array<String>) {
 private class TraderDemo {
     enum class Role {
         BUYER,
-        SELLER
+        SELLER,
+        SELLER_TRANSFER
     }
 
     companion object {
@@ -57,13 +58,23 @@ private class TraderDemo {
             CordaRPCClient(host).use("demo", "demo") {
                 TraderDemoClientApi(this).runBuyer()
             }
-        } else {
+        } else if (role == Role.SELLER) { //change back to SELLER once you're done testing!
+            // MC: Bank B (10009) sells shares to Bank A - by issuing them
             val amount = Amount.parseCurrency(options.valueOf(amountArg)!!)
             val qty = options.valueOf(qtyArg)!!
             val ticker = options.valueOf(tickerArg)
             val host = HostAndPort.fromString("localhost:10009")
             CordaRPCClient(host).use("demo", "demo") {
                 TraderDemoClientApi(this).runSeller(amount, "Bank A", qty, ticker)
+            }
+        } else if (role == Role.SELLER_TRANSFER) {
+            // MC: Bank A (10006) sells shares back to bank B - by trading (moving)
+            val amount = Amount.parseCurrency(options.valueOf(amountArg)!!)
+            val qty = options.valueOf(qtyArg)!!
+            val ticker = options.valueOf(tickerArg)
+            val host = HostAndPort.fromString("localhost:10006")
+            CordaRPCClient(host).use("demo", "demo") {
+                TraderDemoClientApi(this).runSellerTransfer(amount, "Bank B", qty, ticker)
             }
         }
     }

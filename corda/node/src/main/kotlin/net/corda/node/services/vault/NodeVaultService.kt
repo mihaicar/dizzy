@@ -9,6 +9,7 @@ import io.requery.kotlin.eq
 import io.requery.kotlin.isNull
 import io.requery.kotlin.notNull
 import io.requery.query.RowExpression
+import net.corda.contracts.ShareContract
 import net.corda.contracts.asset.Cash
 import net.corda.core.ThreadBox
 import net.corda.core.bufferUntilSubscribed
@@ -410,6 +411,98 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         return stateAndRefs
     }
 
+
+    val shareSpendLock: ReentrantLock = ReentrantLock()
+
+    @Suspendable
+    override fun <T : ContractState> unconsumedStatesForShareSpending(qty: Long, onlyFromIssuerParties: Set<AbstractParty>?, notary: Party?, lockId: UUID, withIssuerRefs: Set<OpaqueBytes>?, ticker: String): List<StateAndRef<T>> {
+        //MC: qty and lockid are the only ones that should not be null in this
+
+        val issuerKeysStr = onlyFromIssuerParties?.fold("") { left, right -> left + "('${right.owningKey.toBase58String()}')," }?.dropLast(1)
+        val issuerRefsStr = withIssuerRefs?.fold("") { left, right -> left + "('${right.bytes.toHexString()}')," }?.dropLast(1)
+
+        var stateAndRefs = mutableListOf<StateAndRef<T>>()
+
+        for (retryCount in 1..MAX_RETRIES) {
+
+            shareSpendLock.withLock {
+                val statement = configuration.jdbcSession().createStatement()
+                try {
+                    // MC: We're accumulating the total number of shares for our ticker in t
+                    statement.execute("CALL SET(@t, 0);")
+
+                    // we select spendable states irrespective of lock but prioritised by unlocked ones (Eg. null)
+                    // the softLockReserve update will detect whether we try to lock states locked by others
+
+                    // MC: WHY ARE YOU NOT JOINING?????????????? UGLY
+                    val selectJoin = """
+                        SELECT vs.transaction_id, vs.output_index, vs.contract_state, ccs.qty, SET(@t, ifnull(@t,0)+ccs.qty) total_qty, vs.lock_id
+                        FROM vault_states AS vs, contract_share_states AS ccs
+                        WHERE vs.transaction_id = ccs.transaction_id AND vs.output_index = ccs.output_index
+                        AND vs.state_status = 0
+                        AND ccs.ticker = 'AAPL'
+                        AND (vs.lock_id = '$lockId' OR vs.lock_id is null) --MC: what is lockID
+                        """ +
+                            (if (notary != null)
+                                " AND vs.notary_key = '${notary.owningKey.toBase58String()}'" else "") +
+                            (if (issuerKeysStr != null)
+                                " AND ccs.issuer_key IN ($issuerKeysStr)" else "") +
+                            (if (issuerRefsStr != null)
+                                " AND ccs.issuer_ref IN ($issuerRefsStr)" else "")
+
+                    // Retrieve spendable state refs
+                    val rs = statement.executeQuery(selectJoin)
+                    stateAndRefs.clear()
+                    var totalQty = 0L
+
+                    // MC: Goes through the resulting rows to gather information
+                    while (rs.next()) {
+                        val txHash = SecureHash.parse(rs.getString(1))
+                        val index = rs.getInt(2)
+                        val stateRef = StateRef(txHash, index)
+                        val state = rs.getBytes(3).deserialize<TransactionState<T>>(storageKryo())
+                        val rowqty = rs.getLong(4)
+                        totalQty = rs.getLong(5)
+                        val rowLockId = rs.getString(6)
+                        stateAndRefs.add(StateAndRef(state, stateRef))
+                        log.trace { "ROW: $rowLockId ($lockId): $stateRef : $rowqty ($totalQty)" }
+                    }
+                    // MC: At the end, totalQty will contain the last accumulator - the one we need.
+
+                    // MC: Checks whether there are enough shares to use.
+                    if (stateAndRefs.isNotEmpty() && totalQty >= qty) {
+                        log.trace("Coin selection for $qty retrieved ${stateAndRefs.count()} states totalling $totalQty pennies: $stateAndRefs")
+
+                        // update database
+                        softLockReserve(lockId, stateAndRefs.map { it.ref }.toSet())
+                        return stateAndRefs
+                    }
+                    log.trace("Coin selection requested $qty but retrieved $totalQty pennies with state refs: ${stateAndRefs.map { it.ref }}")
+                    // retry as more states may become available
+                } catch (e: SQLException) {
+                    log.error("""Failed retrieving unconsumed states for: amount [$qty], onlyFromIssuerParties [$onlyFromIssuerParties], notary [$notary], lockId [$lockId]
+                            $e.
+                        """)
+                } catch (e: StatesNotAvailableException) {
+                    stateAndRefs.clear()
+                    log.warn(e.message)
+                    // retry only if there are locked states that may become available again (or consumed with change)
+                } finally {
+                    statement.close()
+                }
+            }
+
+            log.warn("Coin selection failed on attempt $retryCount")
+            // TODO: revisit the back off strategy for contended spending.
+            if (retryCount != MAX_RETRIES) {
+                FlowStateMachineImpl.sleep(RETRY_SLEEP * retryCount.toLong())
+            }
+        }
+
+        log.warn("Insufficient spendable states identified for $qty")
+        return stateAndRefs
+    }
+
     override fun <T : ContractState> softLockedStates(lockId: UUID?): List<StateAndRef<T>> {
         val stateAndRefs =
             session.withTransaction(TransactionIsolation.REPEATABLE_READ) {
@@ -518,12 +611,82 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         // What if we already have a move command with the right keys? Filter it out here or in platform code?
         tx.addCommand(Cash().generateMoveCommand(), keysUsed)
 
-        // update Vault
-        //        notify(tx.toWireTransaction())
-        // Vault update must be completed AFTER transaction is recorded to ledger storage!!!
-        // (this is accomplished within the recordTransaction function)
+        return Pair(tx, keysUsed)
+    }
+
+    @Suspendable
+    override fun generateShareSpend(tx: TransactionBuilder, qty: Long, ticker: String, to: CompositeKey, onlyFromParties: Set<AbstractParty>?): Pair<TransactionBuilder, List<CompositeKey>> {
+        // get all the unconsumed states for share spending:
+        val acceptableShares = unconsumedStatesForShareSpending<ShareContract.State>(qty, onlyFromParties, tx.notary, tx.lockId, ticker = ticker)
+        println("We have the acceptable shares as \n $acceptableShares")
+        // notary may be associated with locked state only?
+        tx.notary = acceptableShares.firstOrNull()?.state?.notary
+
+        // get change from no. of shares
+        val (gathered, gatheredAmount) = gatherShares(acceptableShares, qty)
+        val takeChangeFrom = gathered.firstOrNull()
+        val change = if (takeChangeFrom != null && gatheredAmount > qty) {
+            gatheredAmount - qty
+        } else {
+            null
+        }
+
+        val keysUsed = gathered.map { it.state.data.owner }
+        println("We work with keysUsed: $keysUsed")
+        //TODO MC: ISSUANCE MIGHT NOT BE CORRECT (what about owner?)
+        val states = gathered.groupBy { it.state.data.issuance }.map {
+            val sh = it.value
+            val totalAmount = sh.map { it.state.data.qty }.sum()
+            deriveShareState(sh.first().state, totalAmount, to)
+        }.sortedBy { it.data.qty}
+
+        println("We also have the states: $states")
+        // now, if we have some change left, deal with it
+        val outputs = if (change != null ) {
+            val existingOwner = gathered.first().state.data.owner
+            states.subList(0, states.lastIndex) +
+                    states.last().let {
+                        val spent = it.data.qty - change
+                        deriveShareState(it, spent, it.data.owner)
+                    } +
+                    states.last().let{
+                        deriveShareState(it, change, existingOwner)
+                    }
+        } else states
+
+        for (state in gathered) {
+            tx.addInputState(state)
+        }
+        for (state in outputs) {
+            tx.addOutputState(state)
+        }
+        println("And we're about to add the last move command.")
+        tx.addCommand(ShareContract.Commands.Move(), keysUsed)
 
         return Pair(tx, keysUsed)
+
+    }
+
+    private fun  deriveShareState(txState: TransactionState<ShareContract.State>, amount: Long, owner: CompositeKey)
+        = txState.copy(data = txState.data.copy(qty = amount, owner = owner))
+
+    private fun gatherShares(acceptableShares: List<StateAndRef<ShareContract.State>>, qty: Long):
+                            Pair<ArrayList<StateAndRef<ShareContract.State>>, Long>
+    {
+        val gathered = arrayListOf<StateAndRef<ShareContract.State>>()
+        var gatheredAmount = 0L
+        for (s in acceptableShares) {
+            if (gatheredAmount >= qty) break
+            gathered.add(s)
+            gatheredAmount += s.state.data.qty
+        }
+
+        if (gatheredAmount < qty) {
+            log.trace("Insufficient shares!!!")
+            throw InsufficientBalanceException(0.DOLLARS)
+        }
+
+        return Pair(gathered, gatheredAmount)
     }
 
     private fun deriveState(txState: TransactionState<Cash.State>, amount: Amount<Issued<Currency>>, owner: CompositeKey)

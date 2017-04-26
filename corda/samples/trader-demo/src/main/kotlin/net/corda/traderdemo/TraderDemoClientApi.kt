@@ -14,6 +14,7 @@ import net.corda.core.utilities.loggerFor
 import net.corda.flows.IssuerFlow.IssuanceRequester
 import net.corda.testing.BOC
 import net.corda.traderdemo.flow.SellerFlow
+import net.corda.traderdemo.flow.SellerTransferFlow
 import java.util.*
 import kotlin.test.assertEquals
 
@@ -61,5 +62,14 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         println("About to start seller flow.")
         val stx = rpc.startFlow(::SellerFlow, otherParty, amount, qty, ticker).returnValue.getOrThrow()
         println("Sale completed in API - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx.tx)}")
+    }
+
+    fun runSellerTransfer(amount: Amount<Currency>, counterparty: String, qty: Long, ticker: String) {
+        val otherParty = rpc.partyFromName(counterparty) ?: throw IllegalStateException("Don't know $counterparty")
+        // MC: This time, the seller will already have the shares in his vault - no issuing.
+        println("About to start seller transfer flow.")
+        val stx = rpc.startFlow(::SellerTransferFlow, otherParty, amount, qty, ticker).returnValue.getOrThrow()
+        println("Sale completed in API - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx.tx)}")
+
     }
 }

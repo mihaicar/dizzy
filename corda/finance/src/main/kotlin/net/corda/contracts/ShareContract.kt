@@ -56,7 +56,7 @@ class ShareContract : Contract {
             get() = Issued(issuance, Terms(faceValue.token, maturityDate))
 
         override fun withNewOwner(newOwner: CompositeKey) = Pair(Commands.Move(), copy(owner = newOwner))
-        override fun toString() = "${Emoji.newspaper}ShareContract(of $faceValue redeemable on $maturityDate by '$issuance', owned by $owner)"
+        override fun toString() = "${Emoji.newspaper}ShareContract(of $faceValue for $qty of $ticker Transferable on $maturityDate by '$issuance', owned by $owner)"
 
         // Although kotlin is smart enough not to need these, as we are using the IShareState, we need to declare them explicitly for use later,
         override fun withOwner(newOwner: CompositeKey): IShareState = copy(owner = newOwner)
@@ -66,6 +66,7 @@ class ShareContract : Contract {
         override fun withMaturityDate(newMaturityDate: Instant): IShareState = copy(maturityDate = newMaturityDate)
         override fun withQty(newQty: Long): IShareState = copy(qty = newQty)
         override fun withTicker(newTicker: String): IShareState = copy(ticker = newTicker)
+
 
         /** Object Relational Mapping support. */
         override fun supportedSchemas(): Iterable<MappedSchema> = listOf(ShareSchemaV1)
@@ -94,9 +95,10 @@ class ShareContract : Contract {
     interface Clauses {
         class Group : GroupClauseVerifier<State, Commands, Issued<Terms>>(
                 AnyOf(
-                        Redeem(),
+                        Transfer(),
                         Move(),
-                        Issue())) {
+                        Issue(),
+                        Redeem())) {
             override fun groupStates(tx: TransactionForContract): List<TransactionForContract.InOutGroup<State, Issued<Terms>>>
                     = tx.groupStates<State, Issued<Terms>> { it.token }
         }
@@ -117,10 +119,9 @@ class ShareContract : Contract {
                 val time = timestamp?.before ?: throw IllegalArgumentException("Issuances must be timestamped")
                 // MC: this might not be the case for shares - right?
                 require(outputs.all { time < it.maturityDate }) { "maturity date is not in the past" }
-
                 // MC: Checks whether the offered price corresponds to the exchange price.
                 require(outputs.all { it.faceValue > (Amount.parseCurrency("$" + StockFetch.getPrice(it.ticker))
-                        * it.qty `issued by` DUMMY_CASH_ISSUER)}) {"not enough cash for this pricey share"}
+                        `issued by` DUMMY_CASH_ISSUER)}) {"not enough cash for this pricey share"}
                 return consumedCommands
             }
         }
@@ -145,6 +146,33 @@ class ShareContract : Contract {
             }
         }
 
+        class Transfer() : Clause<State, Commands, Issued<Terms>>() {
+            override val requiredCommands: Set<Class<out CommandData>> = setOf(Commands.Transfer::class.java)
+
+            override fun verify(tx: TransactionForContract,
+                                inputs: List<State>,
+                                outputs: List<State>,
+                                commands: List<AuthenticatedObject<Commands>>,
+                                groupingKey: Issued<Terms>?): Set<Commands> {
+                // TODO: This should filter commands down to those with compatible subjects (underlying product and maturity date)
+                // before requiring a single command
+                val command = commands.requireSingleCommand<Commands.Transfer>()
+                val timestamp = tx.timestamp
+
+                val input = inputs.single()
+                val received = tx.outputs.sumCashBy(input.owner)
+                val time = timestamp?.after ?: throw IllegalArgumentException("Transfers must be timestamped")
+                requireThat {
+                    "the paper must have matured" by (time >= input.maturityDate)
+                    //"the transaction is signed by the owner of the SC" by (input.owner in command.signers)
+                }
+
+                return setOf(command.value)
+            }
+
+        }
+
+
         class Redeem() : Clause<State, Commands, Issued<Terms>>() {
             override val requiredCommands: Set<Class<out CommandData>> = setOf(Commands.Redeem::class.java)
 
@@ -162,10 +190,10 @@ class ShareContract : Contract {
                 val received = tx.outputs.sumCashBy(input.owner)
                 val time = timestamp?.after ?: throw IllegalArgumentException("Redemptions must be timestamped")
                 requireThat {
-                    "the paper must have matured" by (time >= input.maturityDate)
-                    "the received amount equals the face value" by (received == input.faceValue)
+                    //"the paper must have matured" by (time >= input.maturityDate)
+                    //"the received amount equals the face value" by (received == input.faceValue)
                     "the paper must be destroyed" by outputs.isEmpty()
-                    "the transaction is signed by the owner of the SC" by (input.owner in command.signers)
+                    //"the transaction is signed by the owner of the CP" by (input.owner in command.signers)
                 }
 
                 return setOf(command.value)
@@ -176,6 +204,7 @@ class ShareContract : Contract {
 
     interface Commands : CommandData {
         data class Move(override val contractHash: SecureHash? = null) : FungibleAsset.Commands.Move, Commands
+        class Transfer : TypeOnlyCommandData(), Commands
         class Redeem : TypeOnlyCommandData(), Commands
         data class Issue(override val nonce: Long = random63BitValue()) : IssueCommand, Commands
     }
@@ -199,8 +228,44 @@ class ShareContract : Contract {
         tx.addCommand(Commands.Move(), paper.state.data.owner)
     }
 
+    fun generateMove(tx: TransactionBuilder, paper: StateAndRef<State>, newFaceValue: Amount<Issued<Currency>>, newOwner: CompositeKey) {
+        tx.addInputState(paper)
+        // MC: Change in price as well as owner
+        tx.addOutputState(TransactionState(paper.state.data.copy(faceValue = newFaceValue, owner = newOwner), paper.state.notary))
+        tx.addCommand(Commands.Move(), paper.state.data.owner)
+    }
+
     /**
      * Intended to be called by the issuer of some share contract paper, when an owner has notified us that they wish
+     * to Transfer the paper. We must therefore send enough money to the key that owns the paper to satisfy the face
+     * value, and then ensure the paper is removed from the ledger.
+     *
+     * @throws InsufficientBalanceException if the vault doesn't contain enough money to pay the Transferer.
+     */
+    @Throws(InsufficientBalanceException::class)
+    fun generateTransfer(vault: VaultService, issuance: PartyAndReference, value: Amount<Issued<Currency>>, maturityDate: Instant, notary: Party, qty: Long, ticker: String): TransactionBuilder {
+        // generateIssue for new paper that will be transferred
+        println("Transfer is generating new paper...")
+        val tx = generateIssue(issuance, value, maturityDate, notary, qty, ticker) //paper with 5 shares
+
+        // vault.generateShareSpend for that resulting transaction
+        println("Transfer is generating the spend with ${issuance.party.owningKey}")
+        vault.generateShareSpend(tx, qty, ticker, issuance.party.owningKey)
+        //tx.addInputState(paper) - isnt this done in the generateSpend?
+        // input as states all papers used
+
+        // add command the transfer - already done, that's fine.
+
+        // paper.owner, in our case is... the person who HAS the CP in their vault (so those who own the share, seller)
+        // therefore, WE ARE THE OWNER: issuance.party.owningKey = paper...owner
+
+        println("Transfer is issuing command with ${issuance.party.owningKey} --- this is where the problem is.")
+        tx.addCommand(Commands.Transfer(), issuance.party.owningKey)
+        return tx
+    }
+
+    /**
+     * Intended to be called by the issuer of some commercial paper, when an owner has notified us that they wish
      * to redeem the paper. We must therefore send enough money to the key that owns the paper to satisfy the face
      * value, and then ensure the paper is removed from the ledger.
      *
@@ -212,7 +277,7 @@ class ShareContract : Contract {
         val amount = paper.state.data.faceValue.let { amount -> Amount(amount.quantity, amount.token.product) }
         vault.generateSpend(tx, amount, paper.state.data.owner)
         tx.addInputState(paper)
-        tx.addCommand(ShareContract.Commands.Redeem(), paper.state.data.owner)
+        tx.addCommand(Commands.Redeem(), paper.state.data.owner)
     }
 }
 

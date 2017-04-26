@@ -88,9 +88,12 @@ object TwoPartyTradeFlow {
         @Suspendable
         override fun call(): SignedTransaction {
             val partialSTX: SignedTransaction = receiveAndCheckProposedTransaction()
+            println("Partial stx: " + partialSTX.tx)
             val ourSignature = calculateOurSignature(partialSTX)
             val unnotarisedSTX: SignedTransaction = partialSTX + ourSignature
+            println("Unnotarised: " + unnotarisedSTX.tx)
             val finishedSTX = subFlow(FinalityFlow(unnotarisedSTX)).single()
+            println("Finished stx: " + finishedSTX.tx)
             return finishedSTX
         }
         // DOCEND 4
@@ -100,12 +103,14 @@ object TwoPartyTradeFlow {
         private fun receiveAndCheckProposedTransaction(): SignedTransaction {
             progressTracker.currentStep = AWAITING_PROPOSAL
 
-            val myPublicKey = myKeyPair.public.composite
+            val myPublicKey = myKeyPair.public.composite //seller owner key
             // Make the first message we'll send to kick off the flow.
             val hello = SellerTradeInfo(assetToSell, price, qty, ticker, myPublicKey)
             // What we get back from the other side is a transaction that *might* be valid and acceptable to us,
             // but we must check it out thoroughly before we sign!
+            println("Hello with owner key: " + hello.sellerOwnerKey + " " + otherParty.owningKey)
             val untrustedSTX = sendAndReceive<SignedTransaction>(otherParty, hello)
+            println("Untrusted: " + untrustedSTX.data.tx)
             progressTracker.currentStep = VERIFYING
             return untrustedSTX.unwrap {
                 // Check that the tx proposed by the buyer is valid.
@@ -115,7 +120,7 @@ object TwoPartyTradeFlow {
                 // Download and check all the things that this transaction depends on and verify it is contract-valid,
                 // even though it is missing signatures.
                 subFlow(ResolveTransactionsFlow(wtx, otherParty))
-                if (wtx.outputs.map { it.data }.sumCashBy(myPublicKey).withoutIssuer() != price)
+                if (wtx.outputs.map { it.data }.sumCashBy(myPublicKey).withoutIssuer() != price * qty)
                     throw FlowException("Transaction is not sending us the right amount of cash")
 
                 it
@@ -210,18 +215,19 @@ object TwoPartyTradeFlow {
                 ptx.signWith(KeyPair(publicKey, privateKey))
             }
 
-            return ptx.toSignedTransaction(checkSufficientSignatures = false)
+            var p = ptx.toSignedTransaction(checkSufficientSignatures = false)
+            return p
         }
 
         private fun assembleSharedTX(tradeRequest: SellerTradeInfo): Pair<TransactionBuilder, List<CompositeKey>> {
             val ptx = TransactionType.General.Builder(notary)
 
             // Add input and output states for the movement of cash, by using the Cash contract to generate the states
-            val (tx, cashSigningPubKeys) = serviceHub.vaultService.generateSpend(ptx, tradeRequest.price, tradeRequest.sellerOwnerKey)
+            val (tx, cashSigningPubKeys) = serviceHub.vaultService.generateSpend(ptx, tradeRequest.price * tradeRequest.qty, tradeRequest.sellerOwnerKey)
 
             // Add inputs/outputs/a command for the movement of the asset.
             tx.addInputState(tradeRequest.assetForSale)
-            // Just pick some new public key for now. This won't be linked with our identity in any way, which is what
+            // MC!! Just pick some new public key for now. This won't be linked with our identity in any way, which is what
             // we want for privacy reasons: the key is here ONLY to manage and control ownership, it is not intended to
             // reveal who the owner actually is. The key management service is expected to derive a unique key from some
             // initial seed in order to provide privacy protection.

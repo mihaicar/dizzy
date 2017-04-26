@@ -61,7 +61,8 @@ dependencies {
 task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
     ext.rpcUsers = [['user': "demo", 'password': "demo", 'permissions': [
             'StartFlow.net.corda.flows.IssuerFlow$IssuanceRequester',
-            "StartFlow.net.corda.traderdemo.flow.SellerFlow"
+            "StartFlow.net.corda.traderdemo.flow.SellerFlow",
+            "StartFlow.net.corda.traderdemo.flow.SellerTransferFlow"
     ]]]
 
     directory "./build/nodes"
@@ -133,11 +134,32 @@ task runBuyer(type: JavaExec) {
     args 'BUYER'
 }
 
+// MC: executes the seller with the issue command
 task runSeller(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'
     args '--role'
     args 'SELLER'
+    args '--amount'
+    if (project.hasProperty("amt")){
+        args amt
+    }
+    args '--quantity'
+    if (project.hasProperty("qty")){
+        args qty
+    }
+    args '--ticker'
+    if (project.hasProperty("tck")){
+        args tck
+    }
+}
+
+// MC: executes the seller with the move ownership command
+task runSellerTransfer(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'net.corda.traderdemo.TraderDemoKt'
+    args '--role'
+    args 'SELLER_TRANSFER'
     args '--amount'
     if (project.hasProperty("amt")){
         args amt

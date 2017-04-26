@@ -32,6 +32,6 @@ class TraderDemoTest : NodeBasedTest() {
         }
 
         TraderDemoClientApi(nodeARpc).runBuyer()
-        TraderDemoClientApi(nodeBRpc).runSeller(counterparty = nodeA.info.legalIdentity.name)
+        TraderDemoClientApi(nodeBRpc).runSeller(counterparty = nodeA.info.legalIdentity.name, qty = 2, ticker = "AAPL")
     }
 }

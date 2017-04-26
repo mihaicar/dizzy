@@ -207,6 +207,31 @@ interface VaultService {
                       to: CompositeKey,
                       onlyFromParties: Set<AbstractParty>? = null): Pair<TransactionBuilder, List<CompositeKey>>
 
+    /**
+     * MC: Generate a transaction that moves an amount of shares to the given pubkey.
+     *
+     *
+     * @param tx A builder, which may contain inputs, outputs and commands already. The relevant components needed
+     *           to move the cash will be added on top.
+     * @param qty How many shares to send.
+     * @param ticker stock symbol we want to trade
+     * @param to a key of the recipient.
+     * @param onlyFromParties if non-null, the asset states will be filtered to only include those issued by the set
+     *                        of given parties. This can be useful if the party you're trying to pay has expectations
+     *                        about which type of asset claims they are willing to accept.
+     * @return A [Pair] of the same transaction builder passed in as [tx], and the list of keys that need to sign
+     *         the resulting transaction for it to be valid.
+     * @throws InsufficientBalanceException when a share spending transaction fails because the vault does not
+     *         have sufficient shares of the stock to trade
+     */
+    @Throws(InsufficientBalanceException::class)
+    @Suspendable
+    fun generateShareSpend(tx: TransactionBuilder,
+                      qty: Long,
+                      ticker: String,
+                      to: CompositeKey,
+                      onlyFromParties: Set<AbstractParty>? = null): Pair<TransactionBuilder, List<CompositeKey>>
+
     // DOCSTART VaultStatesQuery
     /**
      * Return [ContractState]s of a given [Contract] type and [Iterable] of [Vault.StateStatus].
@@ -254,7 +279,17 @@ interface VaultService {
      * is implemented in a separate module (finance) and requires access to it.
      */
     @Suspendable
-    fun <T : ContractState> unconsumedStatesForSpending(amount: Amount<Currency>, onlyFromIssuerParties: Set<AbstractParty>? = null, notary: Party? = null, lockId: UUID, withIssuerRefs: Set<OpaqueBytes>? = null): List<StateAndRef<T>>
+    fun <T : ContractState>
+            unconsumedStatesForSpending(amount: Amount<Currency>, onlyFromIssuerParties: Set<AbstractParty>? = null,
+                  notary: Party? = null, lockId: UUID, withIssuerRefs: Set<OpaqueBytes>? = null): List<StateAndRef<T>>
+
+    /**
+     * Function required to be able to get other contracts besides cash ones out of the vault - here Shares
+     */
+    @Suspendable
+    fun <T: ContractState>
+            unconsumedStatesForShareSpending(qty: Long, onlyFromIssuerParties: Set<AbstractParty>? = null,
+                                             notary: Party? = null, lockId: UUID, withIssuerRefs: Set<OpaqueBytes>? = null, ticker: String): List<StateAndRef<T>>
 }
 
 inline fun <reified T: ContractState> VaultService.unconsumedStates(includeSoftLockedStates: Boolean = true): Iterable<StateAndRef<T>> =
