@@ -173,3 +173,23 @@ task runSellerTransfer(type: JavaExec) {
         args tck
     }
 }
+
+// MC: executes the seller with the move ownership command
+task runTransferBack(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'net.corda.traderdemo.TraderDemoKt'
+    args '--role'
+    args 'TRANSFER_BACK'
+    args '--amount'
+    if (project.hasProperty("amt")){
+        args amt
+    }
+    args '--quantity'
+    if (project.hasProperty("qty")){
+        args qty
+    }
+    args '--ticker'
+    if (project.hasProperty("tck")){
+        args tck
+    }
+}

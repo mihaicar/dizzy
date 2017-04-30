@@ -88,12 +88,10 @@ object TwoPartyTradeFlow {
         @Suspendable
         override fun call(): SignedTransaction {
             val partialSTX: SignedTransaction = receiveAndCheckProposedTransaction()
-            println("Partial stx: " + partialSTX.tx)
             val ourSignature = calculateOurSignature(partialSTX)
             val unnotarisedSTX: SignedTransaction = partialSTX + ourSignature
-            println("Unnotarised: " + unnotarisedSTX.tx)
             val finishedSTX = subFlow(FinalityFlow(unnotarisedSTX)).single()
-            println("Finished stx: " + finishedSTX.tx)
+            println("Transaction's outputs: " + finishedSTX.tx.outputs)
             return finishedSTX
         }
         // DOCEND 4
@@ -224,7 +222,6 @@ object TwoPartyTradeFlow {
 
             // Add input and output states for the movement of cash, by using the Cash contract to generate the states
             val (tx, cashSigningPubKeys) = serviceHub.vaultService.generateSpend(ptx, tradeRequest.price * tradeRequest.qty, tradeRequest.sellerOwnerKey)
-
             // Add inputs/outputs/a command for the movement of the asset.
             tx.addInputState(tradeRequest.assetForSale)
             // MC!! Just pick some new public key for now. This won't be linked with our identity in any way, which is what
@@ -232,7 +229,8 @@ object TwoPartyTradeFlow {
             // reveal who the owner actually is. The key management service is expected to derive a unique key from some
             // initial seed in order to provide privacy protection.
             val freshKey = serviceHub.keyManagementService.freshKey()
-            val (command, state) = tradeRequest.assetForSale.state.data.withNewOwner(freshKey.public.composite)
+            val (command, state) = tradeRequest.assetForSale.state.data.withNewOwner(cashSigningPubKeys.first())
+            //val (command, state) = tradeRequest.assetForSale.state.data.withNewOwner(freshKey.public.composite)
             tx.addOutputState(state, tradeRequest.assetForSale.state.notary) // adds the SC as an output
             tx.addCommand(command, tradeRequest.assetForSale.state.data.owner) // modifies the owner
             // And add a request for timestamping: it may be that none of the contracts need this! But it can't hurt

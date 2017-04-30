@@ -68,8 +68,17 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         val otherParty = rpc.partyFromName(counterparty) ?: throw IllegalStateException("Don't know $counterparty")
         // MC: This time, the seller will already have the shares in his vault - no issuing.
         println("About to start seller transfer flow.")
-        val stx = rpc.startFlow(::SellerTransferFlow, otherParty, amount, qty, ticker).returnValue.getOrThrow()
-        println("Sale completed in API - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx.tx)}")
+        val stx = rpc.startFlow(::SellerTransferFlow, otherParty, qty, ticker).returnValue.getOrThrow()
+        println("Transfer completed in API - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx.tx)}")
+
+    }
+
+    fun runSellerTransferBack(amount: Amount<Currency>, counterparty: String, qty: Long, ticker: String) {
+        val otherParty = rpc.partyFromName(counterparty) ?: throw IllegalStateException("Don't know $counterparty")
+        // MC: This time, the seller will already have the shares in his vault - no issuing.
+        println("About to start seller transfer flow.")
+        val stx = rpc.startFlow(::SellerTransferFlow, otherParty, qty, ticker).returnValue.getOrThrow()
+        println("Transfer completed in API - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx.tx)}")
 
     }
 }

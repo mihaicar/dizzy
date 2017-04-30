@@ -20,7 +20,8 @@ private class TraderDemo {
     enum class Role {
         BUYER,
         SELLER,
-        SELLER_TRANSFER
+        SELLER_TRANSFER,
+        TRANSFER_BACK
     }
 
     companion object {
@@ -75,6 +76,15 @@ private class TraderDemo {
             val host = HostAndPort.fromString("localhost:10006")
             CordaRPCClient(host).use("demo", "demo") {
                 TraderDemoClientApi(this).runSellerTransfer(amount, "Bank B", qty, ticker)
+            }
+        } else if (role == Role.TRANSFER_BACK) {
+            // MC: Bank B (10009) moves back the shares to Bank A
+            val amount = Amount.parseCurrency(options.valueOf(amountArg)!!)
+            val qty = options.valueOf(qtyArg)!!
+            val ticker = options.valueOf(tickerArg)
+            val host = HostAndPort.fromString("localhost:10009")
+            CordaRPCClient(host).use("demo", "demo") {
+                TraderDemoClientApi(this).runSellerTransfer(amount, "Bank A", qty, ticker)
             }
         }
     }

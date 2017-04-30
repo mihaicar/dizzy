@@ -68,6 +68,7 @@ class BuyerFlow(val otherParty: Party,
 
         logIssuanceAttachment(tradeTX)
         logBalance()
+        logShareContracts()
 
     }
 
@@ -91,5 +92,16 @@ Attachment for the Share => any legal physical contract. Follows the initial iss
 
 ${Emoji.renderIfSupported(cpIssuance)}""")
         }
+    }
+
+    private fun logShareContracts() {
+        val lockID: UUID = UUID(1234, 1234)
+        val list = serviceHub.vaultService.unconsumedStatesForShareSpending<ShareContract.State>(qty = 4, lockId = lockID, ticker = "AAPL");
+        var noShares = 0L
+        list
+                .filter { it.state.data.ticker == "AAPL" }
+                .forEach { noShares += it.state.data.qty }
+
+        println("Buyer has a total of $noShares in AAPL.")
     }
 }

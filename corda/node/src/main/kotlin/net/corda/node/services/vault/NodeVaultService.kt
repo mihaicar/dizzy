@@ -417,13 +417,12 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
     @Suspendable
     override fun <T : ContractState> unconsumedStatesForShareSpending(qty: Long, onlyFromIssuerParties: Set<AbstractParty>?, notary: Party?, lockId: UUID, withIssuerRefs: Set<OpaqueBytes>?, ticker: String): List<StateAndRef<T>> {
         //MC: qty and lockid are the only ones that should not be null in this
-
         val issuerKeysStr = onlyFromIssuerParties?.fold("") { left, right -> left + "('${right.owningKey.toBase58String()}')," }?.dropLast(1)
         val issuerRefsStr = withIssuerRefs?.fold("") { left, right -> left + "('${right.bytes.toHexString()}')," }?.dropLast(1)
 
         var stateAndRefs = mutableListOf<StateAndRef<T>>()
-
-        for (retryCount in 1..MAX_RETRIES) {
+        val MAX_SHARE_RETRIES = 1
+        for (retryCount in 1..MAX_SHARE_RETRIES) {
 
             shareSpendLock.withLock {
                 val statement = configuration.jdbcSession().createStatement()
@@ -434,14 +433,13 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
                     // we select spendable states irrespective of lock but prioritised by unlocked ones (Eg. null)
                     // the softLockReserve update will detect whether we try to lock states locked by others
 
-                    // MC: WHY ARE YOU NOT JOINING?????????????? UGLY
                     val selectJoin = """
                         SELECT vs.transaction_id, vs.output_index, vs.contract_state, ccs.qty, SET(@t, ifnull(@t,0)+ccs.qty) total_qty, vs.lock_id
                         FROM vault_states AS vs, contract_share_states AS ccs
                         WHERE vs.transaction_id = ccs.transaction_id AND vs.output_index = ccs.output_index
                         AND vs.state_status = 0
-                        AND ccs.ticker = 'AAPL'
-                        AND (vs.lock_id = '$lockId' OR vs.lock_id is null) --MC: what is lockID
+                        AND ccs.ticker = '$ticker'
+                        AND (vs.lock_id = '$lockId' OR vs.lock_id is null)
                         """ +
                             (if (notary != null)
                                 " AND vs.notary_key = '${notary.owningKey.toBase58String()}'" else "") +
@@ -562,7 +560,6 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         // will appear in the transaction. The final tx's output states will contain a reference to a Cash state that
         // represents gatheredAmount - required amount (>0). Hence, we need extra information in the transaction.
         val acceptableCoins = unconsumedStatesForSpending<Cash.State>(amount, onlyFromParties, tx.notary, tx.lockId)
-
         // TODO: We should be prepared to produce multiple transactions spending inputs from
         // different notaries, or at least group states by notary and take the set with the
         // highest total value.
@@ -600,7 +597,7 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
                         deriveState(it, Amount(change.quantity, it.data.amount.token), existingOwner)
                     }
         } else states
-
+        println("Gathered: $gathered \n Outputs: $outputs")
         for (state in gathered) {
             tx.addInputState(state)
         }
@@ -617,8 +614,9 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
     @Suspendable
     override fun generateShareSpend(tx: TransactionBuilder, qty: Long, ticker: String, to: CompositeKey, onlyFromParties: Set<AbstractParty>?): Pair<TransactionBuilder, List<CompositeKey>> {
         // get all the unconsumed states for share spending:
-        val acceptableShares = unconsumedStatesForShareSpending<ShareContract.State>(qty, onlyFromParties, tx.notary, tx.lockId, ticker = ticker)
-        println("We have the acceptable shares as \n $acceptableShares")
+        val lock: UUID = UUID(1234, 1234)
+        val acceptableShares = unconsumedStatesForShareSpending<ShareContract.State>(qty = qty, lockId = lock, ticker = ticker, notary = tx.notary);
+        //println("We have the acceptable shares as \n $acceptableShares")
         // notary may be associated with locked state only?
         tx.notary = acceptableShares.firstOrNull()?.state?.notary
 
@@ -630,17 +628,17 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         } else {
             null
         }
-
-        val keysUsed = gathered.map { it.state.data.owner }
-        println("We work with keysUsed: $keysUsed")
+        //println("We have $gathered and ${gathered.first().state.data.owner} as the existingOwner and ${gathered.first().state.data.issuance.party.owningKey}")
+        var keysUsed = gathered.map { it.state.data.owner }
+        //println("We work with keysUsed: $keysUsed, we have $to")
         //TODO MC: ISSUANCE MIGHT NOT BE CORRECT (what about owner?)
-        val states = gathered.groupBy { it.state.data.issuance }.map {
+        val states = gathered.groupBy { it.state.data.ticker }.map {
             val sh = it.value
             val totalAmount = sh.map { it.state.data.qty }.sum()
             deriveShareState(sh.first().state, totalAmount, to)
         }.sortedBy { it.data.qty}
 
-        println("We also have the states: $states")
+        //println("We also have the states: $states")
         // now, if we have some change left, deal with it
         val outputs = if (change != null ) {
             val existingOwner = gathered.first().state.data.owner
@@ -653,16 +651,15 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
                         deriveShareState(it, change, existingOwner)
                     }
         } else states
-
         for (state in gathered) {
             tx.addInputState(state)
+            keysUsed += state.state.data.participants
         }
         for (state in outputs) {
             tx.addOutputState(state)
         }
-        println("And we're about to add the last move command.")
-        tx.addCommand(ShareContract.Commands.Move(), keysUsed)
-
+        //println("And we're about to add the last move command.")
+        tx.addCommand(ShareContract.Commands.Transfer(), keysUsed)
         return Pair(tx, keysUsed)
 
     }

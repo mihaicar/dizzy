@@ -50,11 +50,12 @@ class SellerFlow(val otherParty: Party,
         // cpOwner is the seller (because they're the ones 'issuing' it)
         val cpOwnerKey = serviceHub.legalIdentityKey
         val shareContract = selfIssueShareContract(cpOwnerKey.public.composite, notary, amount, ticker, qty)
-        println("Share contract: " + shareContract)
+        println("Share contract's owner: ${shareContract.state.data.owner} and ${cpOwnerKey.public.composite} -- should be the same now" )
         progressTracker.currentStep = TRADING
 
         val balances = serviceHub.vaultService.cashBalances.entries.map { "${it.key.currencyCode} ${it.value}" }
-
+        val lockID: UUID = UUID(1234, 1234)
+        //println("List of unconsumed states: " + list)
 
 
         // Send the offered amount, quantity and ticker - these come from gradle and, higher, a JS page (//TODO)
@@ -62,8 +63,8 @@ class SellerFlow(val otherParty: Party,
         val items = listOf(amount, qty, ticker)
         // amount - what the buyer has to pay - could be a diff between exchange and gradle input!
         send(otherParty, items)
-        println("Otherparty: " + otherParty + " " + otherParty.owningKey)
-        println("Balance of the Seller previous to the trade is: ${balances.joinToString()}")
+        //println("Otherparty: " + otherParty + " " + otherParty.owningKey)
+        //println("Balance of the Seller previous to the trade is: ${balances.joinToString()}")
         val seller = TwoPartyTradeFlow.Seller(
                 otherParty,
                 notary,
@@ -94,6 +95,7 @@ class SellerFlow(val otherParty: Party,
                     Instant.now() + 10.seconds, notaryNode.notaryIdentity, qty, ticker)
             println("\nTransaction 1: " + tx.outputStates())
             println("We have generated a ShareContract worth ${value * qty}. :)")
+
 
             // TODO: Consider moving these two steps below into generateIssue.
 
@@ -130,8 +132,8 @@ class SellerFlow(val otherParty: Party,
             println("\n SIGNED Transaction in move: " + tx.tx)
             tx
         }
-
-        return move.tx.outRef(0)
+        val trans: StateAndRef<ShareContract.State> = move.tx.outRef(0)
+        return trans
     }
 
 }

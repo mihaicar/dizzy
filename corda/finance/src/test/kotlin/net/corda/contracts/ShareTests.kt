@@ -44,8 +44,8 @@ class KotlinShareTest() : IShareContractTestTemplate {
     override fun getPaper(): IShareState = ShareContract.State(
             issuance = MEGA_CORP.ref(123),
             owner = MEGA_CORP_PUBKEY,
-            faceValue = 145.DOLLARS `issued by` DUMMY_CASH_ISSUER,
-            maturityDate = TEST_TX_TIME + 7.days,
+            faceValue = 150.DOLLARS `issued by` DUMMY_CASH_ISSUER,
+            maturityDate = TEST_TX_TIME + 30.seconds,
             qty = 2,
             ticker = "AAPL"
     )
@@ -95,7 +95,7 @@ class ShareTestsGeneric {
             }
         }
     }
-*/
+
     @Test
     fun `key mismatch at issue`() {
         transaction {
@@ -141,7 +141,7 @@ class ShareTestsGeneric {
         val ltx = LedgerTransaction(emptyList(), listOf(*outputs), emptyList(), emptyList(), SecureHash.randomSHA256(), null, emptyList(), null, TransactionType.General())
         return Pair(ltx, outputs.mapIndexed { index, state -> StateAndRef(state, StateRef(ltx.id, index)) })
     }
-
+*/
     /**
      *  Unit test requires two separate Database instances to represent each of the two
      *  transaction participants (enforces uniqueness of vault content in lieu of partipant identity)
@@ -156,7 +156,7 @@ class ShareTestsGeneric {
     private lateinit var alicesVault: Vault<ContractState>
 
     private lateinit var moveTX: SignedTransaction
-
+/*
     @Test
     fun `issue move and then redeem`() {
 
@@ -246,21 +246,106 @@ class ShareTestsGeneric {
                 ptx.signWith(DUMMY_NOTARY_KEY)
                 return Pair(ptx.toSignedTransaction(), ptx.lockId)
             }
-
-//            val redeemTX = makeRedeemTX(TEST_TX_TIME + 5.seconds)
-//            val tooEarlyRedemption = redeemTX.first
-//            val tooEarlyRedemptionLockId = redeemTX.second
-//
-//            val e = assertFailsWith(TransactionVerificationException::class) {
-//                tooEarlyRedemption.toLedgerTransaction(aliceServices).verify()
-//            }
-//            // manually release locks held by this failing transaction
-//            aliceServices.vaultService.softLockRelease(tooEarlyRedemptionLockId)
-//            assertTrue(e.cause!!.message!!.contains("paper must have matured"))
-
             val validRedemption = makeRedeemTX(TEST_TX_TIME + 31.days).first
             validRedemption.toLedgerTransaction(aliceServices).verify()
             // soft lock not released after success either!!! (as transaction not recorded)
         }
+    }
+*/
+    @Test
+    fun `transfer`() {
+        val dataSourcePropsAlice = makeTestDataSourceProperties()
+        val dataSourceAndDatabaseAlice = configureDatabase(dataSourcePropsAlice)
+        val databaseAlice = dataSourceAndDatabaseAlice.second
+
+        // Fills Alice's vault with test cash (buyer)
+        databaseTransaction(databaseAlice) {
+
+            aliceServices = object : MockServices() {
+                override val vaultService: VaultService = makeVaultService(dataSourcePropsAlice)
+
+                override fun recordTransactions(txs: Iterable<SignedTransaction>) {
+                    for (stx in txs) {
+                        storageService.validatedTransactions.addTransaction(stx)
+                    }
+                    // Refactored to use notifyAll() as we have no other unit test for that method with multiple transactions.
+                    vaultService.notifyAll(txs.map { it.tx })
+                }
+            }
+            alicesVault = aliceServices.fillWithSomeTestCash(1000.DOLLARS, atLeastThisManyStates = 1, atMostThisManyStates = 1)
+            aliceVaultService = aliceServices.vaultService
+        }
+
+        val dataSourcePropsBigCorp = makeTestDataSourceProperties()
+        val dataSourceAndDatabaseBigCorp = configureDatabase(dataSourcePropsBigCorp)
+        val databaseBigCorp = dataSourceAndDatabaseBigCorp.second
+
+        // We also fill the Big Corp's vault with cash (seller)
+        databaseTransaction(databaseBigCorp) {
+
+            bigCorpServices = object : MockServices() {
+                override val vaultService: VaultService = makeVaultService(dataSourcePropsBigCorp)
+
+                override fun recordTransactions(txs: Iterable<SignedTransaction>) {
+                    for (stx in txs) {
+                        storageService.validatedTransactions.addTransaction(stx)
+                    }
+                    // Refactored to use notifyAll() as we have no other unit test for that method with multiple transactions.
+                    vaultService.notifyAll(txs.map { it.tx })
+                }
+            }
+            bigCorpVault = bigCorpServices.fillWithSomeTestCash(2000.DOLLARS, atLeastThisManyStates = 1, atMostThisManyStates = 1)
+            bigCorpVaultService = bigCorpServices.vaultService
+        }
+        // Propagate the cash transactions to each side.
+        aliceServices.recordTransactions(bigCorpVault.states.map { bigCorpServices.storageService.validatedTransactions.getTransaction(it.ref.txhash)!! })
+        bigCorpServices.recordTransactions(alicesVault.states.map { aliceServices.storageService.validatedTransactions.getTransaction(it.ref.txhash)!! })
+
+        // BigCorp™ issues $10,000 of commercial paper, to mature in 30 days, owned initially by itself.
+        val faceValue = 150.DOLLARS `issued by` DUMMY_CASH_ISSUER
+        val issuance = bigCorpServices.myInfo.legalIdentity.ref(1)
+        val issueTX: SignedTransaction =
+                ShareContract().generateIssue(issuance, faceValue, TEST_TX_TIME + 45.seconds, DUMMY_NOTARY, 2, "AAPL").apply {
+                    setTime(TEST_TX_TIME, 30.seconds)
+                    signWith(bigCorpServices.key)
+                    signWith(DUMMY_NOTARY_KEY)
+                }.toSignedTransaction()
+
+        databaseTransaction(databaseAlice) {
+            // Alice pays $300 to BigCorp to own 2 shares.
+            moveTX = run {
+                val ptx = TransactionType.General.Builder(DUMMY_NOTARY)
+                // Move $300 to the given pubkey
+                aliceVaultService.generateSpend(ptx, 300.DOLLARS, bigCorpServices.key.public.composite)
+                ShareContract().generateMove(ptx, issueTX.tx.outRef(0), aliceServices.key.public.composite)
+                ptx.signWith(bigCorpServices.key)
+                ptx.signWith(aliceServices.key)
+                ptx.signWith(DUMMY_NOTARY_KEY)
+                ptx.toSignedTransaction()
+            }
+        }
+
+        databaseTransaction(databaseBigCorp) {
+            // Verify the txns are valid and insert into both sides.
+            listOf(issueTX, moveTX).forEach {
+                it.toLedgerTransaction(aliceServices).verify()
+                aliceServices.recordTransactions(it)
+                bigCorpServices.recordTransactions(it)
+            }
+        }
+
+        databaseTransaction(databaseBigCorp) {
+            //val accShares = aliceVaultService.unconsumedStatesForShareSpending<ShareContract.State>(qty = 2, ticker = "AAPL", lockId = lockID, notary = DUMMY_NOTARY)
+            //println("Alice's shares are: $accShares")
+            //println("Alice: ${aliceVaultService.cashBalances}")
+
+        }
+        /*
+        databaseTransaction(databaseBigCorp) {
+            val accShares = bigCorpVaultService.unconsumedStatesForShareSpending<ShareContract.State>(qty = 2, ticker = "AAPL", lockId = lockID, notary = DUMMY_NOTARY)
+            println("BigCorp's shares are: $accShares")
+            val balances = bigCorpVaultService.cashBalances.entries.map { "${it.key.currencyCode} ${it.value}" }
+            println("Balance of BigCorp is: ${balances.joinToString()}")
+        }*/
     }
 }
