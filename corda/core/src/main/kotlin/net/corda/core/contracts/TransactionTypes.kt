@@ -70,7 +70,7 @@ sealed class TransactionType {
         override fun verifyTransaction(tx: LedgerTransaction) {
             verifyNoNotaryChange(tx)
             verifyEncumbrances(tx)
-            verifyContracts(tx)
+            //verifyContracts(tx)
         }
 
         /**
@@ -125,13 +125,13 @@ sealed class TransactionType {
             val ctx = tx.toTransactionForContract()
             // TODO: This will all be replaced in future once the sandbox and contract constraints work is done.
             val contracts = (ctx.inputs.map { it.contract } + ctx.outputs.map { it.contract }).toSet()
-//            for (contract in contracts) {
-//                try {
-//                    contract.verify(ctx)
-//                } catch(e: Throwable) {
-//                    throw TransactionVerificationException.ContractRejection(tx, contract, e)
-//                }
-//            }
+            for (contract in contracts) {
+                try {
+                    contract.verify(ctx)
+                } catch(e: Throwable) {
+                    throw TransactionVerificationException.ContractRejection(tx, contract, e)
+                }
+            }
         }
 
         override fun getRequiredSigners(tx: LedgerTransaction) = tx.commands.flatMap { it.signers }.toSet()

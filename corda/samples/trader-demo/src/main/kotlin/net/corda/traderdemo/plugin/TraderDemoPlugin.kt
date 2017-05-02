@@ -4,6 +4,7 @@ import net.corda.core.contracts.Amount
 import net.corda.core.crypto.Party
 import net.corda.core.node.CordaPluginRegistry
 import net.corda.traderdemo.flow.BuyerFlow
+import net.corda.traderdemo.flow.BuyerTransferFlow
 import net.corda.traderdemo.flow.SellerFlow
 import net.corda.traderdemo.flow.SellerTransferFlow
 import java.util.function.Function
@@ -14,5 +15,5 @@ class TraderDemoPlugin : CordaPluginRegistry() {
             SellerFlow::class.java.name to setOf(Party::class.java.name, Amount::class.java.name, Long::class.java.name, String::class.java.name),
             SellerTransferFlow::class.java.name to setOf(Party::class.java.name, Amount::class.java.name, Long::class.java.name, String::class.java.name)
     )
-    override val servicePlugins = listOf(Function(BuyerFlow::Service))
+    override val servicePlugins = listOf(Function(BuyerFlow::Service), Function(BuyerTransferFlow::Service))
 }

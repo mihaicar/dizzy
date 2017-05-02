@@ -100,11 +100,16 @@ interface CordaRPCOps : RPCOps {
      */
     fun getVaultTransactionNotes(txnId: SecureHash): Iterable<String>
 
-    /*
+    /**
      * Returns a map of how much cash we have in each currency, ignoring details like issuer. Note: currencies for
      * which we have no cash evaluate to null (not present in map), not 0.
      */
     fun getCashBalances(): Map<Currency, Amount<Currency>>
+
+    /**
+     * Returns a map of how many shares we have in each stock.
+     */
+    fun getShareBalances(): Map<String, Long>
 
     /**
      * Checks whether an attachment with the given hash is stored on the node.

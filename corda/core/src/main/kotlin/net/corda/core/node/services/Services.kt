@@ -290,6 +290,11 @@ interface VaultService {
     fun <T: ContractState>
             unconsumedStatesForShareSpending(qty: Long, onlyFromIssuerParties: Set<AbstractParty>? = null,
                                              notary: Party? = null, lockId: UUID, withIssuerRefs: Set<OpaqueBytes>? = null, ticker: String): List<StateAndRef<T>>
+
+    /**
+     * Gets the share balances for the current node
+     */
+    fun  getShareBalances(): Map<String, Long>
 }
 
 inline fun <reified T: ContractState> VaultService.unconsumedStates(includeSoftLockedStates: Boolean = true): Iterable<StateAndRef<T>> =

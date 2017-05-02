@@ -129,4 +129,5 @@ class FinalityFlow(val transactions: Iterable<SignedTransaction>,
             stx to ltx
         }
     }
+
 }

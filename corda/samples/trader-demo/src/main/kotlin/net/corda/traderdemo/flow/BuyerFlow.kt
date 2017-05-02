@@ -33,7 +33,7 @@ class BuyerFlow(val otherParty: Party,
                 it.storePath
             }
             services.registerFlowInitiator(SellerFlow::class.java) { BuyerFlow(it, attachmentsPath) }
-            services.registerFlowInitiator(SellerTransferFlow::class.java) { BuyerFlow(it, attachmentsPath)}
+            //services.registerFlowInitiator(SellerTransferFlow::class.java) { BuyerFlow(it, attachmentsPath)}
         }
     }
 
@@ -44,7 +44,8 @@ class BuyerFlow(val otherParty: Party,
         // Receive the offered amount and automatically agree to it (in reality this would be a longer negotiation)
         // MC: we're also automatically agreeing to the qty/ticker - why?
         val items = receive<List<Any>>(otherParty).unwrap { it }
-        // Check casts or find different way to do it
+
+        @Suppress("UNCHECKED_CAST")
         val amount : Amount<Currency> = items[0] as Amount<Currency>
         val qty : Long = items[1] as Long
         val ticker : String = items[2] as String
@@ -68,7 +69,7 @@ class BuyerFlow(val otherParty: Party,
 
         logIssuanceAttachment(tradeTX)
         logBalance()
-        logShareContracts()
+        //logShareContracts()
 
     }
 

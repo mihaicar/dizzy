@@ -597,7 +597,6 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
                         deriveState(it, Amount(change.quantity, it.data.amount.token), existingOwner)
                     }
         } else states
-        println("Gathered: $gathered \n Outputs: $outputs")
         for (state in gathered) {
             tx.addInputState(state)
         }
@@ -776,5 +775,13 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
      */
     private fun stateRefArgs(stateRefs: Iterable<StateRef>): List<List<Any>> {
         return stateRefs.map { listOf("'${it.txhash}'", it.index) }
+    }
+
+    override fun getShareBalances(): Map<String, Long> {
+        val lock: UUID = UUID(1234, 1234)
+
+        val acceptableShares = unconsumedStatesForShareSpending<ShareContract.State>(qty = 1, lockId = lock, ticker = "AAPL")
+        //return acceptableShares.first().state.data.qty
+        return null!!
     }
 }

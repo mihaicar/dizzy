@@ -91,7 +91,7 @@ object TwoPartyTradeFlow {
             val ourSignature = calculateOurSignature(partialSTX)
             val unnotarisedSTX: SignedTransaction = partialSTX + ourSignature
             val finishedSTX = subFlow(FinalityFlow(unnotarisedSTX)).single()
-            println("Transaction's outputs: " + finishedSTX.tx.outputs)
+            //println("Transaction's outputs: " + finishedSTX.tx.outputs)
             return finishedSTX
         }
         // DOCEND 4
@@ -106,9 +106,9 @@ object TwoPartyTradeFlow {
             val hello = SellerTradeInfo(assetToSell, price, qty, ticker, myPublicKey)
             // What we get back from the other side is a transaction that *might* be valid and acceptable to us,
             // but we must check it out thoroughly before we sign!
-            println("Hello with owner key: " + hello.sellerOwnerKey + " " + otherParty.owningKey)
+            //println("Hello with owner key: " + hello.sellerOwnerKey + " " + otherParty.owningKey)
             val untrustedSTX = sendAndReceive<SignedTransaction>(otherParty, hello)
-            println("Untrusted: " + untrustedSTX.data.tx)
+            //println("Untrusted: " + untrustedSTX.data.tx)
             progressTracker.currentStep = VERIFYING
             return untrustedSTX.unwrap {
                 // Check that the tx proposed by the buyer is valid.

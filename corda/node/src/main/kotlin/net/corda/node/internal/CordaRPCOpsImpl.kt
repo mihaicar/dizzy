@@ -98,6 +98,12 @@ class CordaRPCOpsImpl(
         }
     }
 
+    override fun getShareBalances(): Map<String, Long> {
+        return databaseTransaction(database) {
+            services.vaultService.getShareBalances()
+        }
+    }
+
     // TODO: Check that this flow is annotated as being intended for RPC invocation
     override fun <T : Any> startFlowDynamic(logicType: Class<out FlowLogic<T>>, vararg args: Any?): FlowHandle<T> {
         requirePermission(startFlowPermission(logicType))
