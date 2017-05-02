@@ -2,8 +2,6 @@ package net.corda.traderdemo.flow
 
 import co.paralleluniverse.fibers.Suspendable
 import net.corda.core.contracts.Amount
-import net.corda.core.contracts.Command
-import net.corda.core.contracts.TransactionState
 import net.corda.core.contracts.TransactionType
 import net.corda.core.crypto.CompositeKey
 import net.corda.core.crypto.Party
@@ -33,7 +31,7 @@ import java.util.*
 
             // Stage 1. Retrieve needed shares and add them as input/output to the share tx
             val txb = TransactionType.General.Builder(notary.notaryIdentity)
-            val (tx, keys) = vault.generateShareSpend(txb, qty, ticker, otherParty.owningKey)
+            val (tx, keys) = vault.generateShareSpend(txb, qty, ticker, otherParty.owningKey, value = value)
             logBalance()
 
             //Stage 2. Send the buyer info for the cash tx

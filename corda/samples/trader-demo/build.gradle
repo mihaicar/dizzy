@@ -193,3 +193,19 @@ task runTransferBack(type: JavaExec) {
         args tck
     }
 }
+
+// MC: displays cash and assets of node A
+task runDisplayA(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'net.corda.traderdemo.TraderDemoKt'
+    args '--role'
+    args 'DISPLAY_A'
+}
+
+// MC: displays cash and assets of node A
+task runDisplayB(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'net.corda.traderdemo.TraderDemoKt'
+    args '--role'
+    args 'DISPLAY_B'
+}

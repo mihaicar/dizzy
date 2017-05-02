@@ -11,10 +11,15 @@ import io.requery.kotlin.notNull
 import io.requery.query.RowExpression
 import net.corda.contracts.ShareContract
 import net.corda.contracts.asset.Cash
+import net.corda.contracts.asset.DUMMY_CASH_ISSUER
 import net.corda.core.ThreadBox
 import net.corda.core.bufferUntilSubscribed
 import net.corda.core.contracts.*
-import net.corda.core.crypto.*
+import net.corda.core.crypto.AbstractParty
+import net.corda.core.crypto.CompositeKey
+import net.corda.core.crypto.Party
+import net.corda.core.crypto.SecureHash
+import net.corda.core.flows.FlowException
 import net.corda.core.node.ServiceHub
 import net.corda.core.node.services.StatesNotAvailableException
 import net.corda.core.node.services.Vault
@@ -611,9 +616,10 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
     }
 
     @Suspendable
-    override fun generateShareSpend(tx: TransactionBuilder, qty: Long, ticker: String, to: CompositeKey, onlyFromParties: Set<AbstractParty>?): Pair<TransactionBuilder, List<CompositeKey>> {
+    override fun generateShareSpend(tx: TransactionBuilder, qty: Long, ticker: String, to: CompositeKey, onlyFromParties: Set<AbstractParty>?, value : Amount<Currency>): Pair<TransactionBuilder, List<CompositeKey>> {
         // get all the unconsumed states for share spending:
         val lock: UUID = UUID(1234, 1234)
+        val price = value `issued by` DUMMY_CASH_ISSUER
         val acceptableShares = unconsumedStatesForShareSpending<ShareContract.State>(qty = qty, lockId = lock, ticker = ticker, notary = tx.notary);
         //println("We have the acceptable shares as \n $acceptableShares")
         // notary may be associated with locked state only?
@@ -634,7 +640,7 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         val states = gathered.groupBy { it.state.data.ticker }.map {
             val sh = it.value
             val totalAmount = sh.map { it.state.data.qty }.sum()
-            deriveShareState(sh.first().state, totalAmount, to)
+            deriveShareState(sh.first().state, totalAmount, to, price)
         }.sortedBy { it.data.qty}
 
         //println("We also have the states: $states")
@@ -644,10 +650,10 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
             states.subList(0, states.lastIndex) +
                     states.last().let {
                         val spent = it.data.qty - change
-                        deriveShareState(it, spent, it.data.owner)
+                        deriveShareState(it, spent, it.data.owner, price)
                     } +
                     states.last().let{
-                        deriveShareState(it, change, existingOwner)
+                        deriveShareState(it, change, existingOwner, price)
                     }
         } else states
         for (state in gathered) {
@@ -663,8 +669,8 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
 
     }
 
-    private fun  deriveShareState(txState: TransactionState<ShareContract.State>, amount: Long, owner: CompositeKey)
-        = txState.copy(data = txState.data.copy(qty = amount, owner = owner))
+    private fun  deriveShareState(txState: TransactionState<ShareContract.State>, amount: Long, owner: CompositeKey, price: Amount<Issued<Currency>>)
+        = txState.copy(data = txState.data.copy(qty = amount, owner = owner, faceValue = price))
 
     private fun gatherShares(acceptableShares: List<StateAndRef<ShareContract.State>>, qty: Long):
                             Pair<ArrayList<StateAndRef<ShareContract.State>>, Long>
@@ -678,8 +684,8 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         }
 
         if (gatheredAmount < qty) {
-            log.trace("Insufficient shares!!!")
-            throw InsufficientBalanceException(0.DOLLARS)
+            log.trace("Insufficient shares!")
+            throw InsufficientSharesException(gathered[0].state.data.ticker, gatheredAmount, qty)
         }
 
         return Pair(gathered, gatheredAmount)
@@ -777,11 +783,55 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         return stateRefs.map { listOf("'${it.txhash}'", it.index) }
     }
 
-    override fun getShareBalances(): Map<String, Long> {
-        val lock: UUID = UUID(1234, 1234)
+    val balanceLock: ReentrantLock = ReentrantLock()
+    override fun getShareBalances(): MutableMap<String, Long> {
+        var shares = mutableMapOf<String, Long>()
+        val MAX_SHARE_RETRIES = 1
+        for (retryCount in 1..MAX_SHARE_RETRIES) {
 
-        val acceptableShares = unconsumedStatesForShareSpending<ShareContract.State>(qty = 1, lockId = lock, ticker = "AAPL")
-        //return acceptableShares.first().state.data.qty
-        return null!!
+            balanceLock.withLock {
+                val statement = configuration.jdbcSession().createStatement()
+                try {
+                    statement.execute("CALL SET(@t, 0);")
+
+                    // MC: We select the tickers and the quantity we have (accessible) in them. We only include
+                    // spendable stock, as normal.
+                    val selectJoin = """
+                        SELECT ccs.ticker AS ticker, SUM(ccs.qty) AS total_shares
+                        FROM vault_states AS vs JOIN contract_share_states AS ccs
+                            ON vs.transaction_id = ccs.transaction_id
+                        WHERE vs.output_index = ccs.output_index
+                        AND   vs.state_status = 0
+                        GROUP BY ccs.ticker
+                        ORDER BY total_shares DESC
+                        """
+
+                    // Retrieve spendable state refs
+                    val rs = statement.executeQuery(selectJoin)
+                    //shares.isEmpty()
+
+                    // MC: Goes through the resulting rows to gather information
+                    while (rs.next()) {
+                        val ticker = rs.getString(1)
+                        val qty = rs.getLong(2)
+                        shares[ticker] = qty
+                    }
+                    return shares
+                } catch (e: SQLException) {
+                    log.error("""Failed retrieving shares! $e.""")
+                } finally {
+                    statement.close()
+                }
+            }
+
+            log.warn("Share display failed on attempt $retryCount")
+            if (retryCount != MAX_RETRIES) {
+                FlowStateMachineImpl.sleep(RETRY_SLEEP * retryCount.toLong())
+            }
+        }
+        return shares
     }
 }
+
+class InsufficientSharesException(ticker: String, gatheredAmount: Long, qty: Long) : FlowException("Insufficient shares in $ticker. Needed $qty, but have $gatheredAmount")
+

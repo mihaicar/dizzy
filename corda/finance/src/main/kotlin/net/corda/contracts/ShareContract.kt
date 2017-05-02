@@ -1,5 +1,6 @@
 package net.corda.contracts
 
+import net.corda.contracts.IShareState
 import net.corda.contracts.asset.DUMMY_CASH_ISSUER
 import net.corda.stockinfo.StockFetch
 import net.corda.contracts.asset.sumCashBy
@@ -250,7 +251,7 @@ class ShareContract : Contract {
 
         // vault.generateShareSpend for that resulting transaction
         println("Transfer is generating the spend with ${issuance.party.owningKey}")
-        vault.generateShareSpend(tx, qty, ticker, issuance.party.owningKey)
+        vault.generateShareSpend(tx, qty, ticker, issuance.party.owningKey, value = value.withoutIssuer())
         //tx.addInputState(paper) - isnt this done in the generateSpend?
         // input as states all papers used
 

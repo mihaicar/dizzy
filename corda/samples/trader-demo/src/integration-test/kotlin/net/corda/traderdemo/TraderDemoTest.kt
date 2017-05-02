@@ -9,6 +9,7 @@ import net.corda.node.services.startFlowPermission
 import net.corda.node.services.transactions.SimpleNotaryService
 import net.corda.nodeapi.User
 import net.corda.testing.node.NodeBasedTest
+import net.corda.traderdemo.client.TraderDemoClientApi
 import org.junit.Test
 
 class TraderDemoTest : NodeBasedTest() {

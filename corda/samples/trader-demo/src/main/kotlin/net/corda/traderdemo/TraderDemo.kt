@@ -8,6 +8,7 @@ import net.corda.core.utilities.loggerFor
 import org.slf4j.Logger
 import kotlin.system.exitProcess
 import net.corda.core.contracts.Amount
+import net.corda.traderdemo.client.TraderDemoClientApi
 
 /**
  * This entry point allows for command line running of the trader demo functions on nodes started by Main.kt.
@@ -21,7 +22,9 @@ private class TraderDemo {
         BUYER,
         SELLER,
         SELLER_TRANSFER,
-        TRANSFER_BACK
+        TRANSFER_BACK,
+        DISPLAY_A,
+        DISPLAY_B
     }
 
     companion object {
@@ -85,6 +88,16 @@ private class TraderDemo {
             val host = HostAndPort.fromString("localhost:10009")
             CordaRPCClient(host).use("demo", "demo") {
                 TraderDemoClientApi(this).runSellerTransfer(amount, "Bank A", qty, ticker)
+            }
+        } else if (role == Role.DISPLAY_A) {
+            val host = HostAndPort.fromString("localhost:10006")
+            CordaRPCClient(host).use("demo", "demo") {
+                TraderDemoClientApi(this).runDisplay()
+            }
+        } else if (role == Role.DISPLAY_B) {
+            val host = HostAndPort.fromString("localhost:10009")
+            CordaRPCClient(host).use("demo", "demo") {
+                TraderDemoClientApi(this).runDisplay()
             }
         }
     }

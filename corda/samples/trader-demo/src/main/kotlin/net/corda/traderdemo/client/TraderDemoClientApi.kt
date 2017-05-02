@@ -1,10 +1,9 @@
-package net.corda.traderdemo
+package net.corda.traderdemo.client
 
 import com.google.common.util.concurrent.Futures
 import net.corda.contracts.testing.calculateRandomlySizedAmounts
 import net.corda.core.contracts.Amount
 import net.corda.core.contracts.DOLLARS
-import net.corda.core.contracts.Issued
 import net.corda.core.getOrThrow
 import net.corda.core.messaging.CordaRPCOps
 import net.corda.core.messaging.startFlow
@@ -54,7 +53,7 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         if (!rpc.attachmentExists(SellerFlow.PROSPECTUS_HASH)) {
             javaClass.classLoader.getResourceAsStream("bank-of-london-cp.jar").use {
                 val id = rpc.uploadAttachment(it)
-                assertEquals(SellerFlow.PROSPECTUS_HASH, id)
+                assertEquals(SellerFlow.Companion.PROSPECTUS_HASH, id)
             }
         }
 
@@ -77,8 +76,10 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
 
     }
 
-    fun printShares() {
-        rpc.getCashBalances()
-        rpc.getShareBalances()
+    fun runDisplay() {
+        val cash = rpc.getCashBalances().entries.map { "${it.key.currencyCode} ${it.value}" }
+        println("Cash balance: ${cash.joinToString()}")
+        val shares = rpc.getShareBalances().entries.map { "${it.key} ${it.value}" }
+        println("Share balance: ${shares.joinToString()}")
     }
 }

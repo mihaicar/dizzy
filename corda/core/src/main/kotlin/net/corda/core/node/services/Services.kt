@@ -230,7 +230,8 @@ interface VaultService {
                       qty: Long,
                       ticker: String,
                       to: CompositeKey,
-                      onlyFromParties: Set<AbstractParty>? = null): Pair<TransactionBuilder, List<CompositeKey>>
+                      onlyFromParties: Set<AbstractParty>? = null,
+                      value: Amount<Currency>): Pair<TransactionBuilder, List<CompositeKey>>
 
     // DOCSTART VaultStatesQuery
     /**
@@ -294,7 +295,7 @@ interface VaultService {
     /**
      * Gets the share balances for the current node
      */
-    fun  getShareBalances(): Map<String, Long>
+    fun  getShareBalances(): MutableMap<String, Long>
 }
 
 inline fun <reified T: ContractState> VaultService.unconsumedStates(includeSoftLockedStates: Boolean = true): Iterable<StateAndRef<T>> =
