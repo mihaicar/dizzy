@@ -51,7 +51,7 @@ class TradeSimulation(runAsync: Boolean, latencyInjector: InMemoryMessagingNetwo
 
         @Suppress("UNCHECKED_CAST")
         val buyerFuture = buyer.initiateSingleShotFlow(Seller::class) {
-            Buyer(it, notary.info.notaryIdentity, amount, CommercialPaper.State::class.java)
+            Buyer(it, notary.info.notaryIdentity, amount, 1, "AAPL", CommercialPaper.State::class.java)
         }.flatMap { (it.stateMachine as FlowStateMachine<SignedTransaction>).resultFuture }
 
         val sellerKey = seller.services.legalIdentityKey
@@ -60,6 +60,8 @@ class TradeSimulation(runAsync: Boolean, latencyInjector: InMemoryMessagingNetwo
                 notary.info,
                 issuance.tx.outRef<OwnableState>(0),
                 amount,
+                1,
+                "AAPL",
                 sellerKey)
 
         showConsensusFor(listOf(buyer, seller, notary))

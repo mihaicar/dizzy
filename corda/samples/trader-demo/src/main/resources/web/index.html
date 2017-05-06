@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example CorDapp</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="js/angular-module.js"></script>
+</head>
+
+
+<body ng-app="demoAppModule" ng-controller="DemoAppController as demoApp">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{demoApp.thisNode}}</a>
+        </div>
+        <button ng-click="demoApp.openModal()" type="button" class="btn btn-primary navbar-btn">Sell shares!</button>
+        <button ng-click="demoApp.getPOs(); demoApp.getCash()" type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-refresh"></span></button>
+    </div>
+</nav>
+
+<script type="text/ng-template" id="demoAppModal.html">
+    <!--CHANGE TO EXCHANGE-->
+    <div ng-if="modalInstance.thisNode!='Bank B'" class="modal-header">
+        <h4 class="modal-title">Sell your shares</h4>
+    </div>
+    <div ng-if="modalInstance.thisNode!='Bank B'">
+        <form>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="counterparty" class="control-label">Counter-party:</label>
+                    <select ng-model="modalInstance.form.counterparty" class="form-control" id="counterparty" ng-options="peer as peer for peer in modalInstance.peers">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ticker" class="control-label">Stock:</label>
+                    <select ng-model="modalInstance.form.ticker" class="form-control" id="ticker" ng-options="sym as sym for sym in modalInstance.stocks">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button ng-click="modalInstance.getQuote()" type="button" class="btn btn-default">Get quote for {{modalInstance.form.ticker}}!</button>
+                    <div id='result'></div>
+                </div>
+                <div class="form-group">
+                    <label for="qty" class="control-label">Quantity:</label>
+                    <input type="text" ng-model="modalInstance.form.qty" class="form-control" id="qty">
+                </div>
+                <div class="form-group">
+                    <label for="price" class="control-label">Price to sell for:</label>
+                    <input type="text" ng-model="modalInstance.form.price" class="form-control" id="price">
+                </div>
+                <div ng-show="modalInstance.formError" class="form-group">
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        Enter valid purchase order parameters
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="modalInstance.cancel()" type="button" class="btn btn-default">Close</button>
+                <button ng-click="modalInstance.create()" type="button" class="btn btn-primary">Sell shares NOW!</button>
+            </div>
+        </form>
+    </div>
+    <div ng-if="modalInstance.thisNode=='Bank B'" class="modal-header">
+        <h4 class="modal-title">Sell fresh shares!</h4>
+    </div>
+    <div ng-if="modalInstance.thisNode=='Bank B'">
+        <form>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="buyer" class="control-label">Buyer:</label>
+                    <select ng-model="modalInstance.form.counterparty" class="form-control" id="buyer" ng-options="bank as bank for bank in modalInstance.banks">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ticker-buy" class="control-label">Stock:</label>
+                    <input type="text" ng-model="modalInstance.form.ticker" class="form-control" id="ticker-buy">
+                </div>
+                <div class="form-group">
+                    <button ng-click="modalInstance.getQuoteBuy()" type="button" class="btn btn-default">Get quote for {{modalInstance.form.ticker}}!</button>
+                    <div id='result-buy'></div>
+                </div>
+                <div class="form-group">
+                    <label for="qty-buy" class="control-label">Quantity:</label>
+                    <input type="text" ng-model="modalInstance.form.qty" class="form-control" id="qty-buy">
+                </div>
+                <div class="form-group">
+                    <label for="price-buy" class="control-label">Price to sell for:</label>
+                    <input type="text" ng-model="modalInstance.form.price" class="form-control" id="price-buy">
+                </div>
+                <div ng-show="modalInstance.formError" class="form-group">
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        Enter valid purchase order parameters
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="modalInstance.cancel()" type="button" class="btn btn-default">Close</button>
+                <button ng-click="modalInstance.createbuy()" type="button" class="btn btn-primary">Sell shares NOW!</button>
+            </div>
+        </form>
+    </div>
+
+    </div>
+</script>
+
+<script type="text/ng-template" id="messageContent.html">
+    <div class="modal-body" id="modal-body">
+        {{ modalInstanceTwo.message }}
+    </div>
+</script>
+
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <!--find alternative for when map is empty * this does not work! -->
+        <div ng-show="angular.equals(demoApp.pos, {})" class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">There are no recorded shares</h3>
+            </div>
+            <div class="panel-body">Use the "Create purchase order" button to establish a purchase order with a peer.</div>
+        </div>
+
+        <div ng-show="!angular.equals(demoApp.pos, {})" class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Recorded shares for </h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="(key, value) in demoApp.pos">Stock symbol: {{key}}. No. of shares: {{value}}</li>
+                </ul>
+            </div>
+        </div>
+        <div ng-show="!angular.equals(demoApp.cash, {})" class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cash balances</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="(key, value) in demoApp.cash">{{value}}</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+</body>
+</html>

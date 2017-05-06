@@ -45,7 +45,6 @@ class ShareContract : Contract {
             override val owner: CompositeKey,
             val faceValue: Amount<Issued<Currency>>,
             val maturityDate: Instant,
-            // MC: added amount and ticker
             val qty: Long,
             val ticker: String
     ) : OwnableState, QueryableState, IShareState {

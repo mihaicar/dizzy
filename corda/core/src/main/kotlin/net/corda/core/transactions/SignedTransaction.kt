@@ -70,7 +70,6 @@ data class SignedTransaction(val txBits: SerializedBytes<WireTransaction>,
         if (missing.isNotEmpty()) {
             val allowed = setOf(*allowedToBeMissing)
             val needed = missing - allowed
-            println("Needed signs: $needed and missing are $missing")
             if (needed.isNotEmpty())
                 throw SignaturesMissingException(needed, getMissingKeyDescriptions(needed), id)
         }

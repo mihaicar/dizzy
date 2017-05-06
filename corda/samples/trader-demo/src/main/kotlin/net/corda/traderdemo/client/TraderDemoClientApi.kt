@@ -60,7 +60,7 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         // The line below blocks and waits for the future to resolve.
         println("About to start seller flow.")
         val stx = rpc.startFlow(::SellerFlow, otherParty, amount, qty, ticker).returnValue.getOrThrow()
-        println("Sale completed in API - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx.tx)}")
+        println("Sale completed in API - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx)}")
     }
 
     fun runSellerTransfer(amount: Amount<Currency>, counterparty: String, qty: Long, ticker: String) {
@@ -68,11 +68,8 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         // MC: This time, the seller will already have the shares in his vault - no issuing.
         println("About to start seller transfer flow.")
         val stxs = rpc.startFlow(::SellerTransferFlow, otherParty, qty, ticker, amount).returnValue.getOrThrow()
-        val cashSTX = stxs.first()
-        val shareSTX = stxs.last()
         println("Transfer completed in API - we have a happy customer!\n\nFinal transaction is:" +
-                "\n\n${Emoji.renderIfSupported(cashSTX.tx)}" +
-                "\n\n${Emoji.renderIfSupported(shareSTX.tx)}")
+                "$stxs")
 
     }
 
