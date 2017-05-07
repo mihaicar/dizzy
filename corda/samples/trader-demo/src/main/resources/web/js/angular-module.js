@@ -122,12 +122,14 @@ app.controller('ModalInstanceCtrl', function ($http, $location, $uibModalInstanc
         .then((response) => $("#result-buy").text("One share in " + modalInstance.form.ticker + " sells at: $" + response.data));
 
     modalInstance.displayMessage = (message) => {
+        //message is: [object Object]
+        console.log("message is: " + message.entity)
         const modalInstanceTwo = $uibModal.open({
             templateUrl: 'messageContent.html',
             controller: 'messageCtrl',
             controllerAs: 'modalInstanceTwo',
             resolve: { message: () => message }
-    });
+        });
 
         // No behaviour on close / dismiss.
         modalInstanceTwo.result.then(() => {}, () => {});

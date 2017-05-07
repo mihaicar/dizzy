@@ -108,6 +108,38 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
     }
 }
 
+task deployExtraNode(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
+    ext.rpcUsers = [['user': "demo", 'password': "demo", 'permissions': [
+            'StartFlow.net.corda.flows.IssuerFlow$IssuanceRequester',
+            "StartFlow.net.corda.traderdemo.flow.SellerFlow",
+            "StartFlow.net.corda.traderdemo.flow.SellerTransferFlow"
+    ]]]
+    directory "./build/nodes"
+    // This name "Notary" is hard-coded into TraderDemoClientApi so if you change it here, change it there too.
+    // In this demo the node that runs a standalone notary also acts as the network map server.
+    networkMap "Notary"
+    node {
+        name "Notary"
+        nearestCity "London"
+        advertisedServices = ["corda.notary.validating"]
+        p2pPort 10002
+        webPort 10004
+        cordapps = []
+    }
+    if (project.hasProperty("nodeName")) {
+        node {
+            name nodeName
+            nearestCity nodeCity
+            advertisedServices = []
+            p2pPort Integer.parseInt(pport)
+            rpcPort Integer.parseInt(rport)
+            webPort Integer.parseInt(wport)
+            cordapps = []
+        }
+    }
+
+}
+
 task integrationTest(type: Test, dependsOn: []) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath

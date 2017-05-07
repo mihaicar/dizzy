@@ -126,11 +126,16 @@ class TraderApi(val services: CordaRPCOps) {
 
 
         when (result) {
-            is FlowResult.Success ->
+            is FlowResult.Success -> {
+                var resp = Response
+                    .status(Response.Status.CREATED)
+                    .entity(result.message)
+                    .build()
                 return Response
-                        .status(Response.Status.CREATED)
-                        .entity(result.message)
-                        .build()
+                    .status(Response.Status.CREATED)
+                    .entity(result.message)
+                    .build()
+            }
             is FlowResult.Failure ->
                 return Response
                         .status(Response.Status.BAD_REQUEST)

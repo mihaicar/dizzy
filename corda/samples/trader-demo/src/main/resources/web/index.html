@@ -26,10 +26,10 @@
 
 <script type="text/ng-template" id="demoAppModal.html">
     <!--CHANGE TO EXCHANGE-->
-    <div ng-if="modalInstance.thisNode!='Bank B'" class="modal-header">
+    <div ng-if="modalInstance.thisNode!='Exchange'" class="modal-header">
         <h4 class="modal-title">Sell your shares</h4>
     </div>
-    <div ng-if="modalInstance.thisNode!='Bank B'">
+    <div ng-if="modalInstance.thisNode!='Exchange'">
         <form>
             <div class="modal-body">
                 <div class="form-group">
@@ -68,10 +68,10 @@
             </div>
         </form>
     </div>
-    <div ng-if="modalInstance.thisNode=='Bank B'" class="modal-header">
+    <div ng-if="modalInstance.thisNode=='Exchange'" class="modal-header">
         <h4 class="modal-title">Sell fresh shares!</h4>
     </div>
-    <div ng-if="modalInstance.thisNode=='Bank B'">
+    <div ng-if="modalInstance.thisNode=='Exchange'">
         <form>
             <div class="modal-body">
                 <div class="form-group">
