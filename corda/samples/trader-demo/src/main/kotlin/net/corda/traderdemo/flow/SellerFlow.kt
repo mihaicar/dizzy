@@ -22,15 +22,12 @@ class SellerFlow(val otherParty: Party,
                  val amount: Amount<Currency>,
                  val qty: Long,
                  val ticker: String,
-                 override val progressTracker: ProgressTracker) : FlowLogic<FlowResult>() {
+                 override val progressTracker: ProgressTracker) : FlowLogic<String>() {
     constructor(otherParty: Party, amount: Amount<Currency>, qty: Long, ticker: String) : this(otherParty, amount, qty, ticker, tracker())
-    constructor(otherParty: Party, share: Share) : this(otherParty, DOLLARS(share.price), share.qty, share.ticker, tracker())
 
     companion object {
         val PROSPECTUS_HASH = SecureHash.parse("decd098666b9657314870e192ced0c3519c2c9d395507a238338f8d003929de9")
-
         object SELF_ISSUING : ProgressTracker.Step("Got session ID back, issuing and timestamping some commercial paper")
-
         object TRADING : ProgressTracker.Step("Starting the trade flow") {
             override fun childProgressTracker(): ProgressTracker = TwoPartyTradeFlow.Seller.tracker()
         }
@@ -42,7 +39,7 @@ class SellerFlow(val otherParty: Party,
     }
 
     @Suspendable
-    override fun call(): FlowResult {
+    override fun call(): String {
         try {
             progressTracker.currentStep = SELF_ISSUING
 
@@ -51,13 +48,7 @@ class SellerFlow(val otherParty: Party,
             // cpOwner is the seller (because they're the ones 'issuing' it)
             val cpOwnerKey = serviceHub.legalIdentityKey
             val shareContract = selfIssueShareContract(cpOwnerKey.public.composite, notary, amount, ticker, qty)
-            println("Share contract's owner: ${shareContract.state.data.owner} and ${cpOwnerKey.public.composite} -- should be the same now")
             progressTracker.currentStep = TRADING
-
-            val balances = serviceHub.vaultService.cashBalances.entries.map { "${it.key.currencyCode} ${it.value}" }
-            val lockID: UUID = UUID(1234, 1234)
-            //println("List of unconsumed states: " + list)
-
 
             // Send the offered amount, quantity and ticker - these come from gradle and, higher, a JS page (//TODO)
             // MC: AMOUNT should be the price of ONE share, not all the shares sent in the contract.
@@ -74,9 +65,10 @@ class SellerFlow(val otherParty: Party,
                     cpOwnerKey,
                     progressTracker.getChildProgressTracker(TRADING)!!)
             val finalTX = subFlow(seller, shareParentSessions = true)
-            return FlowResult.Success("Transaction: ${Emoji.renderIfSupported(finalTX.tx)}")
+            return "Transaction ID: ${finalTX.tx.id} \n \n " +
+                    "${otherParty.name} has received $qty shares in $ticker (priced at $amount per share)"
         } catch (ex: Exception) {
-            return FlowResult.Failure(ex.message)
+            return "Failure ${ex.message}"
         }
     }
 
@@ -129,8 +121,7 @@ class SellerFlow(val otherParty: Party,
             serviceHub.recordTransactions(listOf(tx))
             tx
         }
-        val trans: StateAndRef<ShareContract.State> = move.tx.outRef(0)
-        return trans
+        return move.tx.outRef(0)
     }
 
 }

@@ -24,11 +24,10 @@ import java.util.*
      * Notarisation (if required) and commitment to the ledger is handled vy the [FinalityFlow].
      * The flow returns the [SignedTransaction] that was committed to the ledger.
      */
-    class SellerTransferFlow(val otherParty: Party, val qty: Long, val ticker: String, val value: Amount<Currency>): FlowLogic<FlowResult>() {
-        constructor(otherParty: Party, share: Share) : this(otherParty, share.qty, share.ticker, DOLLARS(share.price))
+    class SellerTransferFlow(val otherParty: Party, val qty: Long, val ticker: String, val value: Amount<Currency>): FlowLogic<String>() {
 
         @Suspendable
-        override fun call(): FlowResult {
+        override fun call(): String {
             try {
                 val vault = serviceHub.vaultService
                 val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
@@ -37,7 +36,7 @@ import java.util.*
                 // Stage 1. Retrieve needed shares and add them as input/output to the share tx
                 val txb = TransactionType.General.Builder(notary.notaryIdentity)
                 val (tx, keys) = vault.generateShareSpend(txb, qty, ticker, otherParty.owningKey, value = value)
-                logBalance()
+
 
                 //Stage 2. Send the buyer info for the cash tx
                 val items = SellerTransferInfo(qty, ticker, value, currentOwner.owningKey)
@@ -60,11 +59,11 @@ import java.util.*
                 // Stage 7. Notarise and record, the transactions in our vaults.
                 val newCash = subFlow(FinalityFlow(cashSTX, setOf(currentOwner, otherParty))).single()
                 val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty))).single()
-                return FlowResult.Success("Cash ${Emoji.renderIfSupported(newCash.tx)} \n" +
-                        "Shares ${Emoji.renderIfSupported(newShare.tx)}")
+                return  "Transaction IDs: \n \n Cash: ${newCash.tx.id} \n Shares: ${newShare.tx.id} \n \n \n" +
+                        "${value * qty} were received from ${otherParty.name}. \n \n" +
+                        "${otherParty.name} received $qty shares in $ticker (priced at $value per share)"
             } catch(ex: Exception) {
-                // Catch all exception types.
-                return FlowResult.Failure(ex.message)
+                return "Failure: ${ex.message}"
             }
         }
 

@@ -25,7 +25,6 @@
 </nav>
 
 <script type="text/ng-template" id="demoAppModal.html">
-    <!--CHANGE TO EXCHANGE-->
     <div ng-if="modalInstance.thisNode!='Exchange'" class="modal-header">
         <h4 class="modal-title">Sell your shares</h4>
     </div>
@@ -34,7 +33,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="counterparty" class="control-label">Counter-party:</label>
-                    <select ng-model="modalInstance.form.counterparty" class="form-control" id="counterparty" ng-options="peer as peer for peer in modalInstance.peers">
+                    <select ng-model="modalInstance.form.counterparty" class="form-control" id="counterparty" ng-options="bank as bank for bank in modalInstance.banks">
                     </select>
                 </div>
                 <div class="form-group">
@@ -113,12 +112,6 @@
     </div>
 </script>
 
-<script type="text/ng-template" id="messageContent.html">
-    <div class="modal-body" id="modal-body">
-        {{ modalInstanceTwo.message }}
-    </div>
-</script>
-
 
 <div class="row">
     <div class="col-md-1"></div>
@@ -155,6 +148,13 @@
     </div>
     <div class="col-md-1"></div>
 </div>
+
+<script type="text/ng-template" id="messageContent.html">
+    <div class="modal-body" id="modal-body-result">
+        {{ modalInstanceTwo.message }}
+        <div id="result-message"></div>
+    </div>
+</script>
 
 </body>
 </html>

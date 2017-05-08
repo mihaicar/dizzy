@@ -33,7 +33,7 @@ app.controller('DemoAppController', function($http, $location, $uibModal) {
                     peers: () => peers,
                     banks: () => banks
                 }
-    });
+        });
 
         modalInstance.result.then(() => {}, () => {});
     };
@@ -116,14 +116,8 @@ app.controller('ModalInstanceCtrl', function ($http, $location, $uibModalInstanc
         }
     };
 
-    modalInstance.getQuote = () => $http.get(apiBaseURL + modalInstance.form.ticker + "/get-quote")
-        .then((response) => $("#result").text("One share in " + modalInstance.form.ticker + " sells at: $" + response.data));
-    modalInstance.getQuoteBuy = () => $http.get(apiBaseURL + modalInstance.form.ticker + "/get-quote")
-        .then((response) => $("#result-buy").text("One share in " + modalInstance.form.ticker + " sells at: $" + response.data));
-
     modalInstance.displayMessage = (message) => {
-        //message is: [object Object]
-        console.log("message is: " + message.entity)
+        //message.entity is: [object Object]
         const modalInstanceTwo = $uibModal.open({
             templateUrl: 'messageContent.html',
             controller: 'messageCtrl',
@@ -134,6 +128,10 @@ app.controller('ModalInstanceCtrl', function ($http, $location, $uibModalInstanc
         // No behaviour on close / dismiss.
         modalInstanceTwo.result.then(() => {}, () => {});
     };
+    modalInstance.getQuote = () => $http.get(apiBaseURL + modalInstance.form.ticker + "/get-quote")
+        .then((response) => $("#result").text("One share in " + modalInstance.form.ticker + " sells at: $" + response.data));
+    modalInstance.getQuoteBuy = () => $http.get(apiBaseURL + modalInstance.form.ticker + "/get-quote")
+        .then((response) => $("#result-buy").text("One share in " + modalInstance.form.ticker + " sells at: $" + response.data));
 
     // Close create purchase order modal dialogue.
     modalInstance.cancel = () => $uibModalInstance.dismiss();
