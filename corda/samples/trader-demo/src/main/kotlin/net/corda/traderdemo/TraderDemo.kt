@@ -63,8 +63,9 @@ private class TraderDemo {
         val ip = "localhost"
         if (role == Role.BUYER) {
             val host = HostAndPort.fromString("$ip:$port")
+            val amount = Amount.parseCurrency(options.valueOf(amountArg)!!)
             CordaRPCClient(host).use("demo", "demo") {
-                TraderDemoClientApi(this).runBuyer()
+                TraderDemoClientApi(this).runBuyer(amount)
             }
         } else if (role == Role.SELLER) { //change back to SELLER once you're done testing!
             // MC: Bank B (10009) sells shares to Bank A - by issuing them

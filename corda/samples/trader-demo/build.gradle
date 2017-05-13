@@ -209,6 +209,10 @@ task runBuyer(type: JavaExec) {
     main = 'net.corda.traderdemo.TraderDemoKt'
     args '--role'
     args 'BUYER'
+    args '--amount'
+    if (project.hasProperty("amt")) {
+        args amt
+    }
     args '--port'
     if (project.hasProperty("port")) {
         args port

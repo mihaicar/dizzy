@@ -29,7 +29,7 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         val bankOfCordaParty = rpc.partyFromName(BOC.name)
                 ?: throw Exception("Unable to locate ${BOC.name} in Network Map Service")
         val me = rpc.nodeIdentity()
-        val amounts = calculateRandomlySizedAmounts(amount, 3, 10, Random())
+        val amounts = calculateRandomlySizedAmounts(amount, 1, 2, Random())
         // issuer random amounts of currency totaling 30000.DOLLARS in parallel
         println("About to request money issuance in the Buyer.")
 
