@@ -106,6 +106,46 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
         webPort 10013
         cordapps = []
     }
+//    node {
+//        name "Bank C"
+//        nearestCity "London"
+//        advertisedServices = []
+//        p2pPort 10014
+//        rpcPort 10015
+//        webPort 10016
+//        cordapps = []
+//        rpcUsers = ext.rpcUsers
+//    }
+//    node {
+//        name "Hargreaves Lansdown"
+//        nearestCity "London"
+//        advertisedServices = []
+//        p2pPort 10017
+//        rpcPort 10018
+//        webPort 10019
+//        cordapps = []
+//        rpcUsers = ext.rpcUsers
+//    }
+//    node {
+//        name "Beaufort Securities"
+//        nearestCity "London"
+//        advertisedServices = []
+//        p2pPort 10020
+//        rpcPort 10021
+//        webPort 10022
+//        cordapps = []
+//        rpcUsers = ext.rpcUsers
+//    }
+    node {
+        name "Exchange"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10040
+        rpcPort 10041
+        webPort 10042
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
 }
 
 task deployExtraNode(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
@@ -169,6 +209,10 @@ task runBuyer(type: JavaExec) {
     main = 'net.corda.traderdemo.TraderDemoKt'
     args '--role'
     args 'BUYER'
+    args '--port'
+    if (project.hasProperty("port")) {
+        args port
+    }
 }
 
 // MC: executes the seller with the issue command
@@ -178,16 +222,24 @@ task runSeller(type: JavaExec) {
     args '--role'
     args 'SELLER'
     args '--amount'
-    if (project.hasProperty("amt")){
+    if (project.hasProperty("amt")) {
         args amt
     }
     args '--quantity'
-    if (project.hasProperty("qty")){
+    if (project.hasProperty("qty")) {
         args qty
     }
     args '--ticker'
-    if (project.hasProperty("tck")){
+    if (project.hasProperty("tck")) {
         args tck
+    }
+    args '--port'
+    if (project.hasProperty("port")) {
+        args port
+    }
+    args '--cparty'
+    if (project.hasProperty("cp")) {
+        args cp
     }
 }
 
@@ -209,6 +261,14 @@ task runSellerTransfer(type: JavaExec) {
     if (project.hasProperty("tck")){
         args tck
     }
+    args '--port'
+    if (project.hasProperty("port")) {
+        args port
+    }
+    args '--cparty'
+    if (project.hasProperty("cp")) {
+        args cp
+    }
 }
 
 // MC: executes the seller with the move ownership command
@@ -229,14 +289,26 @@ task runTransferBack(type: JavaExec) {
     if (project.hasProperty("tck")){
         args tck
     }
+    args '--port'
+    if (project.hasProperty("port")) {
+        args port
+    }
+    args '--cparty'
+    if (project.hasProperty("cp")) {
+        args cp
+    }
 }
 
 // MC: displays cash and assets of node A
-task runDisplayA(type: JavaExec) {
+task runDisplay(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'
     args '--role'
-    args 'DISPLAY_A'
+    args 'DISPLAY'
+    args '--port'
+    if (project.hasProperty("port")) {
+        args port
+    }
 }
 
 // MC: displays cash and assets of node A
@@ -244,5 +316,5 @@ task runDisplayB(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'
     args '--role'
-    args 'DISPLAY_B'
+    args 'DISPLAY'
 }

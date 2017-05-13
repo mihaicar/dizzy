@@ -9,6 +9,7 @@ import org.slf4j.Logger
 import kotlin.system.exitProcess
 import net.corda.core.contracts.Amount
 import net.corda.traderdemo.client.TraderDemoClientApi
+import java.net.InetAddress
 
 /**
  * This entry point allows for command line running of the trader demo functions on nodes started by Main.kt.
@@ -23,8 +24,7 @@ private class TraderDemo {
         SELLER,
         SELLER_TRANSFER,
         TRANSFER_BACK,
-        DISPLAY_A,
-        DISPLAY_B
+        DISPLAY
     }
 
     companion object {
@@ -38,6 +38,8 @@ private class TraderDemo {
         val amountArg = parser.accepts("amount").withOptionalArg().ofType(String::class.java)
         val qtyArg = parser.accepts("quantity").withOptionalArg().ofType(Long::class.java)
         val tickerArg = parser.accepts("ticker").withOptionalArg().ofType(String::class.java)
+        val portArg = parser.accepts("port").withOptionalArg().ofType(Integer::class.java)
+        val cpartyArg = parser.accepts("cparty").withOptionalArg().ofType(String::class.java)
         val options = try {
             parser.parse(*args)
         } catch (e: Exception) {
@@ -56,9 +58,11 @@ private class TraderDemo {
         // MC: Seller should be getting the amount and counterparty from gradle too!
 
         val role = options.valueOf(roleArg)!!
-
+        val port = options.valueOf(portArg)!!
+        //val ip = InetAddress.getLocalHost().hostAddress
+        val ip = "localhost"
         if (role == Role.BUYER) {
-            val host = HostAndPort.fromString("localhost:10006")
+            val host = HostAndPort.fromString("$ip:$port")
             CordaRPCClient(host).use("demo", "demo") {
                 TraderDemoClientApi(this).runBuyer()
             }
@@ -67,39 +71,43 @@ private class TraderDemo {
             val amount = Amount.parseCurrency(options.valueOf(amountArg)!!)
             val qty = options.valueOf(qtyArg)!!
             val ticker = options.valueOf(tickerArg)
-            val host = HostAndPort.fromString("localhost:10009")
+            val cparty = options.valueOf(cpartyArg)
+            val host = HostAndPort.fromString("$ip:$port")
             CordaRPCClient(host).use("demo", "demo") {
-                TraderDemoClientApi(this).runSeller(amount, "Bank A", qty, ticker)
+                TraderDemoClientApi(this).runSeller(amount, cparty, qty, ticker)
             }
         } else if (role == Role.SELLER_TRANSFER) {
             // MC: Bank A (10006) sells shares back to bank B - by trading (moving)
             val amount = Amount.parseCurrency(options.valueOf(amountArg)!!)
             val qty = options.valueOf(qtyArg)!!
             val ticker = options.valueOf(tickerArg)
-            val host = HostAndPort.fromString("localhost:10006")
+            val host = HostAndPort.fromString("$ip:$port")
+            val cparty = options.valueOf(cpartyArg)
             CordaRPCClient(host).use("demo", "demo") {
-                TraderDemoClientApi(this).runSellerTransfer(amount, "Bank B", qty, ticker)
+                TraderDemoClientApi(this).runSellerTransfer(amount, cparty, qty, ticker)
             }
         } else if (role == Role.TRANSFER_BACK) {
             // MC: Bank B (10009) moves back the shares to Bank A
             val amount = Amount.parseCurrency(options.valueOf(amountArg)!!)
             val qty = options.valueOf(qtyArg)!!
             val ticker = options.valueOf(tickerArg)
-            val host = HostAndPort.fromString("localhost:10009")
+            val host = HostAndPort.fromString("$ip:$port")
+            val cparty = options.valueOf(cpartyArg)
             CordaRPCClient(host).use("demo", "demo") {
-                TraderDemoClientApi(this).runSellerTransfer(amount, "Bank A", qty, ticker)
+                TraderDemoClientApi(this).runSellerTransfer(amount, cparty, qty, ticker)
             }
-        } else if (role == Role.DISPLAY_A) {
-            val host = HostAndPort.fromString("localhost:10006")
-            CordaRPCClient(host).use("demo", "demo") {
-                TraderDemoClientApi(this).runDisplay()
-            }
-        } else if (role == Role.DISPLAY_B) {
-            val host = HostAndPort.fromString("localhost:10009")
+        } else if (role == Role.DISPLAY) {
+            val host = HostAndPort.fromString("$ip:$port")
             CordaRPCClient(host).use("demo", "demo") {
                 TraderDemoClientApi(this).runDisplay()
             }
         }
+// else if (role == Role.DISPLAY_B) {
+//            val host = HostAndPort.fromString("$ip:10009")
+//            CordaRPCClient(host).use("demo", "demo") {
+//                TraderDemoClientApi(this).runDisplay()
+//            }
+//        }
     }
 
     fun printHelp(parser: OptionParser) {

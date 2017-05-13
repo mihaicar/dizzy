@@ -13,7 +13,8 @@ app.controller('DemoAppController', function($http, $location, $uibModal) {
 
     // We identify the node based on its localhost port.
     const nodePort = $location.port();
-    const apiBaseURL = "http://localhost:" + nodePort + "/api/example/";
+    // should not be localhost
+    const apiBaseURL = "http://" + location.host + "/api/example/";
     let peers = [];
     let banks = [];
 

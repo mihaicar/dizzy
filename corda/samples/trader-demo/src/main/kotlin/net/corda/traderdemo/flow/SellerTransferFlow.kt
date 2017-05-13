@@ -31,6 +31,7 @@ import java.util.*
             try {
                 val vault = serviceHub.vaultService
                 val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
+                println("Notary node is: ${notary.notaryIdentity}")
                 val currentOwner = serviceHub.myInfo.legalIdentity
 
                 // Stage 1. Retrieve needed shares and add them as input/output to the share tx

@@ -47,6 +47,7 @@ class SellerFlow(val otherParty: Party,
 
             // cpOwner is the seller (because they're the ones 'issuing' it)
             val cpOwnerKey = serviceHub.legalIdentityKey
+            println("Issuing contract...")
             val shareContract = selfIssueShareContract(cpOwnerKey.public.composite, notary, amount, ticker, qty)
             progressTracker.currentStep = TRADING
 
@@ -55,6 +56,7 @@ class SellerFlow(val otherParty: Party,
             val items = listOf(amount, qty, ticker)
             // amount - what the buyer has to pay - could be a diff between exchange and gradle input!
             send(otherParty, items)
+            println("We have sent our items over.")
             val seller = TwoPartyTradeFlow.Seller(
                     otherParty,
                     notary,
@@ -101,6 +103,7 @@ class SellerFlow(val otherParty: Party,
             tx.signWith(keyPair)
 
             // Get the notary to sign the timestamp
+            println("Getting signatures...")
             val notarySigs = subFlow(NotaryFlow.Client(tx.toSignedTransaction(false)))
             notarySigs.forEach { tx.addSignatureUnchecked(it) }
 
