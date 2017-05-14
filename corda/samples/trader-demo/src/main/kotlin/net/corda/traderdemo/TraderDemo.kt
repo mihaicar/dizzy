@@ -8,8 +8,12 @@ import net.corda.core.utilities.loggerFor
 import org.slf4j.Logger
 import kotlin.system.exitProcess
 import net.corda.core.contracts.Amount
+import net.corda.core.getOrThrow
+import net.corda.core.messaging.startFlow
 import net.corda.traderdemo.client.TraderDemoClientApi
+import net.corda.traderdemo.flow.SellerFlow
 import java.net.InetAddress
+import java.util.*
 
 /**
  * This entry point allows for command line running of the trader demo functions on nodes started by Main.kt.
@@ -24,7 +28,8 @@ private class TraderDemo {
         SELLER,
         SELLER_TRANSFER,
         TRANSFER_BACK,
-        DISPLAY
+        DISPLAY,
+        RANDOM
     }
 
     companion object {
@@ -102,13 +107,50 @@ private class TraderDemo {
             CordaRPCClient(host).use("demo", "demo") {
                 TraderDemoClientApi(this).runDisplay()
             }
+        } else if (role == Role.RANDOM) {
+            val portA = 10006
+            val portB = 10009
+            val portE = 10041
+            val portHL = 10018
+            val portBS = 10021
+            val ports = listOf(Pair(portA, "Bank A"),
+                    Pair(portB, "Bank B"),
+                    Pair(portE, "Exchange"),
+                    Pair(portHL, "Hargreaves Lansdown"),
+                    Pair(portBS, "Beaufort Securities"))
+            val stocks = listOf(Pair("AAPL", 160.DOLLARS),
+                    Pair("FB", 160.DOLLARS),
+                    Pair("GS", 230.DOLLARS),
+                    Pair("MSFT", 75.DOLLARS),
+                    Pair("MS", 50.DOLLARS))
+
+            // give 100.000 dollars to banks
+            CordaRPCClient(HostAndPort.fromString("$ip:$portA")).use("demo", "demo") {
+                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
+            }
+            CordaRPCClient(HostAndPort.fromString("$ip:$portB")).use("demo", "demo") {
+                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
+            }
+            CordaRPCClient(HostAndPort.fromString("$ip:$portHL")).use("demo", "demo") {
+                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
+            }
+            CordaRPCClient(HostAndPort.fromString("$ip:$portBS")).use("demo", "demo") {
+                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
+            }
+
+            // Then we have a few random variables and start the trades. Sure, this would work best with about 4-5
+            // banks (Bank A, Bank B, HL and BS)
+            val tries = 5
+            val rand = Random()
+            for (i in 0..tries) {
+                var stock = rand.nextInt(5) + 1
+                var port = rand.nextInt(5) + 1
+                CordaRPCClient(HostAndPort.fromString("$ip:$portE")).use("demo", "demo") {
+                    TraderDemoClientApi(this).runSeller(stocks[stock].second, ports[port].second, 1, stocks[stock].first)
+                }
+            }
+            println("We have finished selling assets. Onto their transfers...")
         }
-// else if (role == Role.DISPLAY_B) {
-//            val host = HostAndPort.fromString("$ip:10009")
-//            CordaRPCClient(host).use("demo", "demo") {
-//                TraderDemoClientApi(this).runDisplay()
-//            }
-//        }
     }
 
     fun printHelp(parser: OptionParser) {

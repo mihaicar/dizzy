@@ -116,26 +116,26 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
 //        cordapps = []
 //        rpcUsers = ext.rpcUsers
 //    }
-//    node {
-//        name "Hargreaves Lansdown"
-//        nearestCity "London"
-//        advertisedServices = []
-//        p2pPort 10017
-//        rpcPort 10018
-//        webPort 10019
-//        cordapps = []
-//        rpcUsers = ext.rpcUsers
-//    }
-//    node {
-//        name "Beaufort Securities"
-//        nearestCity "London"
-//        advertisedServices = []
-//        p2pPort 10020
-//        rpcPort 10021
-//        webPort 10022
-//        cordapps = []
-//        rpcUsers = ext.rpcUsers
-//    }
+    node {
+        name "Hargreaves Lansdown"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10017
+        rpcPort 10018
+        webPort 10019
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "Beaufort Securities"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10020
+        rpcPort 10021
+        webPort 10022
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
     node {
         name "Exchange"
         nearestCity "London"

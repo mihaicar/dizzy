@@ -818,15 +818,11 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
                     }
                     return shares
                 } catch (e: SQLException) {
-                    log.error("""Failed retrieving shares! $e.""")
+                    shares.clear()
+                    return shares
                 } finally {
                     statement.close()
                 }
-            }
-
-            log.warn("Share display failed on attempt $retryCount")
-            if (retryCount != MAX_RETRIES) {
-                FlowStateMachineImpl.sleep(RETRY_SLEEP * retryCount.toLong())
             }
         }
         return shares

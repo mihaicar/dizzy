@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.Futures
 import net.corda.contracts.testing.calculateRandomlySizedAmounts
 import net.corda.core.contracts.Amount
 import net.corda.core.contracts.DOLLARS
+import net.corda.core.crypto.Party
 import net.corda.core.getOrThrow
 import net.corda.core.messaging.CordaRPCOps
 import net.corda.core.messaging.startFlow
@@ -31,7 +32,7 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         val me = rpc.nodeIdentity()
         val amounts = calculateRandomlySizedAmounts(amount, 1, 2, Random())
         // issuer random amounts of currency totaling 30000.DOLLARS in parallel
-        println("About to request money issuance in the Buyer.")
+        //println("About to request money issuance in the Buyer.")
 
         // The IssuanceRequester is just a testing feature to enable asset mvm - not to be used in production.
         val resultFutures = amounts.map { pennies ->
@@ -39,7 +40,7 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         }
 
         Futures.allAsList(resultFutures).getOrThrow()
-        println("Requested and received.")
+        println("Requested and received in ${me.legalIdentity.name}")
     }
 
     fun runSeller(amount: Amount<Currency> = 1000.0.DOLLARS, counterparty: String, qty: Long, ticker: String) {
@@ -60,7 +61,7 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         // The line below blocks and waits for the future to resolve.
         println("About to start seller flow.")
         val stx = rpc.startFlow(::SellerFlow, otherParty, amount, qty, ticker).returnValue.getOrThrow()
-        println("Sale completed in API - we have a happy customer!\n\nFinal transaction is:\n\n${Emoji.renderIfSupported(stx)}")
+        println("Final result is: \n\n${Emoji.renderIfSupported(stx)}")
     }
 
     fun runSellerTransfer(amount: Amount<Currency>, counterparty: String, qty: Long, ticker: String) {
@@ -68,8 +69,7 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         // MC: This time, the seller will already have the shares in his vault - no issuing.
         println("About to start seller transfer flow.")
         val stxs = rpc.startFlow(::SellerTransferFlow, otherParty, qty, ticker, amount).returnValue.getOrThrow()
-        println("Transfer completed in API - we have a happy customer!\n\nFinal transaction is:" +
-                "$stxs")
+        println("Final result is: $stxs")
 
     }
 
@@ -79,4 +79,5 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         val shares = rpc.getShareBalances().entries.map { "${it.key} ${it.value}" }
         println("Share balance: ${shares.joinToString()}")
     }
+
 }
