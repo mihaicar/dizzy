@@ -11,6 +11,7 @@ import net.corda.core.seconds
 import net.corda.core.transactions.SignedTransaction
 import net.corda.core.utilities.Emoji
 import net.corda.core.utilities.ProgressTracker
+import net.corda.flows.BroadcastTransactionFlow
 import net.corda.flows.NotaryFlow
 import net.corda.flows.TwoPartyTradeFlow
 import net.corda.traderdemo.model.Share
@@ -44,7 +45,6 @@ class SellerFlow(val otherParty: Party,
             progressTracker.currentStep = SELF_ISSUING
 
             val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
-
             // cpOwner is the seller (because they're the ones 'issuing' it)
             val cpOwnerKey = serviceHub.legalIdentityKey
             println("Issuing contract...")
@@ -67,6 +67,7 @@ class SellerFlow(val otherParty: Party,
                     cpOwnerKey,
                     progressTracker.getChildProgressTracker(TRADING)!!)
             val finalTX = subFlow(seller, shareParentSessions = true)
+            //subFlow(BroadcastTransactionFlow(finalTX, setOf(notary.notaryIdentity)))
             return "Transaction ID: ${finalTX.tx.id} \n \n " +
                     "${otherParty.name} has received $qty shares in $ticker (priced at $amount per share)"
         } catch (ex: Exception) {

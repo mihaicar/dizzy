@@ -827,6 +827,42 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         }
         return shares
     }
+
+    val historyLock: ReentrantLock = ReentrantLock()
+    override fun txHistory(tx: String): String {
+        var txInfo = ""
+        historyLock.withLock {
+            val statement = configuration.jdbcSession().createStatement()
+            try {
+                // MC: We select the tickers and the quantity we have (accessible) in them. We only include
+                // spendable stock, as normal.
+                val selectJoin = """
+                        SELECT ccs.TICKER, ccs.QTY, ccs.FACE_VALUE/100 AS PRICE, ccs.ISSUER_KEY
+                        FROM vault_states AS vs JOIN contract_share_states AS ccs
+                        ON vs.transaction_id = ccs.transaction_id
+                        WHERE vs.output_index = ccs.output_index
+                        AND ccs.TRANSACTION_ID = '$tx'
+                        """
+
+                // Retrieve spendable state refs
+                val rs = statement.executeQuery(selectJoin)
+
+                // MC: Goes through the resulting rows to gather information
+                while (rs.next()) {
+                    val ticker = rs.getString(1)
+                    val qty = rs.getLong(2)
+                    val price = rs.getDouble(3)
+                    val issuer = rs.getString(4)
+                    txInfo += "Transaction of $qty shares in $ticker for the price of $price, coming from $issuer. \n"
+                }
+                return txInfo
+            } catch (e: SQLException) {
+                return ""
+            } finally {
+                statement.close()
+            }
+        }
+    }
 }
 
 class InsufficientSharesException(ticker: String, gatheredAmount: Long, qty: Long) : FlowException("Insufficient shares in $ticker. Needed $qty, but have $gatheredAmount")

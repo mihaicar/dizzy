@@ -31,40 +31,34 @@ import java.util.*
             try {
                 val vault = serviceHub.vaultService
                 val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
-                println("Notary node is: ${notary.notaryIdentity}")
                 val currentOwner = serviceHub.myInfo.legalIdentity
 
                 // Stage 1. Retrieve needed shares and add them as input/output to the share tx
                 val txb = TransactionType.General.Builder(notary.notaryIdentity)
                 val (tx, keys) = vault.generateShareSpend(txb, qty, ticker, otherParty.owningKey, value = value)
 
-
                 //Stage 2. Send the buyer info for the cash tx
                 val items = SellerTransferInfo(qty, ticker, value, currentOwner.owningKey)
                 send(otherParty, items)
 
-                // Stage 3. Retrieve the tx for cash movement
-                val cashSTX = receive<SignedTransaction>(otherParty).unwrap { it }
-
-                // Stage 4. Verify validity of cash transaction?
-                //TODO: check the nullity in the verifyContracts() function.
-
                 // Stage 5. Sign the share transaction now
                 tx.toWireTransaction().toLedgerTransaction(serviceHub).verify()
                 val ptx = tx.signWith(serviceHub.legalIdentityKey).toSignedTransaction(false)
-
                 // Stage 6. Collect signature from buyer.
                 // This also verifies the transaction and checks the signatures.
                 val shareSTX = subFlow(SignTransferFlow.Initiator(ptx))
-
+                println("signed by buyer too")
                 // Stage 7. Notarise and record, the transactions in our vaults.
-                val newCash = subFlow(FinalityFlow(cashSTX, setOf(currentOwner, otherParty))).single()
-                val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty))).single()
+                //val newCash = subFlow(FinalityFlow(cashSTX, setOf(currentOwner, otherParty))).single()
+
+                // Stage 3. Retrieve the tx for cash movement
+                val newCash = receive<SignedTransaction>(otherParty).unwrap { it }
+                val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty, notary.notaryIdentity))).single()
                 return  "Transaction IDs: \n \n Cash: ${newCash.tx.id} \n Shares: ${newShare.tx.id} \n \n \n" +
                         "${value * qty} were received from ${otherParty.name}. \n \n" +
                         "${otherParty.name} received $qty shares in $ticker (priced at $value per share)"
             } catch(ex: Exception) {
-                return "Failure: ${ex.message}"
+                return "Failure: ${ex.message} $ex "
             }
         }
 

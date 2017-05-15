@@ -15,6 +15,7 @@ import net.corda.flows.IssuerFlow.IssuanceRequester
 import net.corda.testing.BOC
 import net.corda.traderdemo.flow.SellerFlow
 import net.corda.traderdemo.flow.SellerTransferFlow
+import net.corda.traderdemo.flow.ShowHistory
 import java.util.*
 import kotlin.test.assertEquals
 
@@ -30,7 +31,7 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         val bankOfCordaParty = rpc.partyFromName(BOC.name)
                 ?: throw Exception("Unable to locate ${BOC.name} in Network Map Service")
         val me = rpc.nodeIdentity()
-        val amounts = calculateRandomlySizedAmounts(amount, 1, 2, Random())
+        val amounts = calculateRandomlySizedAmounts(amount, 3, 10, Random())
         // issuer random amounts of currency totaling 30000.DOLLARS in parallel
         //println("About to request money issuance in the Buyer.")
 
@@ -78,6 +79,22 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         println("Cash balance: ${cash.joinToString()}")
         val shares = rpc.getShareBalances().entries.map { "${it.key} ${it.value}" }
         println("Share balance: ${shares.joinToString()}")
+    }
+
+    fun  runAuditor(counterparties: List<String>, txID: String) {
+        val otherParties : MutableList<Party> = mutableListOf()
+        for (cp in counterparties) {
+            val otherParty = rpc.partyFromName(cp) ?: throw IllegalStateException("Don't know $cp")
+            otherParties.add(otherParty)
+        }
+        var txs: String = ""
+        for (p in otherParties) {
+            try {
+                txs = rpc.startFlow(::ShowHistory, p, txID).returnValue.getOrThrow()
+                break;
+            } catch (ex: Exception) {}
+        }
+        println("Transaction details: $txs")
     }
 
 }

@@ -14,6 +14,7 @@ import net.corda.core.serialization.SingletonSerializeAsToken
 import net.corda.core.utilities.ProgressTracker
 import net.corda.core.utilities.UntrustworthyData
 import net.corda.core.utilities.unwrap
+import net.corda.flows.FinalityFlow
 import net.corda.stockinfo.StockFetch
 import java.util.*
 
@@ -36,7 +37,7 @@ class BuyerTransferFlow(val otherParty: Party,
     override fun call() {
         val vault = serviceHub.vaultService
         val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
-
+        val currentOwner = serviceHub.myInfo.legalIdentity
         // Stage 1. Receive the tx from the seller.
         val untrustedItems = receive<SellerTransferInfo>(otherParty)
 
@@ -56,7 +57,8 @@ class BuyerTransferFlow(val otherParty: Party,
         val stx = subFlow(SignTransferFlow.Initiator(ptx))
 
         // Stage 7. Notarise and record, the transaction in our vaults.
-        send(otherParty, stx)
+        val newCash = subFlow(FinalityFlow(stx, setOf(currentOwner, otherParty, notary.notaryIdentity))).single()
+        send(otherParty, newCash)
     }
 
     private fun  verify(data: UntrustworthyData<SellerTransferInfo>): SellerTransferInfo {

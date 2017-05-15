@@ -296,6 +296,12 @@ interface VaultService {
      * Gets the share balances for the current node
      */
     fun  getShareBalances(): MutableMap<String, Long>
+
+    /**
+     * Shows information about transaction
+     */
+
+    fun  txHistory(tx : String): String
 }
 
 inline fun <reified T: ContractState> VaultService.unconsumedStates(includeSoftLockedStates: Boolean = true): Iterable<StateAndRef<T>> =
