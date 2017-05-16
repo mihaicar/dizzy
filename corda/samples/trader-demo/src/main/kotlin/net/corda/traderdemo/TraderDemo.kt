@@ -121,59 +121,93 @@ private class TraderDemo {
             val portA = 10006
             val portB = 10009
             val portE = 10041
-//            val portHL = 10018
-//            val portBS = 10021
+            val portHL = 10048
+            val portBS = 10021
 
             val ports = listOf(Pair(portA, "Bank A"),
                     Pair(portB, "Bank B"),
-//                    Pair(portHL, "Hargreaves Lansdown"),
-//                    Pair(portBS, "Beaufort Securities"),
+                    Pair(portHL, "Hargreaves Lansdown"),
+                    Pair(portBS, "Beaufort Securities"),
                     Pair(portE, "Exchange"))
 
             val stocks = listOf(Pair("AAPL", 160.DOLLARS),
-                    Pair("FB", 160.DOLLARS),
                     Pair("GS", 230.DOLLARS),
-                    Pair("MSFT", 75.DOLLARS),
-                    Pair("MS", 50.DOLLARS))
+                    Pair("MSFT", 75.DOLLARS))
 
             // give 100.000 dollars to banks
-            CordaRPCClient(HostAndPort.fromString("$ip:$portA")).use("demo", "demo") {
-                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
-            }
-            CordaRPCClient(HostAndPort.fromString("$ip:$portB")).use("demo", "demo") {
-                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
-            }
-//            CordaRPCClient(HostAndPort.fromString("$ip:$portHL")).use("demo", "demo") {
-//                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
-//            }
-//            CordaRPCClient(HostAndPort.fromString("$ip:$portBS")).use("demo", "demo") {
-//                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
-//            }
+            try {
+                CordaRPCClient(HostAndPort.fromString("$ip:$portA")).use("demo", "demo") {
+                    TraderDemoClientApi(this).runBuyer(30000.DOLLARS)
+                }
+            } catch (ex: Exception) {}
+            try {
+                CordaRPCClient(HostAndPort.fromString("$ip:$portB")).use("demo", "demo") {
+                    TraderDemoClientApi(this).runBuyer(30000.DOLLARS)
+                }
+            } catch (ex: Exception) {}
+            try {
+                CordaRPCClient(HostAndPort.fromString("$ip:$portHL")).use("demo", "demo") {
+                    TraderDemoClientApi(this).runBuyer(30000.DOLLARS)
+                }
+            } catch (ex: Exception) {}
+            try {
+                CordaRPCClient(HostAndPort.fromString("$ip:$portBS")).use("demo", "demo") {
+                    TraderDemoClientApi(this).runBuyer(30000.DOLLARS)
+                }
+            } catch (ex: Exception) {}
+
 
             // Then we have a few random variables and start the trades. Sure, this would work best with about 4-5
             // banks (Bank A, Bank B, HL and BS)
-            val tries = 5
             val rand = Random()
-            for (i in 0..tries) {
-                val stock = rand.nextInt(5)
-                val p = rand.nextInt(2)
+            var tries = 10
+            while (tries > 0) {
+                val stock = rand.nextInt(3)
+                val p = rand.nextInt(5)
+                try {
+                    CordaRPCClient(HostAndPort.fromString("$ip:$portE")).use("demo", "demo") {
+                        TraderDemoClientApi(this).runSellerR(stocks[stock].second, ports[p].second, 1, stocks[stock].first)
+                    }
+                } catch (ex: Exception) {}
+                tries--
+            }
+            println("Performing transactions now! \n\n\n\n\n\n\n")
+            while (true) {
+                val stock = rand.nextInt(3)
+                val p = rand.nextInt(5)
+                var msg = ""
                 CordaRPCClient(HostAndPort.fromString("$ip:$portE")).use("demo", "demo") {
-                    TraderDemoClientApi(this).runSeller(stocks[stock].second, ports[p].second, 1, stocks[stock].first)
+                    msg = TraderDemoClientApi(this).runSellerTransferR(stocks[stock].second, ports[p].second, 1, stocks[stock].first)
+                }
+                if (msg.contains("Insufficient balance, missing")) {
+                    try {
+                        CordaRPCClient(HostAndPort.fromString("$ip:${ports[p].second}")).use("demo", "demo") {
+                            TraderDemoClientApi(this).runBuyer(30000.DOLLARS)
+                        }
+                    } catch (ex: Exception) {}
+                } else if (msg.contains("Insufficient shares in")) {
+                    try {
+                        CordaRPCClient(HostAndPort.fromString("$ip:$portE")).use("demo", "demo") {
+                            msg = TraderDemoClientApi(this).runSellerR(stocks[stock].second, ports[p].second, 1, stocks[stock].first)
+                        }
+                    } catch (ex: Exception) {}
+                }
+                tries++
+                if (tries % 5 == 0) {
+                    CordaRPCClient(HostAndPort.fromString("$ip:$portA")).use("demo", "demo") {
+                        TraderDemoClientApi(this).runDisplay()
+                    }
+                    CordaRPCClient(HostAndPort.fromString("$ip:$portB")).use("demo", "demo") {
+                        TraderDemoClientApi(this).runDisplay()
+                    }
+                    CordaRPCClient(HostAndPort.fromString("$ip:$portHL")).use("demo", "demo") {
+                        TraderDemoClientApi(this).runDisplay()
+                    }
+                    CordaRPCClient(HostAndPort.fromString("$ip:$portBS")).use("demo", "demo") {
+                        TraderDemoClientApi(this).runDisplay()
+                    }
                 }
             }
-            println("We have finished selling assets. Onto their transfers...")
-            CordaRPCClient(HostAndPort.fromString("$ip:$portA")).use("demo", "demo") {
-                TraderDemoClientApi(this).runDisplay()
-            }
-            CordaRPCClient(HostAndPort.fromString("$ip:$portB")).use("demo", "demo") {
-                TraderDemoClientApi(this).runDisplay()
-            }
-//            CordaRPCClient(HostAndPort.fromString("$ip:$portHL")).use("demo", "demo") {
-//                TraderDemoClientApi(this).runDisplay()
-//            }
-//            CordaRPCClient(HostAndPort.fromString("$ip:$portBS")).use("demo", "demo") {
-//                TraderDemoClientApi(this).runDisplay()
-//            }
         }
     }
 

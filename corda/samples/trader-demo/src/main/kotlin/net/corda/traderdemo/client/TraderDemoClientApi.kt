@@ -74,6 +74,36 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
 
     }
 
+    fun runSellerR(amount: Amount<Currency> = 1000.0.DOLLARS, counterparty: String, qty: Long, ticker: String): String {
+        val otherParty = rpc.partyFromName(counterparty) ?: throw IllegalStateException("Don't know $counterparty")
+        // The seller will sell some commercial paper to the buyer, who will pay with (self issued) cash.
+        //
+        // The CP sale transaction comes with a prospectus PDF, which will tag along for the ride in an
+        // attachment. Make sure we have the transaction prospectus attachment loaded into our store.
+        //
+        // This can also be done via an HTTP upload, but here we short-circuit and do it from code.
+        if (!rpc.attachmentExists(SellerFlow.PROSPECTUS_HASH)) {
+            javaClass.classLoader.getResourceAsStream("bank-of-london-cp.jar").use {
+                val id = rpc.uploadAttachment(it)
+                assertEquals(SellerFlow.Companion.PROSPECTUS_HASH, id)
+            }
+        }
+
+        // The line below blocks and waits for the future to resolve.
+        println("About to start seller flow.")
+        val stx = rpc.startFlow(::SellerFlow, otherParty, amount, qty, ticker).returnValue.getOrThrow()
+        return stx
+    }
+
+    fun runSellerTransferR(amount: Amount<Currency>, counterparty: String, qty: Long, ticker: String): String {
+        val otherParty = rpc.partyFromName(counterparty) ?: throw IllegalStateException("Don't know $counterparty")
+        // MC: This time, the seller will already have the shares in his vault - no issuing.
+        println("About to start seller transfer flow.")
+        val stxs = rpc.startFlow(::SellerTransferFlow, otherParty, qty, ticker, amount).returnValue.getOrThrow()
+        return stxs
+
+    }
+
     fun runDisplay() {
         val cash = rpc.getCashBalances().entries.map { "${it.key.currencyCode} ${it.value}" }
         println("Cash balance: ${cash.joinToString()}")

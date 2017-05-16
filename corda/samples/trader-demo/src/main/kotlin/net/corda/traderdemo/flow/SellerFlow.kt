@@ -67,7 +67,6 @@ class SellerFlow(val otherParty: Party,
                     cpOwnerKey,
                     progressTracker.getChildProgressTracker(TRADING)!!)
             val finalTX = subFlow(seller, shareParentSessions = true)
-            //subFlow(BroadcastTransactionFlow(finalTX, setOf(notary.notaryIdentity)))
             return "Transaction ID: ${finalTX.tx.id} \n \n " +
                     "${otherParty.name} has received $qty shares in $ticker (priced at $amount per share)"
         } catch (ex: Exception) {
@@ -104,7 +103,7 @@ class SellerFlow(val otherParty: Party,
             tx.signWith(keyPair)
 
             // Get the notary to sign the timestamp
-            println("Getting signatures...")
+//            println("Getting signatures...")
             val notarySigs = subFlow(NotaryFlow.Client(tx.toSignedTransaction(false)))
             notarySigs.forEach { tx.addSignatureUnchecked(it) }
 

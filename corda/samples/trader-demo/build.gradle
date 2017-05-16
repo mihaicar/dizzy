@@ -120,9 +120,9 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
         name "Hargreaves Lansdown"
         nearestCity "London"
         advertisedServices = []
-        p2pPort 10017
-        rpcPort 10018
-        webPort 10019
+        p2pPort 10047
+        rpcPort 10048
+        webPort 10049
         cordapps = []
         rpcUsers = ext.rpcUsers
     }
