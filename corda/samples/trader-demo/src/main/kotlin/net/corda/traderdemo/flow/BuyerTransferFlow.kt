@@ -38,6 +38,7 @@ class BuyerTransferFlow(val otherParty: Party,
         val vault = serviceHub.vaultService
         val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
         val currentOwner = serviceHub.myInfo.legalIdentity
+
         // Stage 1. Receive the tx from the seller.
         val untrustedItems = receive<SellerTransferInfo>(otherParty)
 
@@ -57,7 +58,7 @@ class BuyerTransferFlow(val otherParty: Party,
         val stx = subFlow(SignTransferFlow.Initiator(ptx))
 
         // Stage 7. Notarise and record, the transaction in our vaults.
-        val newCash = subFlow(FinalityFlow(stx, setOf(currentOwner, otherParty, notary.notaryIdentity))).single()
+        val newCash = subFlow(FinalityFlow(stx, setOf(currentOwner, otherParty))).single()
         send(otherParty, newCash)
     }
 

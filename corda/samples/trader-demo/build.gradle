@@ -116,33 +116,43 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
 //        cordapps = []
 //        rpcUsers = ext.rpcUsers
 //    }
+    node {
+        name "Hargreaves Lansdown"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10017
+        rpcPort 10018
+        webPort 10019
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "Beaufort Securities"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10020
+        rpcPort 10021
+        webPort 10022
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "Exchange"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10040
+        rpcPort 10041
+        webPort 10042
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
 //    node {
-//        name "Hargreaves Lansdown"
+//        name "Auditor"
 //        nearestCity "London"
-//        advertisedServices = []
-//        p2pPort 10017
-//        rpcPort 10018
-//        webPort 10019
-//        cordapps = []
-//        rpcUsers = ext.rpcUsers
-//    }
-//    node {
-//        name "Beaufort Securities"
-//        nearestCity "London"
-//        advertisedServices = []
-//        p2pPort 10020
-//        rpcPort 10021
-//        webPort 10022
-//        cordapps = []
-//        rpcUsers = ext.rpcUsers
-//    }
-//    node {
-//        name "Exchange"
-//        nearestCity "London"
-//        advertisedServices = []
-//        p2pPort 10040
-//        rpcPort 10041
-//        webPort 10042
+//        advertisedServices = ["corda.regulator"]
+//        p2pPort 10030
+//        rpcPort 10031
+//        webPort 10032
 //        cordapps = []
 //        rpcUsers = ext.rpcUsers
 //    }
@@ -166,6 +176,14 @@ task deployExtraNode(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
         webPort 10004
         cordapps = []
     }
+    node {
+        name "BankOfCorda"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10011
+        webPort 10013
+        cordapps = []
+    }
     if (project.hasProperty("nodeName")) {
         node {
             name nodeName
@@ -175,6 +193,7 @@ task deployExtraNode(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
             rpcPort Integer.parseInt(rport)
             webPort Integer.parseInt(wport)
             cordapps = []
+            rpcUsers = ext.rpcUsers
         }
     }
 
@@ -315,6 +334,14 @@ task runDisplay(type: JavaExec) {
     }
 }
 
+task runRandom(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'net.corda.traderdemo.TraderDemoKt'
+    args '--role'
+    args 'RANDOM'
+}
+
+// This task is not available until the auditor trail is implemented fully
 task runAudit(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'
@@ -324,6 +351,5 @@ task runAudit(type: JavaExec) {
     if (project.hasProperty("tx")) {
         args tx
     }
-
 }
 

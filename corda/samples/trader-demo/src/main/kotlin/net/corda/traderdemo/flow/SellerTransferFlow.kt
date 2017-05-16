@@ -47,13 +47,12 @@ import java.util.*
                 // Stage 6. Collect signature from buyer.
                 // This also verifies the transaction and checks the signatures.
                 val shareSTX = subFlow(SignTransferFlow.Initiator(ptx))
-                println("signed by buyer too")
                 // Stage 7. Notarise and record, the transactions in our vaults.
                 //val newCash = subFlow(FinalityFlow(cashSTX, setOf(currentOwner, otherParty))).single()
 
                 // Stage 3. Retrieve the tx for cash movement
                 val newCash = receive<SignedTransaction>(otherParty).unwrap { it }
-                val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty, notary.notaryIdentity))).single()
+                val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty))).single()
                 return  "Transaction IDs: \n \n Cash: ${newCash.tx.id} \n Shares: ${newShare.tx.id} \n \n \n" +
                         "${value * qty} were received from ${otherParty.name}. \n \n" +
                         "${otherParty.name} received $qty shares in $ticker (priced at $value per share)"
