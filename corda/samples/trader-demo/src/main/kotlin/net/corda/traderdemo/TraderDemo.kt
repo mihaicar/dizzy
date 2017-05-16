@@ -121,13 +121,13 @@ private class TraderDemo {
             val portA = 10006
             val portB = 10009
             val portE = 10041
-            val portHL = 10018
-            val portBS = 10021
+//            val portHL = 10018
+//            val portBS = 10021
 
             val ports = listOf(Pair(portA, "Bank A"),
                     Pair(portB, "Bank B"),
-                    Pair(portHL, "Hargreaves Lansdown"),
-                    Pair(portBS, "Beaufort Securities"),
+//                    Pair(portHL, "Hargreaves Lansdown"),
+//                    Pair(portBS, "Beaufort Securities"),
                     Pair(portE, "Exchange"))
 
             val stocks = listOf(Pair("AAPL", 160.DOLLARS),
@@ -143,12 +143,12 @@ private class TraderDemo {
             CordaRPCClient(HostAndPort.fromString("$ip:$portB")).use("demo", "demo") {
                 TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
             }
-            CordaRPCClient(HostAndPort.fromString("$ip:$portHL")).use("demo", "demo") {
-                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
-            }
-            CordaRPCClient(HostAndPort.fromString("$ip:$portBS")).use("demo", "demo") {
-                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
-            }
+//            CordaRPCClient(HostAndPort.fromString("$ip:$portHL")).use("demo", "demo") {
+//                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
+//            }
+//            CordaRPCClient(HostAndPort.fromString("$ip:$portBS")).use("demo", "demo") {
+//                TraderDemoClientApi(this).runBuyer(100000.DOLLARS)
+//            }
 
             // Then we have a few random variables and start the trades. Sure, this would work best with about 4-5
             // banks (Bank A, Bank B, HL and BS)
@@ -156,7 +156,7 @@ private class TraderDemo {
             val rand = Random()
             for (i in 0..tries) {
                 val stock = rand.nextInt(5)
-                val p = rand.nextInt(4)
+                val p = rand.nextInt(2)
                 CordaRPCClient(HostAndPort.fromString("$ip:$portE")).use("demo", "demo") {
                     TraderDemoClientApi(this).runSeller(stocks[stock].second, ports[p].second, 1, stocks[stock].first)
                 }
@@ -168,12 +168,12 @@ private class TraderDemo {
             CordaRPCClient(HostAndPort.fromString("$ip:$portB")).use("demo", "demo") {
                 TraderDemoClientApi(this).runDisplay()
             }
-            CordaRPCClient(HostAndPort.fromString("$ip:$portHL")).use("demo", "demo") {
-                TraderDemoClientApi(this).runDisplay()
-            }
-            CordaRPCClient(HostAndPort.fromString("$ip:$portBS")).use("demo", "demo") {
-                TraderDemoClientApi(this).runDisplay()
-            }
+//            CordaRPCClient(HostAndPort.fromString("$ip:$portHL")).use("demo", "demo") {
+//                TraderDemoClientApi(this).runDisplay()
+//            }
+//            CordaRPCClient(HostAndPort.fromString("$ip:$portBS")).use("demo", "demo") {
+//                TraderDemoClientApi(this).runDisplay()
+//            }
         }
     }
 
