@@ -175,20 +175,21 @@ private class TraderDemo {
             while (true) {
                 val stock = rand.nextInt(3)
                 val p = rand.nextInt(5)
+                val p2 = rand.nextInt(5)
                 var msg = ""
-                CordaRPCClient(HostAndPort.fromString("$ip:$portE")).use("demo", "demo") {
+                CordaRPCClient(HostAndPort.fromString("$ip:${ports[p2].first}")).use("demo", "demo") {
                     msg = TraderDemoClientApi(this).runSellerTransferR(stocks[stock].second, ports[p].second, 1, stocks[stock].first)
                 }
                 if (msg.contains("Insufficient balance, missing")) {
                     try {
-                        CordaRPCClient(HostAndPort.fromString("$ip:${ports[p].second}")).use("demo", "demo") {
+                        CordaRPCClient(HostAndPort.fromString("$ip:${ports[p].first}")).use("demo", "demo") {
                             TraderDemoClientApi(this).runBuyer(30000.DOLLARS)
                         }
                     } catch (ex: Exception) {}
                 } else if (msg.contains("Insufficient shares in")) {
                     try {
                         CordaRPCClient(HostAndPort.fromString("$ip:$portE")).use("demo", "demo") {
-                            msg = TraderDemoClientApi(this).runSellerR(stocks[stock].second, ports[p].second, 1, stocks[stock].first)
+                            msg = TraderDemoClientApi(this).runSellerR(stocks[stock].second, ports[p2].second, 1, stocks[stock].first)
                         }
                     } catch (ex: Exception) {}
                 }
