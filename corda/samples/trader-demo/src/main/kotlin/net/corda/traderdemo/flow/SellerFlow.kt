@@ -43,9 +43,7 @@ class SellerFlow(val otherParty: Party,
     override fun call(): String {
         try {
             progressTracker.currentStep = SELF_ISSUING
-
             val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
-            // cpOwner is the seller (because they're the ones 'issuing' it)
             val cpOwnerKey = serviceHub.legalIdentityKey
             println("Issuing contract...")
             val shareContract = selfIssueShareContract(cpOwnerKey.public.composite, notary, amount, ticker, qty)
@@ -76,7 +74,7 @@ class SellerFlow(val otherParty: Party,
 
     @Suspendable
     fun selfIssueShareContract(ownedBy: CompositeKey, notaryNode: NodeInfo, value: Amount<Currency>, ticker: String, qty: Long): StateAndRef<ShareContract.State> {
-        // Make a fake company that's issued its own paper, given a ticker
+        // MC: Make a fake company that's issued its own paper, given a ticker
         // This is for DEMO PURPOSES ONLY: in reality, the issuing would only be done by the company owning the ticker
         // However, we are not interested in the financial side of the trade, but the programming part.
         val keyPair = generateKeyPair()
@@ -86,16 +84,12 @@ class SellerFlow(val otherParty: Party,
             // The value of the contract is the amount times the no of shares in it.
             // Need to check the offered price is good for the value of the contract, i.e.
             // assert paid > value
-
-            // MC: timestamping - we can redeem 10 sec after
             val tx = ShareContract().generateIssue(party.ref(1, 2, 3), value `issued by` DUMMY_CASH_ISSUER,
                     Instant.now() + 10.seconds, notaryNode.notaryIdentity, qty, ticker)
 
-
-            // TODO: Consider moving these two steps below into generateIssue.
-
             // Attach the prospectus.
             tx.addAttachment(serviceHub.storageService.attachments.openAttachment(PROSPECTUS_HASH)!!.id)
+
             // Requesting timestamping, all CP must be timestamped.
             tx.setTime(Instant.now(), 5.seconds)
 
@@ -103,7 +97,6 @@ class SellerFlow(val otherParty: Party,
             tx.signWith(keyPair)
 
             // Get the notary to sign the timestamp
-//            println("Getting signatures...")
             val notarySigs = subFlow(NotaryFlow.Client(tx.toSignedTransaction(false)))
             notarySigs.forEach { tx.addSignatureUnchecked(it) }
 

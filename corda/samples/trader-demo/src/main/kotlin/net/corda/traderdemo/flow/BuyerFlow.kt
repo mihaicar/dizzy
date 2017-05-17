@@ -41,14 +41,15 @@ class BuyerFlow(val otherParty: Party,
         progressTracker.currentStep = STARTING_BUY
         logBalance()
         // Receive the offered amount and automatically agree to it (in reality this would be a longer negotiation)
-        // MC: we're also automatically agreeing to the qty/ticker - why?
+        // MC: we're also automatically agreeing to the qty/ticker in the updated version
         val items = receive<List<Any>>(otherParty).unwrap { it }
 
         @Suppress("UNCHECKED_CAST")
         val amount : Amount<Currency> = items[0] as Amount<Currency>
         val qty : Long = items[1] as Long
         val ticker : String = items[2] as String
-        // MC: the agreement is already done - left to check amount and value are similar
+
+        // MC: the negotiation is already done externally, left to verify values in the 2PT flow
         val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
         val buyer = TwoPartyTradeFlow.Buyer(
                 otherParty,
@@ -60,7 +61,6 @@ class BuyerFlow(val otherParty: Party,
 
         // This invokes the trading flow and out pops our finished transaction.
         val tradeTX: SignedTransaction = subFlow(buyer, shareParentSessions = true)
-        // TODO: This should be moved into the flow itself.
         serviceHub.recordTransactions(listOf(tradeTX))
 
         println("Purchase complete - we are a happy customer! Final transaction is: " +
@@ -68,8 +68,6 @@ class BuyerFlow(val otherParty: Party,
 
         logIssuanceAttachment(tradeTX)
         logBalance()
-        //logShareContracts()
-
     }
 
     private fun logBalance() {
@@ -94,14 +92,15 @@ ${Emoji.renderIfSupported(cpIssuance)}""")
         }
     }
 
-    private fun logShareContracts() {
+    // MC: helper method to retrieve no. of shares in given stock
+    private fun logShareContracts(ticker: String) {
         val lockID: UUID = UUID(1234, 1234)
-        val list = serviceHub.vaultService.unconsumedStatesForShareSpending<ShareContract.State>(qty = 4, lockId = lockID, ticker = "AAPL");
+        val list = serviceHub.vaultService.unconsumedStatesForShareSpending<ShareContract.State>(qty = 1, lockId = lockID, ticker = ticker);
         var noShares = 0L
         list
-                .filter { it.state.data.ticker == "AAPL" }
+                .filter { it.state.data.ticker == ticker }
                 .forEach { noShares += it.state.data.qty }
 
-        println("Buyer has a total of $noShares in AAPL.")
+        println("Buyer has a total of $noShares in $ticker.")
     }
 }

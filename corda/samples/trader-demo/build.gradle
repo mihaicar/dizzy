@@ -117,7 +117,7 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
 //        rpcUsers = ext.rpcUsers
 //    }
     node {
-        name "Hargreaves Lansdown"
+        name "Hargreaves"
         nearestCity "London"
         advertisedServices = []
         p2pPort 10047
@@ -126,16 +126,16 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
         cordapps = []
         rpcUsers = ext.rpcUsers
     }
-    node {
-        name "Beaufort Securities"
-        nearestCity "London"
-        advertisedServices = []
-        p2pPort 10020
-        rpcPort 10021
-        webPort 10022
-        cordapps = []
-        rpcUsers = ext.rpcUsers
-    }
+//    node {
+//        name "Beaufort Securities"
+//        nearestCity "London"
+//        advertisedServices = []
+//        p2pPort 10020
+//        rpcPort 10021
+//        webPort 10022
+//        cordapps = []
+//        rpcUsers = ext.rpcUsers
+//    }
     node {
         name "Exchange"
         nearestCity "London"
@@ -158,6 +158,7 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
 //    }
 }
 
+// MC: Task to deploy extra node - can be called when the other nodes are still running!
 task deployExtraNode(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
     ext.rpcUsers = [['user': "demo", 'password': "demo", 'permissions': [
             'StartFlow.net.corda.flows.IssuerFlow$IssuanceRequester',
@@ -223,6 +224,7 @@ publishing {
     }
 }
 
+// MC: Task to request cash issuance in the buyer node
 task runBuyer(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'
@@ -238,7 +240,7 @@ task runBuyer(type: JavaExec) {
     }
 }
 
-// MC: executes the seller with the issue command
+// MC: Task to issue shares and move them to the counterparty
 task runSeller(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'
@@ -266,7 +268,7 @@ task runSeller(type: JavaExec) {
     }
 }
 
-// MC: executes the seller with the move ownership command
+// MC: task to transfer shares from seller to counterparty
 task runSellerTransfer(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'
@@ -294,35 +296,8 @@ task runSellerTransfer(type: JavaExec) {
     }
 }
 
-// MC: executes the seller with the move ownership command
-task runTransferBack(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = 'net.corda.traderdemo.TraderDemoKt'
-    args '--role'
-    args 'TRANSFER_BACK'
-    args '--amount'
-    if (project.hasProperty("amt")){
-        args amt
-    }
-    args '--quantity'
-    if (project.hasProperty("qty")){
-        args qty
-    }
-    args '--ticker'
-    if (project.hasProperty("tck")){
-        args tck
-    }
-    args '--port'
-    if (project.hasProperty("port")) {
-        args port
-    }
-    args '--cparty'
-    if (project.hasProperty("cp")) {
-        args cp
-    }
-}
 
-// MC: displays cash and assets of node A
+// MC: displays cash and assets of given node
 task runDisplay(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'
@@ -334,6 +309,7 @@ task runDisplay(type: JavaExec) {
     }
 }
 
+// MC: task to run a random trade cycle
 task runRandom(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'
@@ -341,7 +317,7 @@ task runRandom(type: JavaExec) {
     args 'RANDOM'
 }
 
-// This task is not available until the auditor trail is implemented fully
+// MC: This task is not available until the auditor trail is implemented fully
 task runAudit(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.traderdemo.TraderDemoKt'

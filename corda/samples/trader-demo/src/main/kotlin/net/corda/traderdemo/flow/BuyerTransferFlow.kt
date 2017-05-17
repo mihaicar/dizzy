@@ -30,7 +30,6 @@ class BuyerTransferFlow(val otherParty: Party,
         init {
             services.registerFlowInitiator(SellerTransferFlow::class.java) { BuyerTransferFlow(it)}
         }
-
     }
 
     @Suspendable
@@ -53,16 +52,17 @@ class BuyerTransferFlow(val otherParty: Party,
         ctx.toWireTransaction().toLedgerTransaction(serviceHub).verify()
         val ptx = ctx.signWith(serviceHub.legalIdentityKey).toSignedTransaction(false)
 
-        // Stage 6. Collect signature from seller.
-        // This also verifies the transaction and checks the signatures.
+        // Stage 5. Collect signature from seller. This also verifies the transaction and checks the signatures.
         val stx = subFlow(SignTransferFlow.Initiator(ptx))
 
-        // Stage 7. Notarise and record, the transaction in our vaults.
+        // Stage 6. Notarise and record, the transaction in our vaults.
         val newCash = subFlow(FinalityFlow(stx, setOf(currentOwner, otherParty))).single()
+
+        // Stage 7. Send the signed transaction over to the seller for finalisation
         send(otherParty, newCash)
     }
 
-    private fun  verify(data: UntrustworthyData<SellerTransferInfo>): SellerTransferInfo {
+    private fun verify(data: UntrustworthyData<SellerTransferInfo>): SellerTransferInfo {
         return data.unwrap{
             // is price accurately describing the asset?
             val sharePrice = StockFetch.getPrice(it.ticker)
