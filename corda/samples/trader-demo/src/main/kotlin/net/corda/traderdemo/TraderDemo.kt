@@ -196,7 +196,7 @@ private class TraderDemo {
                     } catch (ex: Exception) {
                         println("ERROR MONEY $ex")
                     }
-                } else if (msg.contains("Insufficient shares in")) {
+                } else if (msg.contains("IndexOutOfBounds")) {
                     try {
                         CordaRPCClient(HostAndPort.fromString("$ip:$portE")).use("demo", "demo") {
                             msg = TraderDemoClientApi(this).runSellerR(stocks[stock].second, ports[p2].second, 1, stocks[stock].first)

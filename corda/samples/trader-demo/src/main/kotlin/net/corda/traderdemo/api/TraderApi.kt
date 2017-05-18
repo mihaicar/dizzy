@@ -1,18 +1,15 @@
 package net.corda.traderdemo.api
 
-import net.corda.contracts.ShareContract
 import net.corda.core.contracts.DOLLARS
 import net.corda.core.getOrThrow
 import net.corda.core.messaging.CordaRPCOps
 import net.corda.core.messaging.startFlow
 import net.corda.stockinfo.StockFetch
-import net.corda.traderdemo.flow.FlowResult
 import net.corda.traderdemo.flow.SellerFlow
 import net.corda.traderdemo.flow.SellerTransferFlow
 import net.corda.traderdemo.model.Share
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
-import javax.ws.rs.core.Response
 
 val NOTARY_NAME = "Notary"
 val BANK_OF_CORDA = "BankOfCorda"
