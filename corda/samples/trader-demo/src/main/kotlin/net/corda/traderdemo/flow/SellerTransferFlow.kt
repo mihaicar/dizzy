@@ -2,6 +2,7 @@ package net.corda.traderdemo.flow
 
 import co.paralleluniverse.fibers.Suspendable
 import net.corda.core.contracts.Amount
+import net.corda.core.contracts.InsufficientBalanceException
 import net.corda.core.contracts.TransactionType
 import net.corda.core.crypto.CompositeKey
 import net.corda.core.crypto.Party
@@ -59,7 +60,11 @@ import java.util.*
                 return  "Transaction IDs: \n \n Cash: ${newCash.tx.id} \n Shares: ${newShare.tx.id} \n \n \n" +
                         "${value * qty} were received from ${otherParty.name}. \n \n" +
                         "${otherParty.name} received $qty shares in $ticker (priced at $value per share)"
-            } catch(ex: Exception) {
+            } catch (ex: IndexOutOfBoundsException) {
+                return "Not enough shares."
+            } catch (ex: InsufficientBalanceException) {
+                return "Not enough cash."
+            } catch (ex: Exception) {
                 return "Failure: ${ex.message} $ex "
             }
         }

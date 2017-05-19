@@ -25,7 +25,9 @@ private class TraderDemo {
         SELLER_TRANSFER,
         DISPLAY,
         RANDOM,
-        AUDIT
+        AUDIT,
+        RANDOM_ISSUE,
+        RANDOM_TRANSACT
     }
 
     companion object {
@@ -220,6 +222,118 @@ private class TraderDemo {
                 }
             }
         }
+        /** These are used for the shared marketplace (on 2 machines)
+            We will have as follows:
+            M1: Bank A, Bank B, BankOfCorda, Beaufort - ip1
+            M2: Notary, Hargreaves, Exchange, Bank C - ip2
+        */
+        else if (role == Role.RANDOM_ISSUE) {
+            val vals = varDeclaration()
+            @Suppress("UNCHECKED_CAST")
+            val pi = vals[0] as Map<String, Pair<Int, String>>
+            @Suppress("UNCHECKED_CAST")
+            val stocks = vals[1] as Map<String, Amount<Currency>>
+            val rand = vals[2] as Random
+            val stocksAsArray = ArrayList<String>(stocks.keys)
+            val banksAsArray = ArrayList<String>(pi.keys.minus("Exchange"))
+
+            // Issue money for Banks
+            for (entity in banksAsArray) {
+                tryIssueCashTo(entity, pi)
+            }
+
+            // Issue some shares for the banks - we start with 20
+            var tries = 20
+            while (tries > 0) {
+                val stock = rand.nextInt(stocks.size)
+                val p = rand.nextInt(pi.size - 1)
+                tryIssueSharesTo(banksAsArray[p], "Exchange", pi, stocks[stocksAsArray[stock]] as Amount<Currency>, stocksAsArray[stock])
+                tries--
+            }
+
+        } else if (role == Role.RANDOM_TRANSACT) {
+            val vals = varDeclaration()
+            @Suppress("UNCHECKED_CAST")
+            val pi = vals[0] as Map<String, Pair<Int, String>>
+            @Suppress("UNCHECKED_CAST")
+            val stocks = vals[1] as Map<String, Amount<Currency>>
+            val rand = vals[2] as Random
+            val stocksAsArray = ArrayList<String>(stocks.keys)
+            val banksAsArray = ArrayList<String>(pi.keys.minus("Exchange"))
+            var tries = 0
+            while (true) {
+                val stock = rand.nextInt(2)
+                val buyer = banksAsArray[rand.nextInt(pi.size)]
+                val seller = banksAsArray[rand.nextInt(pi.size)]
+                transferShares(buyer, seller, pi, stocks[stocksAsArray[stock]] as Amount<Currency>, stocksAsArray[stock])
+                tries++
+                if (tries % 10 == 0) {
+                    for (entity in banksAsArray) {
+                        displayBalances(entity, pi)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun displayBalances(entity: String, pi: Map<String, Pair<Int, String>>) {
+        CordaRPCClient(HostAndPort.fromString("${pi[entity]?.second}:${pi[entity]?.first}")).use("demo", "demo") {
+            TraderDemoClientApi(this).runDisplay()
+        }
+    }
+
+    private fun transferShares(buyer: String, seller: String, pi: Map<String, Pair<Int, String>>,
+                               amount: Amount<Currency>, ticker: String) {
+        var msg = ""
+        CordaRPCClient(HostAndPort.fromString("${pi[seller]?.second}:${pi[seller]?.first}")).use("demo", "demo") {
+            msg = TraderDemoClientApi(this).runSellerTransferR(amount, buyer, 1, ticker)
+        }
+
+        if (msg.contains("cash")) {
+            tryIssueCashTo(buyer, pi)
+        } else if (msg.contains("shares")) {
+            tryIssueSharesTo(buyer, "Exchange", pi, amount, ticker)
+        }
+    }
+
+    private fun tryIssueSharesTo(entity: String, seller: String, pi: Map<String, Pair<Int, String>>,
+                                 amount: Amount<Currency>, ticker: String) {
+        try {
+            CordaRPCClient(HostAndPort.fromString("${pi[seller]?.second}:${pi[seller]?.first}")).use("demo", "demo") {
+                TraderDemoClientApi(this).runSellerR(amount, entity, 1, ticker)
+            }
+        } catch (ex: Exception) {
+            println("No shares issued (error)")
+        }
+    }
+
+    private fun tryIssueCashTo(entity: String, pi: Map<String, Pair<Int, String>>) {
+        try {
+            CordaRPCClient(HostAndPort.fromString("${pi[entity]?.second}:${pi[entity]?.second}")).use("demo", "demo") {
+                TraderDemoClientApi(this).runBuyer(30000.DOLLARS)
+            }
+            println("Money issued for $entity")
+        } catch (ex: Exception) {
+            println("Not fully issued.")
+        }
+    }
+
+    private fun varDeclaration(): List<Any> {
+        val ipM1 = ""
+        val ipM2 = ""
+        val ports = mapOf(
+                "Bank A" to Pair(10006, ipM1),
+                "Bank B" to Pair (10009, ipM1),
+                "Bank C" to Pair (10015, ipM2),
+                "Beaufort" to Pair(10021, ipM1),
+                "Hargreaves" to Pair(10048, ipM2),
+                "Exchange" to Pair(10041, ipM2))
+        val rand = Random()
+        val stocks = mapOf(
+                "AAPL" to 160.DOLLARS,
+                "MSFT" to 75.DOLLARS,
+                "GS" to 230.DOLLARS)
+        return listOf(ports, stocks, rand)
     }
 
     fun printHelp(parser: OptionParser) {
