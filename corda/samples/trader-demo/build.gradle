@@ -378,6 +378,22 @@ task runRandom(type: JavaExec) {
     args 'RANDOM'
 }
 
+// MC: task to run a random trade cycle transaction
+task runRandomT(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'net.corda.traderdemo.TraderDemoKt'
+    args '--role'
+    args 'RANDOM_TRANSACT'
+}
+
+// MC: task to run a random trade cycle issue
+task runRandomI(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'net.corda.traderdemo.TraderDemoKt'
+    args '--role'
+    args 'RANDOM_ISSUE'
+}
+
 // MC: This task is not available until the auditor trail is implemented fully
 task runAudit(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath

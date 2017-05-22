@@ -1,5 +1,6 @@
 package net.corda.traderdemo
 
+import co.paralleluniverse.fibers.Suspendable
 import com.google.common.net.HostAndPort
 import joptsimple.OptionParser
 import net.corda.client.rpc.CordaRPCClient
@@ -34,6 +35,7 @@ private class TraderDemo {
         val logger: Logger = loggerFor<TraderDemo>()
     }
 
+    @Suspendable
     fun main(args: Array<String>) {
         val parser = OptionParser()
 
@@ -285,13 +287,19 @@ private class TraderDemo {
     private fun transferShares(buyer: String, seller: String, pi: Map<String, Pair<Int, String>>,
                                amount: Amount<Currency>, ticker: String) {
         var msg = ""
-        CordaRPCClient(HostAndPort.fromString("${pi[seller]?.second}:${pi[seller]?.first}")).use("demo", "demo") {
-            msg = TraderDemoClientApi(this).runSellerTransferR(amount, buyer, 1, ticker)
+        try {
+            CordaRPCClient(HostAndPort.fromString("${pi[seller]?.second}:${pi[seller]?.first}")).use("demo", "demo") {
+                msg = TraderDemoClientApi(this).runSellerTransferR(amount, buyer, 1, ticker)
+            }
+        } catch (ex: Exception) {
+            println("Transfer not performed => $ex")
         }
 
         if (msg.contains("cash")) {
+            println("Not enough cash to buy shares!")
             tryIssueCashTo(buyer, pi)
         } else if (msg.contains("shares")) {
+            println("Not enough shares to sell!")
             tryIssueSharesTo(buyer, "Exchange", pi, amount, ticker)
         }
     }
@@ -303,7 +311,7 @@ private class TraderDemo {
                 TraderDemoClientApi(this).runSellerR(amount, entity, 1, ticker)
             }
         } catch (ex: Exception) {
-            println("No shares issued (error)")
+            println("No shares issued ($ex)")
         }
     }
 
@@ -314,7 +322,7 @@ private class TraderDemo {
             }
             println("Money issued for $entity")
         } catch (ex: Exception) {
-            println("Not fully issued.")
+            println("Not fully issued. ($ex)")
         }
     }
 

@@ -39,7 +39,7 @@ class BuyerFlow(val otherParty: Party,
     @Suspendable
     override fun call() {
         progressTracker.currentStep = STARTING_BUY
-        logBalance()
+        //logBalance()
         // Receive the offered amount and automatically agree to it (in reality this would be a longer negotiation)
         // MC: we're also automatically agreeing to the qty/ticker in the updated version
         val items = receive<List<Any>>(otherParty).unwrap { it }
@@ -66,7 +66,7 @@ class BuyerFlow(val otherParty: Party,
         println("Purchase complete - we are a happy customer! Final transaction is: " +
                 "\n\n${Emoji.renderIfSupported(tradeTX.tx)}")
 
-        logIssuanceAttachment(tradeTX)
+        //logIssuanceAttachment(tradeTX)
         logBalance()
     }
 
@@ -75,6 +75,7 @@ class BuyerFlow(val otherParty: Party,
         println("Balance of Buyer is: ${balances.joinToString()}")
     }
 
+    @Suspendable
     private fun logIssuanceAttachment(tradeTX: SignedTransaction) {
         // Find the original share issuance - TGS
         // MC: Explore the complexity of TGS
