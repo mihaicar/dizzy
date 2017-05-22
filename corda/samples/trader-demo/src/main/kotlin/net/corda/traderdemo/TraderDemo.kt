@@ -295,10 +295,10 @@ private class TraderDemo {
             println("Transfer not performed => $ex")
         }
 
-        if (msg.contains("cash")) {
+        if (msg.contains("Not enough cash")) {
             println("Not enough cash to buy shares!")
             tryIssueCashTo(buyer, pi)
-        } else if (msg.contains("shares")) {
+        } else if (msg.contains("Not enough shares")) {
             println("Not enough shares to sell!")
             tryIssueSharesTo(buyer, "Exchange", pi, amount, ticker)
         }
