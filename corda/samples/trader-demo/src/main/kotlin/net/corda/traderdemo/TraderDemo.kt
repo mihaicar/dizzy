@@ -317,7 +317,7 @@ private class TraderDemo {
 
     private fun tryIssueCashTo(entity: String, pi: Map<String, Pair<Int, String>>) {
         try {
-            CordaRPCClient(HostAndPort.fromString("${pi[entity]?.second}:${pi[entity]?.second}")).use("demo", "demo") {
+            CordaRPCClient(HostAndPort.fromString("${pi[entity]?.second}:${pi[entity]?.first}")).use("demo", "demo") {
                 TraderDemoClientApi(this).runBuyer(30000.DOLLARS)
             }
             println("Money issued for $entity")
@@ -327,8 +327,8 @@ private class TraderDemo {
     }
 
     private fun varDeclaration(): List<Any> {
-        val ipM1 = ""
-        val ipM2 = ""
+        val ipM1 = "146.169.47.223"
+        val ipM2 = "146.169.47.221"
         val ports = mapOf(
                 "Bank A" to Pair(10006, ipM1),
                 "Bank B" to Pair (10009, ipM1),
