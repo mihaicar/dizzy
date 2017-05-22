@@ -265,8 +265,8 @@ private class TraderDemo {
             var tries = 0
             while (true) {
                 val stock = rand.nextInt(2)
-                val buyer = banksAsArray[rand.nextInt(pi.size)]
-                val seller = banksAsArray[rand.nextInt(pi.size)]
+                val buyer = banksAsArray[rand.nextInt(pi.size) - 1]
+                val seller = banksAsArray[rand.nextInt(pi.size) - 1]
                 transferShares(buyer, seller, pi, stocks[stocksAsArray[stock]] as Amount<Currency>, stocksAsArray[stock])
                 tries++
                 if (tries % 10 == 0) {
