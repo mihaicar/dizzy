@@ -219,6 +219,88 @@ task deployNodesWeb(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
     }
 }
 
+// Used for the marketplace
+task deployNodesMkt(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
+    ext.rpcUsers = [['user': "demo", 'password': "demo", 'permissions': [
+            'StartFlow.net.corda.flows.IssuerFlow$IssuanceRequester',
+            "StartFlow.net.corda.traderdemo.flow.SellerFlow",
+            "StartFlow.net.corda.traderdemo.flow.SellerTransferFlow"
+    ]]]
+
+    directory "./build/nodes"
+    // This name "Notary" is hard-coded into TraderDemoClientApi so if you change it here, change it there too.
+    // In this demo the node that runs a standalone notary also acts as the network map server.
+    networkMap "Notary"
+    node {
+        name "Notary"
+        nearestCity "London"
+        advertisedServices = ["corda.notary.validating"]
+        p2pPort 10002
+        cordapps = []
+    }
+    node {
+        name "Bank A"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10005
+        rpcPort 10006
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "Bank B"
+        nearestCity "New York"
+        advertisedServices = []
+        p2pPort 10008
+        rpcPort 10009
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "BankOfCorda"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10011
+        cordapps = []
+    }
+    node {
+        name "Bank C"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10014
+        rpcPort 10015
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "Hargreaves"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10047
+        rpcPort 10048
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "Beaufort"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10020
+        rpcPort 10021
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "Exchange"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10040
+        rpcPort 10041
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+}
+
 // MC: Task to deploy extra node - can be called when the other nodes are still running!
 task deployExtraNode(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
     ext.rpcUsers = [['user': "demo", 'password': "demo", 'permissions': [
