@@ -16,6 +16,7 @@ import net.corda.notarydemo.flows.DummyIssueAndMove
 import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.system.exitProcess
+import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     val host = HostAndPort.fromString("localhost:10003")
@@ -42,19 +43,27 @@ private class NotaryDemoClientApi(val rpc: CordaRPCOps) {
 
     /** Makes calls to the node rpc to start transaction notarisation. */
     fun startNotarisation() {
+        println("Notarising 10...")
         notarise(TRANSACTION_COUNT)
+        println("Notarising 50...")
+        notarise(50)
+        println("Notarising 100...")
+        notarise(100)
     }
 
     fun notarise(count: Int) {
         val transactions = buildTransactions(count)
+        val before = System.currentTimeMillis()
         val signers = notariseTransactions(transactions)
+        val after = System.currentTimeMillis()
         val transactionSigners = transactions.zip(signers).map {
             val (tx, signer) = it
             "Tx [${tx.tx.id.prefixChars()}..] signed by $signer"
         }.joinToString("\n")
 
         println("Notary: \"${notary.name}\", with composite key: ${notary.owningKey}\n" +
-                "Notarised ${transactions.size} transactions:\n" + transactionSigners)
+                "Notarised ${transactions.size} transactions:\n" + transactionSigners +
+                "Time (ms): ${(after - before)}")
     }
 
     /**
@@ -80,26 +89,5 @@ private class NotaryDemoClientApi(val rpc: CordaRPCOps) {
         @Suppress("UNSUPPORTED_FEATURE")
         val signatureFutures = transactions.map { rpc.startFlow(NotaryFlow::Client, it).returnValue }
         return Futures.allAsList(signatureFutures).getOrThrow().map { it.map { it.by.toStringShort() }.joinToString() }
-    }
-}
-
-private fun getCertPath(args: Array<String>): String? {
-    val parser = OptionParser()
-    val certsPath = parser.accepts("certificates").withRequiredArg()
-    val options = try {
-        parser.parse(*args)
-    } catch (e: Exception) {
-        println(e.message)
-        exitProcess(1)
-    }
-    return options.valueOf(certsPath)
-}
-
-// TODO: Take this out once we have a dedicated RPC port and allow SSL on it to be optional.
-private fun sslConfigFor(nodename: String, certsPath: String?): SSLConfiguration {
-    return object : SSLConfiguration {
-        override val keyStorePassword: String = "cordacadevpass"
-        override val trustStorePassword: String = "trustpass"
-        override val certificatesDirectory: Path = if (certsPath != null) Paths.get(certsPath) else Paths.get("build") / "nodes" / nodename / "certificates"
     }
 }

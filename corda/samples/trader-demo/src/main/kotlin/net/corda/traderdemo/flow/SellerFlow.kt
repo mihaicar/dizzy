@@ -49,10 +49,8 @@ class SellerFlow(val otherParty: Party,
             val shareContract = selfIssueShareContract(cpOwnerKey.public.composite, notary, amount, ticker, qty)
             progressTracker.currentStep = TRADING
 
-            // Send the offered amount, quantity and ticker - these come from gradle and, higher, a JS page (//TODO)
-            // MC: AMOUNT should be the price of ONE share, not all the shares sent in the contract.
+            // MC: AMOUNT is the price of ONE share, not all the shares sent in the contract.
             val items = listOf(amount, qty, ticker)
-            // amount - what the buyer has to pay - could be a diff between exchange and gradle input!
             send(otherParty, items)
             println("We have sent our items over.")
             val seller = TwoPartyTradeFlow.Seller(
