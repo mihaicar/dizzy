@@ -15,6 +15,7 @@ import net.corda.nodeapi.config.SSLConfiguration
 import net.corda.notarydemo.flows.DummyIssueAndMove
 import java.nio.file.Path
 import java.nio.file.Paths
+import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 import kotlin.system.measureTimeMillis
 
@@ -43,12 +44,24 @@ private class NotaryDemoClientApi(val rpc: CordaRPCOps) {
 
     /** Makes calls to the node rpc to start transaction notarisation. */
     fun startNotarisation() {
-        println("Notarising 10...")
-        notarise(TRANSACTION_COUNT)
-        println("Notarising 50...")
-        notarise(50)
-        println("Notarising 100...")
-        notarise(100)
+//        println("Notarising 10...")
+//        notarise(TRANSACTION_COUNT)
+//        println("Notarising 50...")
+//        notarise(50)
+//        println("Notarising 100...")
+//        notarise(100)
+        val b = System.currentTimeMillis()
+        thread(start = true) {
+            println("running from thread(): ${Thread.currentThread()}")
+            notarise(20)
+        }
+        val b2 = System.currentTimeMillis()
+        thread(start = true) {
+            println("running from thread(): ${Thread.currentThread()}")
+            notarise(20)
+        }
+        val b3 = System.currentTimeMillis()
+        println("Finished with: $b, $b2, $b3")
     }
 
     fun notarise(count: Int) {
