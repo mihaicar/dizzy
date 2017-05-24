@@ -2,22 +2,15 @@ package net.corda.notarydemo
 
 import com.google.common.net.HostAndPort
 import com.google.common.util.concurrent.Futures
-import joptsimple.OptionParser
 import net.corda.client.rpc.CordaRPCClient
 import net.corda.core.crypto.toStringShort
-import net.corda.core.div
 import net.corda.core.getOrThrow
 import net.corda.core.messaging.CordaRPCOps
 import net.corda.core.messaging.startFlow
 import net.corda.core.transactions.SignedTransaction
 import net.corda.core.utilities.Emoji
 import net.corda.flows.NotaryFlow
-import net.corda.nodeapi.config.SSLConfiguration
 import net.corda.notarydemo.flows.DummyIssueAndMove
-import java.nio.file.Path
-import java.nio.file.Paths
-import kotlin.system.exitProcess
-import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     val host = HostAndPort.fromString("localhost:10003")
@@ -47,15 +40,16 @@ private class NotaryDemoClientApi(val rpc: CordaRPCOps) {
         println("Getting an avg for 10 transactions...")
         var avg10 = 0.0
         for (i in 1..10) {
+            println("Batch $i")
             avg10 += notarise(TRANSACTION_COUNT)
         }
         println("${Emoji.CODE_GREEN_TICK} AVERAGE 10 = ${avg10/10}")
         println("Getting an avg for 50 transactions...")
         var avg50 = 0.0
-        for (i in 1..5) {
+        for (i in 1..10) {
             avg50 += notarise(TRANSACTION_COUNT)
         }
-        println("${Emoji.CODE_GREEN_TICK} AVERAGE 10 = ${avg50/5}")
+        println("${Emoji.CODE_GREEN_TICK} AVERAGE 50 = ${avg50/10}")
     }
 
     fun notarise(count: Int): Double {
