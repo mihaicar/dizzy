@@ -10,12 +10,12 @@ import net.corda.core.getOrThrow
 import net.corda.core.messaging.CordaRPCOps
 import net.corda.core.messaging.startFlow
 import net.corda.core.transactions.SignedTransaction
+import net.corda.core.utilities.Emoji
 import net.corda.flows.NotaryFlow
 import net.corda.nodeapi.config.SSLConfiguration
 import net.corda.notarydemo.flows.DummyIssueAndMove
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 import kotlin.system.measureTimeMillis
 
@@ -44,39 +44,26 @@ private class NotaryDemoClientApi(val rpc: CordaRPCOps) {
 
     /** Makes calls to the node rpc to start transaction notarisation. */
     fun startNotarisation() {
-//        println("Notarising 10...")
-//        notarise(TRANSACTION_COUNT)
-//        println("Notarising 50...")
-//        notarise(50)
-//        println("Notarising 100...")
-//        notarise(100)
-        val b = System.currentTimeMillis()
-        thread(start = true) {
-            println("running from thread(): ${Thread.currentThread()}")
-            notarise(20)
+        println("Getting an avg for 10 transactions...")
+        var avg10 = 0.0
+        for (i in 1..10) {
+            avg10 += notarise(TRANSACTION_COUNT)
         }
-        val b2 = System.currentTimeMillis()
-        thread(start = true) {
-            println("running from thread(): ${Thread.currentThread()}")
-            notarise(20)
+        println("${Emoji.CODE_GREEN_TICK} AVERAGE 10 = ${avg10/10}")
+        println("Getting an avg for 50 transactions...")
+        var avg50 = 0.0
+        for (i in 1..5) {
+            avg50 += notarise(TRANSACTION_COUNT)
         }
-        val b3 = System.currentTimeMillis()
-        println("Finished with: $b, $b2, $b3")
+        println("${Emoji.CODE_GREEN_TICK} AVERAGE 10 = ${avg50/5}")
     }
 
-    fun notarise(count: Int) {
+    fun notarise(count: Int): Double {
         val transactions = buildTransactions(count)
-        val before = System.currentTimeMillis()
-        val signers = notariseTransactions(transactions)
-        val after = System.currentTimeMillis()
-        val transactionSigners = transactions.zip(signers).map {
-            val (tx, signer) = it
-            "Tx [${tx.tx.id.prefixChars()}..] signed by $signer"
-        }.joinToString("\n")
-
-        println("Notary: \"${notary.name}\", with composite key: ${notary.owningKey}\n" +
-                "Notarised ${transactions.size} transactions:\n" + transactionSigners +
-                "Time (ms): ${(after - before)}")
+        val before = System.currentTimeMillis().toDouble()/1000
+        notariseTransactions(transactions)
+        val after = System.currentTimeMillis().toDouble()/1000
+        return after - before
     }
 
     /**

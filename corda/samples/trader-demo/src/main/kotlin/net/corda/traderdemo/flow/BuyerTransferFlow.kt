@@ -66,7 +66,7 @@ class BuyerTransferFlow(val otherParty: Party,
         return data.unwrap{
             // is price accurately describing the asset?
             val sharePrice = StockFetch.getPrice(it.ticker)
-            if (sharePrice.toDouble() > it.price.quantity) {
+            if (sharePrice.toDouble() * 100.0 > it.price.quantity) {
                 throw UnacceptablePriceException(it.price, DOLLARS(sharePrice.toDouble()))
             }
 

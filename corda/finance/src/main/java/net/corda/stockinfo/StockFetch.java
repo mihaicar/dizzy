@@ -30,7 +30,7 @@ public class StockFetch {
         } catch (IOException | NullPointerException e) {
             System.out.println("error retrieving price " + e.getMessage());
         }
-        System.out.println("Price retrieved from Yahoo.");
+        System.out.println("Price retrieved from Yahoo: " + price);
         return price;
     }
 }

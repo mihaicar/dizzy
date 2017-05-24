@@ -99,6 +99,22 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         println("Share balance: ${shares.joinToString()}")
     }
 
+    fun retrieveCash(): Double {
+        try {
+            return ((rpc.getCashBalances()[Currency.getInstance("USD")]!!.quantity)/100).toDouble()
+        } catch (ex: Exception) {
+            return 0.0
+        }
+    }
+
+    fun retrieveSharesIn(ticker: String): Long {
+        try {
+            return rpc.getShareBalances()[ticker] as Long
+        } catch (ex: Exception) {
+            return 0
+        }
+    }
+
     fun  runAuditor(counterparties: List<String>, txID: String) {
         val otherParties : MutableList<Party> = mutableListOf()
         for (cp in counterparties) {
