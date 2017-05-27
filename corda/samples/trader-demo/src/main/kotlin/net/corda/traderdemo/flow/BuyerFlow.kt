@@ -83,7 +83,6 @@ class BuyerFlow(val otherParty: Party,
         search.query = TransactionGraphSearch.Query(withCommandOfType = ShareContract.Commands.Issue::class.java,
                 followInputsOfType = ShareContract.State::class.java)
         val cpIssuance = search.call().single()
-
         cpIssuance.attachments.first().let {
             val p = attachmentsPath.toAbsolutePath().resolve("$it.jar")
             println("""

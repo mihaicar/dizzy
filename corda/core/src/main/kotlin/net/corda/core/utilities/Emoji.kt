@@ -23,6 +23,7 @@ object Emoji {
     @JvmStatic val CODE_NO_ENTRY: String = codePointsString(0x1F6AB)
     @JvmStatic val CODE_SKULL_AND_CROSSBONES: String = codePointsString(0x2620)
     @JvmStatic val CODE_BOOKS: String = codePointsString(0x1F4DA)
+    @JvmStatic val CODE_RED_CROSS: String = codePointsString(0x274C)
 
     /**
      * When non-null, toString() methods are allowed to use emoji in the output as we're going to render them to a

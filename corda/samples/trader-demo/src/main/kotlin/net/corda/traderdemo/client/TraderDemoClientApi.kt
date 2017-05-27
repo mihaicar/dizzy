@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.Futures
 import net.corda.contracts.testing.calculateRandomlySizedAmounts
 import net.corda.core.contracts.Amount
 import net.corda.core.contracts.DOLLARS
+import net.corda.core.contracts.InsufficientBalanceException
 import net.corda.core.crypto.Party
 import net.corda.core.getOrThrow
 import net.corda.core.messaging.CordaRPCOps
@@ -101,7 +102,8 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
 
     fun retrieveCash(): Double {
         try {
-            return ((rpc.getCashBalances()[Currency.getInstance("USD")]!!.quantity)/100).toDouble()
+            val cash = rpc.getCashBalances()[Currency.getInstance("USD")] ?: throw InsufficientBalanceException(0.DOLLARS)
+            return (cash.quantity/100).toDouble()
         } catch (ex: Exception) {
             return 0.0
         }
@@ -115,20 +117,12 @@ class TraderDemoClientApi(val rpc: CordaRPCOps) {
         }
     }
 
-    fun  runAuditor(counterparties: List<String>, txID: String) {
-        val otherParties : MutableList<Party> = mutableListOf()
-        for (cp in counterparties) {
-            val otherParty = rpc.partyFromName(cp) ?: throw IllegalStateException("Don't know $cp")
-            otherParties.add(otherParty)
-        }
-        var txs: String = ""
-        for (p in otherParties) {
-            try {
-                txs = rpc.startFlow(::ShowHistory, p, txID).returnValue.getOrThrow()
-                break;
-            } catch (ex: Exception) {}
-        }
-        println("Transaction details: $txs")
+    fun runAuditor(txID: String): String {
+        return rpc.startFlow(::ShowHistory, txID).returnValue.getOrThrow()
+    }
+
+    fun showTxHistory(tx: String) {
+        println("Details: $tx")
     }
 
 }

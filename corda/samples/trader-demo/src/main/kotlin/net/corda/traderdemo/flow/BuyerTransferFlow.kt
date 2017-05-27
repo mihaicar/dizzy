@@ -3,6 +3,7 @@ package net.corda.traderdemo.flow
 import co.paralleluniverse.fibers.Suspendable
 import net.corda.core.contracts.Amount
 import net.corda.core.contracts.DOLLARS
+import net.corda.core.contracts.InsufficientBalanceException
 import net.corda.core.contracts.TransactionType
 import net.corda.core.crypto.CompositeKey
 import net.corda.core.crypto.Party
@@ -16,9 +17,10 @@ import net.corda.core.utilities.UntrustworthyData
 import net.corda.core.utilities.unwrap
 import net.corda.flows.FinalityFlow
 import net.corda.stockinfo.StockFetch
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.div
 import java.util.*
 
-class UnacceptablePriceException(givenPrice: Amount<Currency>, accPrice: Amount<Currency> = 0.DOLLARS) : FlowException("Unacceptable price: $givenPrice != $accPrice")
+class UnacceptablePriceException(givenPrice: Amount<Currency>, accPrice: Amount<Currency> = 0.DOLLARS) : FlowException("Unacceptable price: $givenPrice < $accPrice")
 class UnacceptableNegativeException(price: Long, qty : Long) : FlowException("Unacceptable negative value: $price or $qty")
 class UnacceptableSellerException(sellerOwnerKey: CompositeKey, owningKey: CompositeKey) : FlowException("Different sellers: $sellerOwnerKey and $owningKey")
 
@@ -37,7 +39,7 @@ class BuyerTransferFlow(val otherParty: Party,
         val vault = serviceHub.vaultService
         val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
         val currentOwner = serviceHub.myInfo.legalIdentity
-
+        //val auditor = serviceHub.networkMapCache.regulatorNodes[0].legalIdentity
         // Stage 1. Receive the tx from the seller.
         val untrustedItems = receive<SellerTransferInfo>(otherParty)
 
@@ -46,6 +48,10 @@ class BuyerTransferFlow(val otherParty: Party,
 
         // Stage 3. Generate the cash spend
         val tx = TransactionType.General.Builder(notary.notaryIdentity)
+        val cash = serviceHub.vaultService.cashBalances[Currency.getInstance("USD")] ?: throw InsufficientBalanceException(items.price)
+        if (cash.quantity < items.price.quantity * items.qty) {
+            throw InsufficientBalanceException(items.price)
+        }
         val (ctx, sgn) = vault.generateSpend(tx, items.price * items.qty, items.sellerOwnerKey)
 
         // Stage 4. Sign transaction

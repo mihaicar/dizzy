@@ -24,19 +24,12 @@ import java.util.*
  * Notarisation (if required) and commitment to the ledger is handled vy the [FinalityFlow].
  * The flow returns the [SignedTransaction] that was committed to the ledger.
  */
-class ShowHistory(val otherParty: Party, val txID: String): FlowLogic<String>() {
+class ShowHistory(val txID: String): FlowLogic<String>() {
 
     @Suspendable
     override fun call(): String {
         try {
-            val vault = serviceHub.vaultService
-            val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
-            val currentOwner = serviceHub.myInfo.legalIdentity
-
-            // Stage 1. Retrieve needed shares and add them as input/output to the share tx
-            //val txInfo = vault.txHistory(txID)
-
-            return vault.txHistory(txID)
+            return serviceHub.vaultService.txHistory(txID)
         } catch(ex: Exception) {
             return "Failure: ${ex.message} $ex "
         }

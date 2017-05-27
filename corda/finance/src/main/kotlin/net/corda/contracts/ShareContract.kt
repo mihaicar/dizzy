@@ -259,7 +259,6 @@ class ShareContract : Contract {
         // paper.owner, in our case is... the person who HAS the CP in their vault (so those who own the share, seller)
         // therefore, WE ARE THE OWNER: issuance.party.owningKey = paper...owner
 
-        println("Transfer is issuing command with ${issuance.party.owningKey} --- this is where the problem is.")
         tx.addCommand(Commands.Transfer(), issuance.party.owningKey)
         return tx
     }

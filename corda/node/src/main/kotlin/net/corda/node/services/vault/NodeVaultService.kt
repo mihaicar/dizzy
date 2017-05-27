@@ -847,7 +847,7 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
 
                 // Retrieve spendable state refs
                 val rs = statement.executeQuery(selectJoin)
-
+                println("we have found...")
                 // MC: Goes through the resulting rows to gather information
                 while (rs.next()) {
                     val ticker = rs.getString(1)

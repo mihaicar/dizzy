@@ -31,6 +31,7 @@ import java.util.*
                 val vault = serviceHub.vaultService
                 val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
                 val currentOwner = serviceHub.myInfo.legalIdentity
+                val auditor = serviceHub.networkMapCache.regulatorNodes[0].legalIdentity
 
                 // Stage 1. Retrieve needed shares and add them as input/output to the share tx builder
                 val txb = TransactionType.General.Builder(notary.notaryIdentity)
@@ -51,7 +52,7 @@ import java.util.*
                 val newCash = receive<SignedTransaction>(otherParty).unwrap { it }
 
                 // Stage 6. Notarise and record, the share transaction in our vaults.
-                val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty))).single()
+                val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty, auditor))).single()
 
                 // Stage 7. Print confirmation and return the results to be displayed in the front end.
                 println("Sale transfer! Final transaction is: " +
@@ -60,10 +61,10 @@ import java.util.*
                 return  "Transaction IDs: \n \n Cash: ${newCash.tx.id} \n Shares: ${newShare.tx.id} \n \n \n" +
                         "${value * qty} were received from ${otherParty.name}. \n \n" +
                         "${otherParty.name} received $qty shares in $ticker (priced at $value per share)"
-            } catch (ex: IndexOutOfBoundsException) {
-                return "Not enough shares."
+            } catch (ex: UnacceptablePriceException) {
+                return "Not enough shares. ${ex.message}"
             } catch (ex: InsufficientBalanceException) {
-                return "Not enough cash."
+                return "Not enough cash. ${ex.message}"
             } catch (ex: Exception) {
                 return "Failure: ${ex.message} $ex "
             }

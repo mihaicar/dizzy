@@ -33,6 +33,15 @@ private class TraderDemo {
 
     companion object {
         val logger: Logger = loggerFor<TraderDemo>()
+        val ipM1 = "146.169.47.223"
+        val ipM2 = "146.169.47.221"
+        val ports = mapOf(
+                "Bank A" to Pair(10006, ipM1),
+                "Bank B" to Pair (10009, ipM1),
+                "Bank C" to Pair (10015, ipM2),
+                "Beaufort" to Pair(10021, ipM1),
+                "Hargreaves" to Pair(10048, ipM2),
+                "Exchange" to Pair(10041, ipM2))
     }
 
     @Suspendable
@@ -116,12 +125,24 @@ private class TraderDemo {
                 TraderDemoClientApi(this).runDisplay()
             }
         } else if (role == Role.AUDIT) {
-            val host = HostAndPort.fromString("$ip:10002")
-            val cps = listOf("Bank A", "Bank B")
+            val regulator = HostAndPort.fromString("$ip:10021")
+            val cps = ports.keys.take(2)
             val tx = options.valueOf(txArg)
-
-            CordaRPCClient(host).use("demo", "demo") {
-                TraderDemoClientApi(this).runAuditor(cps, tx)
+            var s = ""
+            var msg = ""
+            for (i in cps) {
+                val bank = HostAndPort.fromString("$ip:${ports[i]!!.first}")
+                CordaRPCClient(bank).use("demo", "demo") {
+                    msg = TraderDemoClientApi(this).runAuditor(tx)
+                }
+                if (msg != "") {
+                    s = i
+                    break
+                }
+            }
+            println(msg)
+            CordaRPCClient(regulator).use("demo", "demo") {
+                TraderDemoClientApi(this).showTxHistory(msg)
             }
         } else if (role == Role.RANDOM) {
             val portA = 10006
@@ -232,46 +253,42 @@ private class TraderDemo {
         else if (role == Role.RANDOM_ISSUE) {
             val vals = varDeclaration()
             @Suppress("UNCHECKED_CAST")
-            val pi = vals[0] as Map<String, Pair<Int, String>>
-            @Suppress("UNCHECKED_CAST")
             val stocks = vals[1] as Map<String, Amount<Currency>>
             val rand = vals[2] as Random
             val stocksAsArray = ArrayList<String>(stocks.keys)
-            val banksAsArray = ArrayList<String>(pi.keys.minus("Exchange"))
+            val banksAsArray = ArrayList<String>(ports.keys.minus("Exchange"))
 
             // Issue money for Banks
             for (entity in banksAsArray) {
-                tryIssueCashTo(entity, pi)
+                tryIssueCashTo(entity, ports)
             }
 
             // Issue some shares for the banks - we start with 20
             var tries = 20
             while (tries > 0) {
                 val stock = rand.nextInt(stocks.size)
-                val p = rand.nextInt(pi.size - 1)
-                tryIssueSharesTo(banksAsArray[p], "Exchange", pi, stocks[stocksAsArray[stock]] as Amount<Currency>, stocksAsArray[stock])
+                val p = rand.nextInt(ports.size - 1)
+                tryIssueSharesTo(banksAsArray[p], "Exchange", ports, stocks[stocksAsArray[stock]] as Amount<Currency>, stocksAsArray[stock])
                 tries--
             }
 
         } else if (role == Role.RANDOM_TRANSACT) {
             val vals = varDeclaration()
             @Suppress("UNCHECKED_CAST")
-            val pi = vals[0] as Map<String, Pair<Int, String>>
-            @Suppress("UNCHECKED_CAST")
             val stocks = vals[1] as Map<String, Amount<Currency>>
             val rand = vals[2] as Random
             val stocksAsArray = ArrayList<String>(stocks.keys)
-            val banksAsArray = ArrayList<String>(pi.keys.minus("Exchange"))
+            val banksAsArray = ArrayList<String>(ports.keys.minus("Exchange"))
             var tries = 0
             while (true) {
                 val stock = rand.nextInt(2)
-                val buyer = banksAsArray[rand.nextInt(pi.size - 1)]
-                val seller = banksAsArray[rand.nextInt(pi.size - 1)]
-                transferShares(buyer, seller, pi, stocks[stocksAsArray[stock]] as Amount<Currency>, stocksAsArray[stock])
+                val buyer = banksAsArray[rand.nextInt(ports.size - 1)]
+                val seller = banksAsArray[rand.nextInt(ports.size - 1)]
+                transferShares(buyer, seller, ports, stocks[stocksAsArray[stock]] as Amount<Currency>, stocksAsArray[stock])
                 tries++
                 if (tries % 10 == 0) {
                     for (entity in banksAsArray) {
-                        displayBalances(entity, pi)
+                        displayBalances(entity, ports)
                     }
                 }
             }
@@ -327,21 +344,12 @@ private class TraderDemo {
     }
 
     private fun varDeclaration(): List<Any> {
-        val ipM1 = "146.169.47.223"
-        val ipM2 = "146.169.47.221"
-        val ports = mapOf(
-                "Bank A" to Pair(10006, ipM1),
-                "Bank B" to Pair (10009, ipM1),
-                "Bank C" to Pair (10015, ipM2),
-                "Beaufort" to Pair(10021, ipM1),
-                "Hargreaves" to Pair(10048, ipM2),
-                "Exchange" to Pair(10041, ipM2))
         val rand = Random()
         val stocks = mapOf(
                 "AAPL" to 160.DOLLARS,
                 "MSFT" to 75.DOLLARS,
                 "GS" to 230.DOLLARS)
-        return listOf(ports, stocks, rand)
+        return listOf(stocks, rand)
     }
 
     fun printHelp(parser: OptionParser) {

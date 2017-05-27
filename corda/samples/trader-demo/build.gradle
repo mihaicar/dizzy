@@ -107,26 +107,6 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
         webPort 10013
         cordapps = []
     }
-//    node {
-//        name "Hargreaves"
-//        nearestCity "London"
-//        advertisedServices = []
-//        p2pPort 10047
-//        rpcPort 10048
-//        webPort 10049
-//        cordapps = []
-//        rpcUsers = ext.rpcUsers
-//    }
-//    node {
-//        name "Exchange"
-//        nearestCity "London"
-//        advertisedServices = []
-//        p2pPort 10040
-//        rpcPort 10041
-//        webPort 10042
-//        cordapps = []
-//        rpcUsers = ext.rpcUsers
-//    }
 }
 
 // Used for the exchange
@@ -341,6 +321,61 @@ task deployExtraNode(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
         }
     }
 
+}
+
+task deployNodesAudit(type: net.corda.plugins.Cordform, dependsOn: ['build']) {
+    ext.rpcUsers = [['user': "demo", 'password': "demo", 'permissions': [
+            'StartFlow.net.corda.flows.IssuerFlow$IssuanceRequester',
+            "StartFlow.net.corda.traderdemo.flow.SellerFlow",
+            "StartFlow.net.corda.traderdemo.flow.SellerTransferFlow",
+            "StartFlow.net.corda.traderdemo.flow.ShowHistory"
+    ]]]
+
+    directory "./build/nodes"
+    // This name "Notary" is hard-coded into TraderDemoClientApi so if you change it here, change it there too.
+    // In this demo the node that runs a standalone notary also acts as the network map server.
+    networkMap "Notary"
+    node {
+        name "Notary"
+        nearestCity "London"
+        advertisedServices = ["corda.notary.validating"]
+        p2pPort 10002
+        cordapps = []
+    }
+    node {
+        name "Bank A"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10005
+        rpcPort 10006
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "Bank B"
+        nearestCity "New York"
+        advertisedServices = []
+        p2pPort 10008
+        rpcPort 10009
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
+    node {
+        name "BankOfCorda"
+        nearestCity "London"
+        advertisedServices = []
+        p2pPort 10011
+        cordapps = []
+    }
+    node {
+        name "Auditor"
+        nearestCity "London"
+        advertisedServices = ["corda.regulator"]
+        p2pPort 10020
+        rpcPort 10021
+        cordapps = []
+        rpcUsers = ext.rpcUsers
+    }
 }
 
 task integrationTest(type: Test, dependsOn: []) {
