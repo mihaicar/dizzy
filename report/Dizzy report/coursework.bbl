@@ -1,0 +1,183 @@
+\begin{thebibliography}{10}
+
+\bibitem{bankrisk}
+Karl Flinders.
+\newblock Big banks' legacy it systems could kill them.
+\newblock 2014.
+
+\bibitem{TTimes}
+What do t+1, t+2 and t+3 mean?, accessed 6 February 2017.
+
+\bibitem{humanrisk}
+Bertrand Dayer.
+\newblock Consideration of human errors in risk management, 2006.
+
+\bibitem{pwc}
+Alan Morrison.
+\newblock Blockchain and smart contract automation: Blockchains defined, 2016
+  (accessed 9 February 2017).
+
+\bibitem{CMM:RN}
+Dennis~Ferenzy et~al.
+\newblock The internet of finance: Unleashing the potential of blockchain
+  technology.
+\newblock Technical report, Institute of International Finance, 2015.
+
+\bibitem{slow}
+Uk banking industry slow to react to digital developments, 2014 (accessed 9
+  February 2017).
+
+\bibitem{Clearing:cost}
+Philip Stafford.
+\newblock The blockchain and financial markets, 2015 (accessed 6 February
+  2017).
+
+\bibitem{FA}
+Financial instruments, accessed 6 February 2017.
+
+\bibitem{Security}
+Security, accessed 6 Feburary 2017.
+
+\bibitem{TradeCycle}
+Gautam Athavale.
+\newblock Trade life cycle/securities trade life cycle, 2011 (accessed 6
+  February 2017).
+
+\bibitem{TradeCycle2}
+Understanding the securities trade lifecycle, 2016 (accessed 6 February 2017).
+
+\bibitem{CHRisk}
+Clearing arrangements for exchange-traded derivatives, accessed 6 February
+  2017.
+
+\bibitem{Corda:IP}
+Richard~Gendal Brown, James Carlyle, Ian Grigg, and Mike Hearn.
+\newblock Corda: An introduction.
+\newblock 2016.
+
+\bibitem{GOVReq}
+M.~Walport.
+\newblock Distributed ledger technology: Beyond blockchain.
+\newblock {\em UK Government Office for Science}, 2016.
+
+\bibitem{Chinese}
+Wei-Tek Tsai and Robert~Blower et~al.
+\newblock A system view of financial blockchains.
+\newblock {\em IEEE Symposium on Service-Oriented System Engineering}, 2016.
+
+\bibitem{visa}
+Visa / IBM~Stress Test.
+\newblock 56,582 transaction messages per second!, 2014.
+
+\bibitem{Scalability}
+Scalability, 2016 (accessed 5 February 2017).
+
+\bibitem{GS:Audit}
+Internal audit, 2017 (accessed 6 February 2017).
+
+\bibitem{RTGS}
+Real-time gross settlement systems.
+\newblock Technical report, Committee on Payment and Settlement Systems of the
+  central banks of the Group of Ten countries, 1997.
+
+\bibitem{TARGET2}
+Target annual report.
+\newblock Technical report, European Central Bank, 2016.
+\newblock https://www.ecb.europa.eu/pub/pdf/other/targetar2015.en.pdf.
+
+\bibitem{Italy:networks}
+M.~Modina and V.~Formisano.
+\newblock The role of local banks' network in the modern banking system: An
+  italian case study.
+\newblock 2009.
+
+\bibitem{BC:Fungibility}
+Ensuring bitcoin fungibility in 2017 (and beyond), 2017 (accessed 6 February
+  2017).
+
+\bibitem{PWPS}
+Ray Patterson.
+\newblock Alternatives to proof of work, 2015 (accessed 5 February 2017).
+
+\bibitem{BC:UB}
+Controlled supply of bitcoin, 2016 (accessed 6 February 2017).
+
+\bibitem{PoW}
+Ray Patterson.
+\newblock The proof-of-work in cryptocurrencies: Brief history., 2015 (accessed
+  6 February 2017).
+
+\bibitem{Corda:TP}
+Mike Hearn.
+\newblock Corda: A distributed ledger.
+\newblock 2016.
+
+\bibitem{PAPB}
+Ray Patterson.
+\newblock Alternatives for proof of work, part 2, 2015 (accessed 6 February
+  2017).
+
+\bibitem{BC:MC}
+Crypto-currencies market capitalizations.
+\newblock \url{https://coinmarketcap.com/}, 2017 (accessed 7 February 2017).
+
+\bibitem{DBC}
+Trent~McConaghy et~al.
+\newblock Bigchaindb: A scalable blockchain database.
+\newblock 2016.
+
+\bibitem{Sewer}
+Bitcoin is the sewer rat of currencies, 2016 (accessed 8 February 2017).
+
+\bibitem{BS:TP}
+Fabian Schuh and Daniel Larimer.
+\newblock Bitshares 2.0: Financial smart contract platform.
+\newblock 2015.
+
+\bibitem{BS:DPOS}
+Delegated proof-of-stake consensus, 2016 (accessed 8 February 2017).
+
+\bibitem{BS:tech}
+Bitshares documentation, 2016 (accessed 5 February 2017).
+
+\bibitem{Stellar:TP}
+David Mazieres.
+\newblock The stellar consensus protocol: A federated model for internet-level
+  consensus.
+\newblock {\em Stellar Development Foundation}, 2016.
+
+\bibitem{Stellar:docs}
+Stellar documentation, 2017 (accessed 5 February 2017).
+
+\bibitem{Ripple:TP}
+Ripple solutions guide.
+\newblock 2016.
+
+\bibitem{Ripple:ILP}
+Stefan Thomas and Evan Schwartz.
+\newblock A protocol for interledger payments.
+\newblock 2016.
+
+\bibitem{Ripple:CP}
+David~Schwarts et~al.
+\newblock The ripple protocol consensus algorithm.
+\newblock 2014.
+
+\bibitem{JoLang}
+Jo~Lang.
+\newblock R3 review: Ripple labs - considerations for adoption by large
+  financial institutions.
+\newblock {\em R3CEV}, 2015.
+
+\bibitem{raft}
+Diego Ongaro and John~K Ousterhout.
+\newblock In search of an understandable consensus algorithm.
+\newblock In {\em USENIX Annual Technical Conference}, pages 305--319, 2014.
+
+\bibitem{Corda:docs}
+Corda documentation, 2016 (accessed 6 February 2017).
+
+\bibitem{Corda:template}
+Cordapp template codebase, 2016 (accessed 5 Feburary 2017).
+
+\end{thebibliography}

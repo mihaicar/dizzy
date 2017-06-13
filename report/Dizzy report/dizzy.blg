@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: dizzy.aux
+The style file: mike.bst
+Database file #1: mybib.bib
+Warning--empty author in newTimesUS
+Warning--empty author in sia
+Warning--empty author in whatclearing
+Warning--empty author in whatclearing2
+Warning--empty author in mifid2off
+Warning--empty author in RTGS
+Warning--empty author in TARGET2
+Warning--empty author in Ripple:TP
+You've used 93 entries,
+            2426 wiz_defined-function locations,
+            984 strings with 18885 characters,
+and the built_in function-call counts, 28742 in all, are:
+= -- 2451
+> -- 314
+< -- 0
++ -- 176
+- -- 69
+* -- 1164
+:= -- 2606
+add.period$ -- 286
+call.type$ -- 93
+change.case$ -- 48
+chr.to.int$ -- 0
+cite$ -- 101
+duplicate$ -- 3585
+empty$ -- 3243
+format.name$ -- 80
+if$ -- 6465
+int.to.chr$ -- 0
+int.to.str$ -- 93
+missing$ -- 571
+newline$ -- 480
+num.names$ -- 55
+pop$ -- 2121
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 466
+stack$ -- 0
+substring$ -- 1883
+swap$ -- 1249
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 8
+while$ -- 83
+width$ -- 95
+write$ -- 956
+(There were 8 warnings)

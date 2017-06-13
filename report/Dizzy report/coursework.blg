@@ -1,0 +1,105 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: coursework.aux
+The style file: unsrt.bst
+Database file #1: mybib.bib
+Warning--entry type for "pwc" isn't style-file defined
+--line 17 of file mybib.bib
+Warning--entry type for "BS:tech" isn't style-file defined
+--line 43 of file mybib.bib
+Warning--entry type for "BS:DPOS" isn't style-file defined
+--line 57 of file mybib.bib
+Warning--entry type for "Corda:docs" isn't style-file defined
+--line 99 of file mybib.bib
+Warning--entry type for "Corda:template" isn't style-file defined
+--line 127 of file mybib.bib
+Warning--entry type for "PWPS" isn't style-file defined
+--line 134 of file mybib.bib
+Warning--entry type for "PAPB" isn't style-file defined
+--line 142 of file mybib.bib
+Warning--entry type for "Scalability" isn't style-file defined
+--line 150 of file mybib.bib
+Warning--entry type for "Stellar:docs" isn't style-file defined
+--line 157 of file mybib.bib
+Warning--entry type for "Clearing:cost" isn't style-file defined
+--line 172 of file mybib.bib
+Warning--entry type for "FA" isn't style-file defined
+--line 180 of file mybib.bib
+Warning--entry type for "Security" isn't style-file defined
+--line 187 of file mybib.bib
+Warning--entry type for "TTimes" isn't style-file defined
+--line 194 of file mybib.bib
+Warning--entry type for "TradeCycle" isn't style-file defined
+--line 201 of file mybib.bib
+Warning--entry type for "TradeCycle2" isn't style-file defined
+--line 208 of file mybib.bib
+Warning--entry type for "CHRisk" isn't style-file defined
+--line 215 of file mybib.bib
+Warning--entry type for "GS:Audit" isn't style-file defined
+--line 222 of file mybib.bib
+Warning--entry type for "BC:Fungibility" isn't style-file defined
+--line 251 of file mybib.bib
+Warning--entry type for "slow" isn't style-file defined
+--line 258 of file mybib.bib
+Warning--entry type for "BC:UB" isn't style-file defined
+--line 281 of file mybib.bib
+Warning--entry type for "PoW" isn't style-file defined
+--line 288 of file mybib.bib
+Warning--entry type for "Sewer" isn't style-file defined
+--line 311 of file mybib.bib
+Warning--entry type for "visa" isn't style-file defined
+--line 327 of file mybib.bib
+Warning--empty journal in bankrisk
+Warning--empty journal in Corda:IP
+Warning--empty author in RTGS
+Warning--empty author in TARGET2
+Warning--empty journal in Italy:networks
+Warning--empty journal in Corda:TP
+Warning--empty journal in DBC
+Warning--empty journal in BS:TP
+Warning--empty author in Ripple:TP
+Warning--empty journal in Ripple:TP
+Warning--empty journal in Ripple:ILP
+Warning--empty journal in Ripple:CP
+You've used 42 entries,
+            1791 wiz_defined-function locations,
+            615 strings with 7118 characters,
+and the built_in function-call counts, 5012 in all, are:
+= -- 376
+> -- 138
+< -- 1
++ -- 72
+- -- 30
+* -- 113
+:= -- 683
+add.period$ -- 83
+call.type$ -- 42
+change.case$ -- 45
+chr.to.int$ -- 0
+cite$ -- 54
+duplicate$ -- 268
+empty$ -- 707
+format.name$ -- 30
+if$ -- 1193
+int.to.chr$ -- 0
+int.to.str$ -- 42
+missing$ -- 14
+newline$ -- 170
+num.names$ -- 22
+pop$ -- 262
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 181
+stack$ -- 0
+substring$ -- 32
+swap$ -- 40
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 12
+while$ -- 25
+width$ -- 44
+write$ -- 331
+(There were 35 warnings)

@@ -1,0 +1,23 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{3}{section.2}
+\contentsline {subsection}{\numberline {1.1}Motivation}{3}{subsection.3}
+\contentsline {subsection}{\numberline {1.2}Objectives}{3}{subsection.4}
+\contentsline {section}{\numberline {2}Background}{6}{section.6}
+\contentsline {subsection}{\numberline {2.1}Traditional Banking}{6}{subsection.7}
+\contentsline {subsubsection}{\numberline {2.1.1}Financial Instruments}{6}{subsubsection.8}
+\contentsline {subsubsection}{\numberline {2.1.2}Life Cycle of a Trade}{7}{subsubsection.9}
+\contentsline {subsubsection}{\numberline {2.1.3}Risks and Bottlenecks}{8}{subsubsection.11}
+\contentsline {subsection}{\numberline {2.2}Requirements}{9}{subsection.13}
+\contentsline {subsection}{\numberline {2.3}Distributed Ledgers}{12}{subsection.14}
+\contentsline {subsubsection}{\numberline {2.3.1}Proof of Work versus Proof of Stake}{13}{subsubsection.15}
+\contentsline {subsection}{\numberline {2.4}Available systems}{14}{subsection.16}
+\contentsline {subsubsection}{\numberline {2.4.1}Some insufficient solutions}{14}{subsubsection.17}
+\contentsline {subsubsection}{\numberline {2.4.2}BitShares and Stellar}{16}{subsubsection.18}
+\contentsline {subsubsection}{\numberline {2.4.3}Ripple}{17}{subsubsection.19}
+\contentsline {subsubsection}{\numberline {2.4.4}Corda}{18}{subsubsection.21}
+\contentsline {section}{\numberline {3}Design and Implementation}{22}{section.25}
+\contentsline {subsection}{\numberline {3.1}Network pre-analysis}{22}{subsection.26}
+\contentsline {subsection}{\numberline {3.2}Load testing}{23}{subsection.30}
+\contentsline {section}{\numberline {4}Timeline}{24}{section.31}
+\contentsline {section}{\numberline {5}Evaluation}{26}{section.32}
+\contentsline {section}{\numberline {6}Bibliography}{27}{section.33}

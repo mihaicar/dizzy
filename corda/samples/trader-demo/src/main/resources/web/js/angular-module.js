@@ -63,7 +63,7 @@ app.controller('ModalInstanceCtrl', function ($http, $location, $uibModalInstanc
         .then((response) => modalInstance.stocks = response.data);
     modalInstance.getPOs();
 
-    // Validate and create purchase order.
+    // Validate and create share sale.
     modalInstance.create = () => {
         if (invalidFormInput()) {
             modalInstance.formError = true;

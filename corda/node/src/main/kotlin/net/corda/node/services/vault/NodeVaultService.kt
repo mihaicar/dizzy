@@ -622,7 +622,6 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         val lock: UUID = UUID(1234, 1234)
         val price = value `issued by` DUMMY_CASH_ISSUER
         val acceptableShares = unconsumedStatesForShareSpending<ShareContract.State>(qty = qty, lockId = lock, ticker = ticker, notary = tx.notary);
-        //println("We have the acceptable shares as \n $acceptableShares")
         // notary may be associated with locked state only?
         tx.notary = acceptableShares.firstOrNull()?.state?.notary
 
@@ -634,17 +633,13 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         } else {
             null
         }
-        //println("We have $gathered and ${gathered.first().state.data.owner} as the existingOwner and ${gathered.first().state.data.issuance.party.owningKey}")
         var keysUsed = gathered.map { it.state.data.owner }
-        //println("We work with keysUsed: $keysUsed, we have $to")
-        //TODO MC: ISSUANCE MIGHT NOT BE CORRECT (what about owner?)
         val states = gathered.groupBy { it.state.data.ticker }.map {
             val sh = it.value
             val totalAmount = sh.map { it.state.data.qty }.sum()
             deriveShareState(sh.first().state, totalAmount, to, price)
         }.sortedBy { it.data.qty}
 
-        //println("We also have the states: $states")
         // now, if we have some change left, deal with it
         val outputs = if (change != null ) {
             val existingOwner = gathered.first().state.data.owner
@@ -664,7 +659,6 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
         for (state in outputs) {
             tx.addOutputState(state)
         }
-        //println("And we're about to add the last move command.")
         tx.addCommand(ShareContract.Commands.Transfer(), keysUsed)
         return Pair(tx, keysUsed)
 
@@ -847,7 +841,7 @@ class NodeVaultService(private val services: ServiceHub, dataSourceProperties: P
 
                 // Retrieve spendable state refs
                 val rs = statement.executeQuery(selectJoin)
-                println("we have found...")
+                println("We have found details for $tx in ${services.myInfo.legalIdentity.name}")
                 // MC: Goes through the resulting rows to gather information
                 while (rs.next()) {
                     val ticker = rs.getString(1)

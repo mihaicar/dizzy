@@ -31,7 +31,7 @@ import java.util.*
                 val vault = serviceHub.vaultService
                 val notary: NodeInfo = serviceHub.networkMapCache.notaryNodes[0]
                 val currentOwner = serviceHub.myInfo.legalIdentity
-                val auditor = serviceHub.networkMapCache.regulatorNodes[0].legalIdentity
+                //val auditor = serviceHub.networkMapCache.regulatorNodes[0].legalIdentity
 
                 // Stage 1. Retrieve needed shares and add them as input/output to the share tx builder
                 val txb = TransactionType.General.Builder(notary.notaryIdentity)
@@ -52,7 +52,8 @@ import java.util.*
                 val newCash = receive<SignedTransaction>(otherParty).unwrap { it }
 
                 // Stage 6. Notarise and record, the share transaction in our vaults.
-                val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty, auditor))).single()
+                //val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty, auditor))).single()
+                val newShare = subFlow(FinalityFlow(shareSTX, setOf(currentOwner, otherParty))).single()
 
                 // Stage 7. Print confirmation and return the results to be displayed in the front end.
                 println("Sale transfer! Final transaction is: " +

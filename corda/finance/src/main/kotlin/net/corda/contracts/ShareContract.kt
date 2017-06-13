@@ -33,7 +33,7 @@ class ShareContract : Contract {
     override val legalContractReference: SecureHash = SecureHash.sha256("https://en.wikipedia.org/wiki/Share_(finance)")
 
     data class Terms(
-            //MCHANGE
+            // MC: modified terms used for the share contract
             val asset: Issued<Currency>,
             val maturityDate: Instant
     )
