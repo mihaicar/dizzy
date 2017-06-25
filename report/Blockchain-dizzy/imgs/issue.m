@@ -17,7 +17,7 @@ class Issue : AbstractIssue<State, Commands, Terms>(
         val timestamp = tx.timestamp
         val time = timestamp?.before ?: 
             throw IllegalArgumentException("No timestamp on issuance")
-        
+        // Requirements created during this project
         // Verifies the maturity date has passed 
         // (forbid malformed transactions happening on wrong dates)
         require(outputs.all { time < it.maturityDate }) 

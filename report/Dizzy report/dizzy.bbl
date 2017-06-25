@@ -15,45 +15,51 @@ Michael~Carneciu et~al.
 Emma Dunkley.
 \newblock \emph{Ten developments in digital finance}.
 \newblock
-  \url{https://www.ft.com/content/b679edf2-8a2d-11e5-90de-f44762bf9896}, 2015.
+  \url{https://www.ft.com/content/b679edf2-8a2d-11e5-90de-f44762bf9896}, 2015
+  (accessed 14 June 2017).
 
 \bibitem{bankrisk}
 Karl Flinders.
 \newblock \emph{Big banks' legacy IT systems could kill them}.
 \newblock
   \url{http://www.computerweekly.com/news/2240212567/Big-banks-legacy-IT-systems-could-kill-them},
-  2014.
+  2014 (accessed 14 June 2017).
 
 \bibitem{flashcrash}
 Bank for International~Settlements.
 \newblock \emph{The sterling ‘flash event’ of 7 October 2016}.
-\newblock \emph{The Markets Committee}, 2017.
+\newblock \emph{The Markets Committee}, 2017 (accessed 14 June 2017).
 \newblock \url{https://www.bis.org/publ/mktc09.pdf}.
 
 \bibitem{CHsuperold}
 Alexander~D. Noyes.
 \newblock \emph{Stock Exchange Clearing Houses}.
-\newblock \emph{Political Science Quarterly}, 8(2):252--267, 1893.
+\newblock \emph{Political Science Quarterly}, 8(2):252--267, 1893 (accessed 14
+  June 2017).
 \newblock ISSN 00323195.
 \newblock \urlprefix\url{http://www.jstor.org/stable/2139644}.
 
 \bibitem{TTimes}
-\emph{What do T+1, T+2 and T+3 mean?}
+Investopedia.
+\newblock \emph{What do T+1, T+2 and T+3 mean?}
 \newblock \url{http://www.investopedia.com/ask/answers/03/061303.asp}, accessed
   6 February 2017.
 
 \bibitem{newTimes}
 Denzil Jenkins.
 \newblock \emph{Introduction of T+2 standard settlement period}.
-\newblock \emph{London Stock Exchange}, 2013.
+\newblock \emph{London Stock Exchange}, 2013 (accessed 14 June 2017).
 
 \bibitem{newTimesUS}
 \emph{SEC Adopts T+2 Settlement Cycle for Securities Transactions}.
-\newblock \emph{US Securities and Exchange Commission}, 2017.
+\newblock \emph{US Securities and Exchange Commission}, 2017 (accessed 14 June
+  2017).
 
 \bibitem{humanrisk}
 Bertrand Dayer.
-\newblock \emph{Consideration of Human Errors in Risk Management}, 2006.
+\newblock \emph{Consideration of Human Errors in Risk Management}.
+\newblock \url{https://pdfs.semanticscholar.org/e22e/a9f240a49ed3b6513
+  32dd64b48668efc2d93.pdf}, 2006 (accessed 14 June 2017).
 
 \bibitem{default}
 \emph{Default}.
@@ -66,7 +72,7 @@ John~W. McPartland.
 \newblock \emph{Clearing and settlement of exchange traded derivatives}.
 \newblock
   \url{https://www.chicagofed.org/~/media/publications/chicago-fed-letter/2009/cfloctober2009-267-pdf.pdf},
-  2009.
+  2009 (accessed 14 June 2017).
 
 \bibitem{euroclearing}
 Lianna Brinded.
@@ -74,37 +80,41 @@ Lianna Brinded.
   would massively hurt Europe}.
 \newblock
   \url{http://uk.businessinsider.com/london-losing-euro-clearing-brexit-2017-5},
-  2017.
+  2017 (accessed 14 June 2017).
 
 \bibitem{sia}
-\emph{T+1 Business Case: Final Report}.
-\newblock \emph{SIA}, 2000.
+Security~Industry Association.
+\newblock \emph{T+1 Business Case: Final Report}.
+\newblock \url{http://archives2.sifma.org/stp/pdf/BusinessCaseFinal.pdf}, 2000
+  (accessed 14 June 2017).
 
 \bibitem{oldletter}
 Arthur Levitt.
 \newblock \emph{Office of the Chairman: Letter to Industry, Regarding T + 1}.
-\newblock \url{https://www.sec.gov/rules/other/levltrt1.htm}, 2001.
+\newblock \url{https://www.sec.gov/rules/other/levltrt1.htm}, 2001 (accessed 14
+  June 2017).
 
 \bibitem{dtcc}
 \emph{DTCC Recommends Shortening the U.S. Trade Settlement Cycle}.
 \newblock
   \url{www.dtcc.com/~/media/Files/Downloads/WhitePapers/T2-Shortened-Cycle-WP.pdf},
-  2014.
+  2014 (accessed 14 June 2017).
 
 \bibitem{bcg}
 Chandy~Chandrashekhar et~al.
 \newblock \emph{Cost Benefit Analysis of Shortening the Settlement Cycle}.
 \newblock
   \url{https://www.bcgperspectives.com/content/articles/financial_institutions_information_technology_performance_cost_benefit_analysis_shortening_settlement_cycle/},
-  2012.
+  2012 (accessed 14 June 2017).
 \newblock Boston Consulting Group.
 
 \bibitem{pwc}
-Alan Morrison.
+Alan Morrison and Subhankar Sinha.
 \newblock \emph{Blockchain and smart contract automation: Blockchains defined}.
 \newblock
   \url{http://www.pwc.com/us/en/technology-forecast/blockchain/definition.html},
   2016 (accessed 9 February 2017).
+\newblock Pwc.
 
 \bibitem{blockchain}
 \emph{Blockchain}.
@@ -113,18 +123,20 @@ Alan Morrison.
 \bibitem{SNakamoto:Bitcoin}
 Satoshi Nakamoto.
 \newblock \emph{Bitcoin: A peer-to-peer electronic cash system}.
-\newblock \url{http://www.paybycashu.com/files/bitcoin.pdf}, 2008.
+\newblock \url{http://www.paybycashu.com/files/bitcoin.pdf}, 2008 (accessed 14
+  June 2017).
 
 \bibitem{DBC}
 Trent~McConaghy et~al.
 \newblock \emph{BigchainDB: A Scalable Blockchain Database}.
-\newblock \emph{BigchainDB}, 2016.
+\newblock \emph{BigchainDB}, 2016 (accessed 14 June 2017).
+\newblock \url{https://www.bigchaindb.com/whitepaper/}.
 
 \bibitem{Ripple:docs}
-\emph{Ripple Documentation - Development Center}.
+Ripple.
+\newblock \emph{Ripple Documentation - Development Center}.
 \newblock \url{https://ripple.com/build/}, 2013-2017 (accessed 7 February
   2017).
-\newblock Ripple.
 
 \bibitem{BS:tech}
 \emph{BitShares Documentation}.
@@ -141,7 +153,10 @@ Trent~McConaghy et~al.
 Dennis~Ferenzy et~al.
 \newblock \emph{The Internet of Finance: Unleashing the Potential of Blockchain
   Technology}.
-\newblock Technical report, Institute of International Finance, 2015.
+\newblock Technical report, Institute of International Finance, 2015 (accessed
+  14 June 2017).
+\newblock
+  \url{https://www.iif.com/sites/default/files/general/cmm_rn_20150416.pdf}.
 
 \bibitem{slow}
 \emph{UK banking industry slow to react to digital developments}.
@@ -157,12 +172,14 @@ Philip Stafford.
   (accessed 6 February 2017).
 
 \bibitem{FA}
-\emph{Financial Instruments}.
+Investopedia.
+\newblock \emph{Financial Instruments}.
 \newblock \url{http://www.investopedia.com/terms/f/financialinstrument.asp},
   accessed 6 February 2017.
 
 \bibitem{Security}
-\emph{Security}.
+Investopedia.
+\newblock \emph{Security}.
 \newblock \url{http://www.investopedia.com/terms/s/security.asp}, accessed 6
   Feburary 2017.
 
@@ -180,7 +197,8 @@ Gautam Athavale.
   (accessed 6 February 2017).
 
 \bibitem{clearinghouse}
-\emph{Clearing House}.
+Investopedia.
+\newblock \emph{Clearing House}.
 \newblock \url{http://www.investopedia.com/terms/c/clearinghouse.asp}, accessed
   28 May 2017.
 
@@ -199,24 +217,26 @@ Gautam Athavale.
 \bibitem{DLTclearing}
 Andrea Pinna and Wiebe Ruttenberg.
 \newblock \emph{Distributed ledger technologies in securities post-trading}.
-\newblock \emph{European Central Bank}, 2016.
+\newblock \emph{European Central Bank}, 2016 (accessed 14 June 2017).
 \newblock \url{https://www.ecb.europa.eu/pub/pdf/scpops/ecbop172.en.pdf}.
 
 \bibitem{CHRisk}
-\emph{Clearing Arrangements for Exchange-Traded Derivatives}.
+International Financial~Risk Institute.
+\newblock \emph{Clearing Arrangements for Exchange-Traded Derivatives}.
 \newblock \url{http://ifci.ch/138700.htm}, accessed 6 February 2017.
 
 \bibitem{Corda:IP}
 Richard~Gendal Brown, James Carlyle et~al.
 \newblock \emph{Corda: An Introduction}.
-\newblock \emph{R3 CEV}, 2016.
+\newblock \emph{R3 CEV}, 2016 (accessed 14 June 2017).
 \newblock
   \url{https://docs.corda.net/\_static/corda-introductory-whitepaper.pdf}.
 
 \bibitem{etdclearing}
 William~J. McDonough.
 \newblock \emph{Clearing arrangements for exchange-traded derivatives}.
-\newblock \url{http://www.bis.org/cpmi/publ/d23a.htm}, 1997.
+\newblock \url{http://www.bis.org/cpmi/publ/d23a.htm}, 1997 (accessed 14 June
+  2017).
 
 \bibitem{emir}
 Tom Springbett.
@@ -224,7 +244,7 @@ Tom Springbett.
   trades}.
 \newblock
   \url{https://www.fca.org.uk/publication/documents/emir-obligation-clear-margin-otc-derivative-trades.pdf},
-  2015.
+  2015 (accessed 14 June 2017).
 
 \bibitem{settledate2}
 \emph{I just bought a security in my cash account. How soon can I sell it?}
@@ -244,8 +264,8 @@ Tom Springbett.
 
 \bibitem{marginACCT}
 \emph{Understanding Margin accounts}.
-\newblock \url{https://www.sec.gov/investor/alerts/ib_marginaccounts.pdf},
-  2013.
+\newblock \url{https://www.sec.gov/investor/alerts/ib_marginaccounts.pdf}, 2013
+  (accessed 14 June 2017).
 \newblock Securities and Exchange Commission.
 
 \bibitem{marginEXP}
@@ -254,79 +274,95 @@ Alex Novak.
   day settlement period?}
 \newblock
   \url{https://www.quora.com/How-do-high-frequency-traders-make-so-many-trades-with-a-three-day-settlement-period},
-  2016.
+  2016 (accessed 14 June 2017).
 
 \bibitem{mifid2}
 Martin Wheatley.
 \newblock \emph{Regulating high frequency trading}.
-\newblock \emph{Global Exchange and Brokerage Conference}, 2014.
+\newblock \emph{Global Exchange and Brokerage Conference}, 2014 (accessed 14
+  June 2017).
 \newblock
   \url{https://www.fca.org.uk/news/speeches/regulating-high-frequency-trading}.
 
 \bibitem{transparency}
-\emph{ESMA Regulation - MiFID II/MiFIR - Transparency and Reporting
-  Requirements}.
-\newblock \url{http://www.marketswiki.com/wiki/MiFID_II}, 2015.
+\emph{{ESMA Regulation - MiFID II/MiFIR - Transparency and Reporting
+  Requirements}}.
+\newblock \url{http://www.marketswiki.com/wiki/MiFID_II}, 2015 (accessed 14
+  June 2017).
 \newblock Markets Reform Wiki.
 
 \bibitem{mifid2off}
-\emph{Directive 2014/65/EU of the European Parliament and of the Council}.
-\newblock \emph{Official Journal of the European Union}, 2014.
+\emph{{Directive 2014/65/EU of the European Parliament and of the Council}}.
+\newblock \emph{Official Journal of the European Union}, 2014 (accessed 14 June
+  2017).
 \newblock
   \url{http://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX\:32014L0065\&from=EN}.
 
 \bibitem{GOVReq}
 M.~Walport.
 \newblock \emph{Distributed Ledger Technology: Beyond Blockchain}.
-\newblock \emph{UK Government Office for Science}, 2016.
+\newblock \emph{UK Government Office for Science}, 2016 (accessed 14 June
+  2017).
+\newblock
+  \url{https://www.gov.uk/government/news/distributed-ledger-technology-beyond-block-chain}.
 
 \bibitem{ESMA}
 \emph{ESMA assesses usefulness of distributed ledger technologies}.
 \newblock
   \url{https://www.esma.europa.eu/press-news/esma-news/esma-assesses-usefulness-distributed-ledger-technologies},
-  2016.
+  2016 (accessed 14 June 2017).
 \newblock European Securities and Markets Authority.
 
 \bibitem{Chinese}
 Wei-Tek Tsai and Robert~Blower et~al.
 \newblock \emph{A System View of Financial Blockchains}.
-\newblock \emph{IEEE Symposium on Service-Oriented System Engineering}, 2016.
+\newblock \emph{IEEE Symposium on Service-Oriented System Engineering}, 2016
+  (accessed 14 June 2017).
+\newblock \url{ieeexplore.ieee.org/iel7/7471098/7472989/07473060.pdf}.
 
 \bibitem{visa}
 \emph{56,582 transaction messages per second!}
 \newblock
   \url{http://visatechmatters.tumblr.com/post/108952718025/56582-transaction-messages-per-second},
-  2014.
+  2014 (accessed 14 June 2017).
 
 \bibitem{Scalability}
-\emph{Scalability}.
+Bitcoin.
+\newblock \emph{Scalability}.
 \newblock \url{https://en.bitcoin.it/wiki/Scalability}, 2016 (accessed 5
   February 2017).
 
 \bibitem{GS:Audit}
-\emph{Internal Audit}.
+Goldman~Sachs International.
+\newblock \emph{Internal Audit}.
 \newblock
   \url{http://www.goldmansachs.com/careers/why-goldman-sachs/our-divisions/internal-audit/},
   2017 (accessed 6 February 2017).
 
 \bibitem{RTGS}
-\emph{Real-Time Gross Settlement Systems}.
+Bank for International~Settlements.
+\newblock \emph{Real-Time Gross Settlement Systems}.
 \newblock Technical report, Committee on Payment and Settlement Systems of the
-  central banks of the Group of Ten countries, 1997.
+  central banks of the Group of Ten countries, 1997 (accessed 14 June 2017).
+\newblock \url{http://www.bis.org/cpmi/publ/d22.pdf}.
 
 \bibitem{TARGET2}
 \emph{TARGET Annual Report}.
-\newblock Technical report, European Central Bank, 2016.
+\newblock Technical report, European Central Bank, 2016 (accessed 14 June
+  2017).
 \newblock \url{https://www.ecb.europa.eu/pub/pdf/other/targetar2015.en.pdf}.
 
 \bibitem{Italy:networks}
 M.~Modina and V.~Formisano.
 \newblock \emph{The role of local banks' network in the modern banking system:
   An Italian case study}.
-\newblock \emph{University of Molise, University of Cassino}, 2009.
+\newblock \emph{University of Molise, University of Cassino}, 2009 (accessed 14
+  June 2017).
+\newblock \url{https://iris.unimol.it/handle/11695/14145}.
 
 \bibitem{BC:Fungibility}
-\emph{Ensuring Bitcoin Fungibility in 2017 (And Beyond)}.
+David Vorick.
+\newblock \emph{Ensuring Bitcoin Fungibility in 2017 (And Beyond)}.
 \newblock
   \url{http://www.coindesk.com/ensuring-bitcoin-fungibility-in-2017-and-beyond/},
   2017 (accessed 6 February 2017).
@@ -339,7 +375,8 @@ Ray Patterson.
   2015 (accessed 5 February 2017).
 
 \bibitem{BC:UB}
-\emph{Controlled Supply of Bitcoin}.
+Bitcoin.
+\newblock \emph{Controlled Supply of Bitcoin}.
 \newblock \url{https://en.bitcoin.it/wiki/Controlled_supply}, 2016 (accessed 6
   February 2017).
 
@@ -352,7 +389,7 @@ Ray Patterson.
 \bibitem{Corda:TP}
 Mike Hearn.
 \newblock \emph{Corda: A distributed ledger}.
-\newblock \emph{R3 CEV}, 2016.
+\newblock \emph{R3 CEV}, 2016 (accessed 14 June 2017).
 \newblock Https://docs.corda.net/\_static/corda-technical-whitepaper.pdf.
 
 \bibitem{PAPB}
@@ -367,7 +404,8 @@ Ray Patterson.
 \newblock \url{https://coinmarketcap.com/}, 2017 (accessed 7 February 2017).
 
 \bibitem{Sewer}
-\emph{Bitcoin is the Sewer Rat of Currencies}.
+Mark Frauenfelder.
+\newblock \emph{Bitcoin is the Sewer Rat of Currencies}.
 \newblock
   \url{https://medium.com/institute-for-the-future/bitcoin-is-the-sewer-rat-of-currencies-b89819cdf036},
   2016 (accessed 8 February 2017).
@@ -375,27 +413,27 @@ Ray Patterson.
 \bibitem{BS:TP}
 Fabian Schuh and Daniel Larimer.
 \newblock \emph{BitShares 2.0: Financial Smart Contract Platform}.
-\newblock \emph{BitShares}, 2015.
+\newblock \emph{BitShares}, 2015 (accessed 14 June 2017).
 
 \bibitem{BS:DPOS}
-\emph{Delegated Proof-of-Stake Consensus}.
+BitShares.
+\newblock \emph{Delegated Proof-of-Stake Consensus}.
 \newblock
   \url{https://bitshares.org/technology/delegated-proof-of-stake-consensus/},
   2016 (accessed 8 February 2017).
-\newblock BitShares.
 
 \bibitem{Stellar:TP}
 David Mazieres.
 \newblock \emph{The Stellar Consensus Protocol: A Federated Model for
   Internet-level Consensus}.
-\newblock \emph{Stellar Development Foundation}, 2016.
+\newblock \emph{Stellar Development Foundation}, 2016 (accessed 14 June 2017).
 \newblock \url{https://www.stellar.org/papers/stellar-consensus-protocol.pdf}.
 
 \bibitem{Stellar:docs}
-\emph{Stellar Documentation}.
+Stellar.
+\newblock \emph{Stellar Documentation}.
 \newblock \url{https://www.stellar.org/developers/}, 2017 (accessed 5 February
   2017).
-\newblock Stellar.
 
 \bibitem{bitcoindominance}
 Avi Mizrahi.
@@ -403,25 +441,26 @@ Avi Mizrahi.
   Cap Tops \$11 Billion}.
 \newblock
   \url{https://www.financemagnates.com/cryptocurrency/trading/bitcoin-dominance-drops-50-ripples-xrp-market-cap-tops-11-billion/},
-  2017.
+  2017 (accessed 14 June 2017).
 \newblock Finance Magnates.
 
 \bibitem{Ripple:TP}
-\emph{Ripple Solutions Guide}.
-\newblock \emph{Ripple Labs}, 2016.
+Ripple.
+\newblock \emph{Ripple Solutions Guide}.
+\newblock \emph{Ripple Labs}, 2016 (accessed 14 June 2017).
 \newblock \url{https://ripple.com/files/ripple\_solutions\_guide.pdf}.
 
 \bibitem{Ripple:ILP}
 Stefan Thomas and Evan Schwartz.
 \newblock \emph{A Protocol for Interledger Payments}.
-\newblock \emph{Ripple Labs}, 2015.
+\newblock \emph{Ripple Labs}, 2015 (accessed 14 June 2017).
 \newblock
   \url{https://bravenewcoin.com/assets/Whitepapers/A-Protocol-for-Interledger-Payments.pdf}.
 
 \bibitem{Ripple:CP}
 David Schwartz, Noah Youngs et~al.
 \newblock \emph{The Ripple protocol consensus algorithm}.
-\newblock \emph{Ripple Labs Inc White Paper}, 5, 2014.
+\newblock \emph{Ripple Labs Inc White Paper}, 5, 2014 (accessed 14 June 2017).
 \newblock
   \url{http://www.the-blockchain.com/docs/Ripple\%20Consensus\%20Whitepaper.pdf}.
 
@@ -429,7 +468,7 @@ David Schwartz, Noah Youngs et~al.
 Jo~Lang.
 \newblock \emph{R3 Review: Ripple Labs - Considerations for Adoption by Large
   Financial Institutions}.
-\newblock \emph{R3CEV}, 2015.
+\newblock \emph{R3CEV}, 2015 (accessed 14 June 2017).
 \newblock Https://static1.squarespace.com/static/55f73743e4b051cfcc0b02cf/t/
   5664a9e2e4b058c26c21ea94/1449437666296/Ripple\_Paper\_Public.pdf.
 
@@ -438,7 +477,7 @@ Hudson Jameson.
 \newblock \emph{FAQ: Upcoming Ethereum Hard Fork}.
 \newblock
   \url{https://blog.ethereum.org/2016/10/18/faq-upcoming-ethereum-hard-fork/},
-  2016.
+  2016 (accessed 14 June 2017).
 \newblock Ethereum Blog.
 
 \bibitem{ethoped}
@@ -447,20 +486,21 @@ Kathleen Breitman.
   Coming Year}.
 \newblock
   \url{https://bitcoinmagazine.com/articles/op-ed-why-ethereums-hard-fork-will-cause-problems-coming-year/},
-  2016.
+  2016 (accessed 14 June 2017).
 \newblock Bitcoin Magazine.
 
 \bibitem{ethhf}
 Joseph Lubin.
 \newblock \emph{OMG, Ethereum Is So Hard Forked}.
-\newblock \url{https://blockgeeks.com/omg-ethereum-hard-forked/}, 2016.
+\newblock \url{https://blockgeeks.com/omg-ethereum-hard-forked/}, 2016
+  (accessed 14 June 2017).
 \newblock Blockgeeks.
 
 \bibitem{cordaops}
 Robert Hackett.
 \newblock \emph{R3 Blockchain Opens to All}.
 \newblock \url{http://fortune.com/2016/11/30/r3-open-source-blockchain-corda/},
-  2016.
+  2016 (accessed 14 June 2017).
 \newblock Fortune.
 
 \bibitem{cordainv}
@@ -469,20 +509,37 @@ Joel Dudley.
   technology with USD 107 million from over 40 institutions}.
 \newblock
   \url{https://www.corda.net/2017/05/r3-secures-largest-ever-investment-distributed-ledger-technology-usd-107-million-40-institutions/},
-  2017.
+  2017 (accessed 14 June 2017).
 \newblock Corda.
 
 \bibitem{raft}
 Ongaro et~al.
 \newblock \emph{In Search of an Understandable Consensus Algorithm.}
-\newblock \emph{USENIX Annual Technical Conference}, 305--319, 2014.
+\newblock \emph{USENIX Annual Technical Conference}, 305--319, 2014 (accessed
+  14 June 2017).
+\newblock
+  \url{https://www.usenix.org/system/files/conference/atc14/atc14-paper-ongaro.pdf}.
+
+\bibitem{kotlin}
+Mike Hearn.
+\newblock \emph{Kotlin}.
+\newblock \url{https://www.corda.net/2017/01/kotlin/}, 2017 (accessed 16 June
+  2017).
+\newblock R3 CEV.
+
+\bibitem{whykotlin}
+Yuri Zelikov.
+\newblock \emph{Why did R3 write Corda (Blockchain) in Kotlin?}
+\newblock
+  \url{https://www.quora.com/Why-did-R3-write-Corda-Blockchain-in-Kotlin}, 2017
+  (accessed 16 June 2017).
 
 \bibitem{fig:design}
 Jose Coll.
 \newblock \emph{Corda network topology}.
 \newblock
-  \url{https://cdn-standard2.discourse.org/uploads/corda/original/1X/ab5a8506ecd170e1048159324e8e1eb4db8d3e33.png},
-  2017.
+  \url{https://cdn-standard2.discourse.org/uploads/corda/original/1X/ab5a8506ecd170e1048159
+  324e8e1eb4db8d3e33.png}, 2017 (accessed 14 June 2017).
 \newblock Corda.
 
 \bibitem{nodestruct}
@@ -517,9 +574,8 @@ Alessandra Scafuro and Matt Shipman.
 \bibitem{first}
 Blockchain.
 \newblock \emph{Blockchain Transaction Information}.
-\newblock
-  \url{https://blockchain.info/tx/7dff938918f07619abd38e4510890396b1cef4fbeca154fb7aafba8843295ea2},
-  2009 (accessed 12 June 2017).
+\newblock \url{https://blockchain.info/tx/7dff938918f07619abd38e4510890
+  396b1cef4fbeca154fb7aafba8843295ea2}, 2009 (accessed 12 June 2017).
 
 \bibitem{voxbubble}
 Timothy~B. Lee.
@@ -572,7 +628,8 @@ Andrius Dagys.
 \bibitem{bftsmart}
 Alysson Bessani, João Sousa et~al.
 \newblock \emph{{State Machine Replication for the Masses with BFT-SMART}}.
-\newblock \emph{Faculdade de Ciências, Universidade de Lisboa}, 2014.
+\newblock \emph{Faculdade de Ciências, Universidade de Lisboa}, 2014 (accessed
+  14 June 2017).
 \newblock
   \url{http://www.di.fc.ul.pt/~bessani/publications/dsn14-bftsmart.pdf}.
 
@@ -580,7 +637,8 @@ Alysson Bessani, João Sousa et~al.
 Christian Haack.
 \newblock \emph{Verification of Security Protocols}.
 \newblock
-  \url{http://cs.ru.nl/~chaack/teaching/2IF02-Spring08/chapter06-print.pdf}.
+  \url{http://cs.ru.nl/~chaack/teaching/2IF02-Spring08/chapter06-print.pdf},
+  2008 (accessed 14 June 2017).
 \newblock Radboud University.
 
 \bibitem{attack}
@@ -589,5 +647,13 @@ Joel Dudley and Richard Brown.
 \newblock \url{https://discourse.corda.net/t/what-if-notary-is-attacked/548/2},
   2016 (accessed 9 June 2017).
 \newblock Corda Discussions.
+
+\bibitem{deadlinenew}
+Jonathan Hill.
+\newblock \emph{{Commission extends by one year the application date for the
+  MiFID II package}}.
+\newblock \url{http://europa.eu/rapid/press-release_IP-16-265_en.htm}, 2016
+  (accessed 16 June 2017).
+\newblock European Commission.
 
 \end{thebibliography}

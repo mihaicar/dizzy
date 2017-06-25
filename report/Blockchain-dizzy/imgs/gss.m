@@ -14,7 +14,7 @@ override fun generateShareSpend(tx: TransactionBuilder, qty: Long,
     
     // notary may be associated with locked state only?
     tx.notary = acceptableShares.firstOrNull()?.state?.notary
-
+    // Adapted algorithm for shares
     // get change from number of shares
     val (gathered, gatheredAmount) = gatherShares(acceptableShares, qty)
     val takeChangeFrom = gathered.firstOrNull()

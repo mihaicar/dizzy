@@ -4,52 +4,49 @@ The top-level auxiliary file: dizzy.aux
 The style file: mike.bst
 Database file #1: mybib.bib
 Warning--empty author in newTimesUS
-Warning--empty author in sia
 Warning--empty author in whatclearing
 Warning--empty author in whatclearing2
 Warning--empty author in mifid2off
-Warning--empty author in RTGS
 Warning--empty author in TARGET2
-Warning--empty author in Ripple:TP
-You've used 93 entries,
+You've used 96 entries,
             2426 wiz_defined-function locations,
-            984 strings with 18885 characters,
-and the built_in function-call counts, 28742 in all, are:
-= -- 2451
-> -- 314
+            1012 strings with 20303 characters,
+and the built_in function-call counts, 30057 in all, are:
+= -- 2548
+> -- 378
 < -- 0
-+ -- 176
-- -- 69
-* -- 1164
-:= -- 2606
-add.period$ -- 286
-call.type$ -- 93
-change.case$ -- 48
++ -- 200
+- -- 89
+* -- 1173
+:= -- 2864
+add.period$ -- 319
+call.type$ -- 96
+change.case$ -- 55
 chr.to.int$ -- 0
 cite$ -- 101
-duplicate$ -- 3585
-empty$ -- 3243
-format.name$ -- 80
-if$ -- 6465
+duplicate$ -- 3693
+empty$ -- 3349
+format.name$ -- 101
+if$ -- 6729
 int.to.chr$ -- 0
-int.to.str$ -- 93
-missing$ -- 571
-newline$ -- 480
-num.names$ -- 55
-pop$ -- 2121
+int.to.str$ -- 96
+missing$ -- 607
+newline$ -- 519
+num.names$ -- 74
+pop$ -- 2159
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 466
+skip$ -- 445
 stack$ -- 0
-substring$ -- 1883
-swap$ -- 1249
+substring$ -- 1888
+swap$ -- 1334
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 8
-while$ -- 83
-width$ -- 95
-write$ -- 956
-(There were 8 warnings)
+warning$ -- 5
+while$ -- 101
+width$ -- 98
+write$ -- 1035
+(There were 5 warnings)

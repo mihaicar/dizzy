@@ -17,38 +17,41 @@
 \BOOKMARK [3][]{subsubsection.33}{2.4.2 BitShares and Stellar}{subsection.31}% 17
 \BOOKMARK [3][]{subsubsection.35}{2.4.3 Ripple and Ethereum}{subsection.31}% 18
 \BOOKMARK [3][]{subsubsection.37}{2.4.4 Corda}{subsection.31}% 19
-\BOOKMARK [1][]{section.43}{3 Overall design}{}% 20
-\BOOKMARK [1][]{section.46}{4 Implementation}{}% 21
-\BOOKMARK [2][]{subsection.47}{4.1 The ShareContract}{section.46}% 22
-\BOOKMARK [2][]{subsection.106}{4.2 The flows}{section.46}% 23
-\BOOKMARK [3][]{subsubsection.133}{4.2.1 The Issuer Flow}{subsection.106}% 24
-\BOOKMARK [3][]{subsubsection.150}{4.2.2 The TwoPartyTrade, Buyer and Seller Flows}{subsection.106}% 25
-\BOOKMARK [3][]{subsubsection.153}{4.2.3 The Buyer and Seller Transfer Flows}{subsection.106}% 26
-\BOOKMARK [3][]{subsubsection.262}{4.2.4 The Signing Flow}{subsection.106}% 27
-\BOOKMARK [3][]{subsubsection.263}{4.2.5 The History Flow}{subsection.106}% 28
-\BOOKMARK [2][]{subsection.272}{4.3 The Vault}{section.46}% 29
-\BOOKMARK [3][]{subsubsection.273}{4.3.1 Querying the vault}{subsection.272}% 30
-\BOOKMARK [3][]{subsubsection.275}{4.3.2 Share spending}{subsection.272}% 31
-\BOOKMARK [2][]{subsection.339}{4.4 Gradle generalisations}{section.46}% 32
-\BOOKMARK [2][]{subsection.367}{4.5 The web interface}{section.46}% 33
-\BOOKMARK [1][]{section.389}{5 Applications}{}% 34
-\BOOKMARK [2][]{subsection.390}{5.1 The Distributed web system}{section.389}% 35
-\BOOKMARK [2][]{subsection.398}{5.2 The Random distributed marketplace}{section.389}% 36
-\BOOKMARK [2][]{subsection.401}{5.3 The on-the-fly node addition}{section.389}% 37
-\BOOKMARK [1][]{section.402}{6 Evaluation}{}% 38
-\BOOKMARK [2][]{subsection.403}{6.1 Nodes}{section.402}% 39
-\BOOKMARK [3][]{subsubsection.404}{6.1.1 Network}{subsection.403}% 40
-\BOOKMARK [3][]{subsubsection.406}{6.1.2 Nodes and vaults}{subsection.403}% 41
-\BOOKMARK [3][]{subsubsection.410}{6.1.3 Zombie nodes}{subsection.403}% 42
-\BOOKMARK [2][]{subsection.411}{6.2 Flows}{section.402}% 43
-\BOOKMARK [2][]{subsection.412}{6.3 Cash and asset issuers}{section.402}% 44
-\BOOKMARK [2][]{subsection.430}{6.4 Performance}{section.402}% 45
-\BOOKMARK [3][]{subsubsection.431}{6.4.1 Nodes}{subsection.430}% 46
-\BOOKMARK [3][]{subsubsection.433}{6.4.2 Transactions}{subsection.430}% 47
-\BOOKMARK [2][]{subsection.436}{6.5 Security}{section.402}% 48
-\BOOKMARK [3][]{subsubsection.437}{6.5.1 Transactions and Notarisation}{subsection.436}% 49
-\BOOKMARK [3][]{subsubsection.438}{6.5.2 Web}{subsection.436}% 50
-\BOOKMARK [3][]{subsubsection.439}{6.5.3 Regulations}{subsection.436}% 51
-\BOOKMARK [1][]{section.440}{7 Future work}{}% 52
-\BOOKMARK [2][]{subsection.441}{7.1 Industry challenges}{section.440}% 53
-\BOOKMARK [1][]{section.442}{8 Conclusion}{}% 54
+\BOOKMARK [1][]{section.66}{3 Overall design}{}% 20
+\BOOKMARK [1][]{section.69}{4 Implementation}{}% 21
+\BOOKMARK [2][]{subsection.70}{4.1 The ShareContract}{section.69}% 22
+\BOOKMARK [2][]{subsection.129}{4.2 The flows}{section.69}% 23
+\BOOKMARK [3][]{subsubsection.156}{4.2.1 The Issuer Flow}{subsection.129}% 24
+\BOOKMARK [3][]{subsubsection.173}{4.2.2 The TwoPartyTrade, Buyer and Seller Flows}{subsection.129}% 25
+\BOOKMARK [3][]{subsubsection.176}{4.2.3 The Buyer and Seller Transfer Flows}{subsection.129}% 26
+\BOOKMARK [3][]{subsubsection.285}{4.2.4 The Signing Flow}{subsection.129}% 27
+\BOOKMARK [3][]{subsubsection.286}{4.2.5 The History Flow}{subsection.129}% 28
+\BOOKMARK [2][]{subsection.295}{4.3 The Vault}{section.69}% 29
+\BOOKMARK [3][]{subsubsection.296}{4.3.1 Querying the vault}{subsection.295}% 30
+\BOOKMARK [3][]{subsubsection.298}{4.3.2 Share spending}{subsection.295}% 31
+\BOOKMARK [2][]{subsection.362}{4.4 Gradle generalisations}{section.69}% 32
+\BOOKMARK [2][]{subsection.390}{4.5 The web interface}{section.69}% 33
+\BOOKMARK [1][]{section.412}{5 Applications}{}% 34
+\BOOKMARK [2][]{subsection.413}{5.1 The Distributed web system}{section.412}% 35
+\BOOKMARK [2][]{subsection.421}{5.2 The Random distributed marketplace}{section.412}% 36
+\BOOKMARK [2][]{subsection.424}{5.3 The on-the-fly node addition}{section.412}% 37
+\BOOKMARK [1][]{section.425}{6 Evaluation}{}% 38
+\BOOKMARK [2][]{subsection.426}{6.1 Nodes}{section.425}% 39
+\BOOKMARK [3][]{subsubsection.427}{6.1.1 Network}{subsection.426}% 40
+\BOOKMARK [3][]{subsubsection.429}{6.1.2 Nodes and vaults}{subsection.426}% 41
+\BOOKMARK [3][]{subsubsection.433}{6.1.3 Zombie nodes}{subsection.426}% 42
+\BOOKMARK [2][]{subsection.434}{6.2 Flows}{section.425}% 43
+\BOOKMARK [2][]{subsection.435}{6.3 Cash and asset issuers}{section.425}% 44
+\BOOKMARK [2][]{subsection.454}{6.4 Performance}{section.425}% 45
+\BOOKMARK [3][]{subsubsection.455}{6.4.1 Nodes}{subsection.454}% 46
+\BOOKMARK [3][]{subsubsection.457}{6.4.2 Transactions}{subsection.454}% 47
+\BOOKMARK [2][]{subsection.460}{6.5 Security}{section.425}% 48
+\BOOKMARK [3][]{subsubsection.461}{6.5.1 Transactions and Notarisation}{subsection.460}% 49
+\BOOKMARK [3][]{subsubsection.462}{6.5.2 Web}{subsection.460}% 50
+\BOOKMARK [3][]{subsubsection.463}{6.5.3 Regulations}{subsection.460}% 51
+\BOOKMARK [1][]{section.465}{7 Future work}{}% 52
+\BOOKMARK [2][]{subsection.466}{7.1 Industry challenges}{section.465}% 53
+\BOOKMARK [1][]{section.467}{8 Conclusion}{}% 54
+\BOOKMARK [1][]{section*.468}{References}{}% 55
+\BOOKMARK [1][]{section*.469}{User Guide}{}% 56
+\BOOKMARK [1][]{section*.472}{Appendix}{}% 57

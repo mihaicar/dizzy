@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.12.18)  13 JUN 2017 16:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.12.18)  16 JUN 2017 15:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1474,48 +1474,48 @@ Package: listings 2014/09/06 1.5e (Carsten Heinz)
 (./dizzy.aux)
 \openout1 = `dizzy.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 53.
-LaTeX Font Info:    Try loading font information for OML+jkp on input line 53.
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 56.
+LaTeX Font Info:    Try loading font information for OML+jkp on input line 56.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for OMS+jkp on input line 53.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 56.
+LaTeX Font Info:    Try loading font information for OMS+jkp on input line 56.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/omsjkp.fd
 File: omsjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for OMX+jkp on input line 53.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 56.
+LaTeX Font Info:    Try loading font information for OMX+jkp on input line 56.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/omxjkp.fd
 File: omxjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for U+jkpexa on input line 53.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 56.
+LaTeX Font Info:    Try loading font information for U+jkpexa on input line 56.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ujkpexa.fd
 File: ujkpexa.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 53.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 56.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 56.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Try loading font information for OT1+bch on input line 53.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Try loading font information for OT1+bch on input line 56.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1bch.fd
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
@@ -1576,7 +1576,7 @@ Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box81
-Package hyperref Info: Link coloring ON on input line 53.
+Package hyperref Info: Link coloring ON on input line 56.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1586,9 +1586,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count213
 )
-LaTeX Info: Redefining \ref on input line 53.
-LaTeX Info: Redefining \pageref on input line 53.
-LaTeX Info: Redefining \nameref on input line 53.
+LaTeX Info: Redefining \ref on input line 56.
+LaTeX Info: Redefining \pageref on input line 56.
+LaTeX Info: Redefining \nameref on input line 56.
 
 (./dizzy.out) (./dizzy.out)
 \@outlinefile=\write7
@@ -1596,7 +1596,7 @@ LaTeX Info: Redefining \nameref on input line 53.
 
 \c@lstlisting=\count214
  (./titlepage.tex
-<./figures/imperial.pdf, id=251, 362.35374pt x 96.36pt>
+<./figures/imperial.pdf, id=263, 362.35374pt x 96.36pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -1638,105 +1638,114 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 ) [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./figur
-es/imperial.pdf>]) (./dizzy.toc
-LaTeX Font Info:    Try loading font information for OT1+jkpss on input line 42
+es/imperial.pdf>])
+LaTeX Font Info:    Try loading font information for OT1+jkpss on input line 60
 .
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
 File: ot1jkpss.fd 2007/07/16 Fontinst v1.928 font definitions for OT1/jkpss.
-) [2])
+) [2
+
+]
+(./abstract2.tex) [3] [4
+
+] (./acks.tex) [5] (./dizzy.toc [6])
 \tf@toc=\write8
 \openout8 = `dizzy.toc'.
 
+ [7]
+LaTeX Font Info:    Try loading font information for TS1+bch on input line 80.
 
-[3]
-LaTeX Font Info:    Try loading font information for TS1+bch on input line 83.
- (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ts1bch.fd
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ts1bch.fd
 File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 77--86
+Underfull \hbox (badness 10000) in paragraph at lines 74--83
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--86
+Underfull \hbox (badness 10000) in paragraph at lines 74--83
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--86
+Underfull \hbox (badness 10000) in paragraph at lines 74--83
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--86
+Underfull \hbox (badness 10000) in paragraph at lines 74--83
 
  []
 
 [1]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/alicebob.png, id=374, 455.7025pt 
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/alicebob.png, id=406, 455.7025pt 
 x 279.0425pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/alicebob.png Graphic file (t
 ype png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/alicebob.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/alicebob.
-png used on input line 89.
+png used on input line 86.
 (pdftex.def)             Requested size: 306.71924pt x 187.81758pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral.png, id=380, 364.36125p
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral.png, id=412, 364.36125p
 t x 364.36125pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral.png Graphic file (
 type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral
-.png used on input line 101.
+.png used on input line 98.
 (pdftex.def)             Requested size: 210.32082pt x 210.3178pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/CCP.png, id=381, 364.36125pt x 36
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/CCP.png, id=413, 364.36125pt x 36
 4.36125pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/CCP.png Graphic file (type p
 ng)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/CCP.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/CCP.png u
-sed on input line 107.
+sed on input line 104.
 (pdftex.def)             Requested size: 210.32082pt x 210.3178pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--113
+Underfull \hbox (badness 10000) in paragraph at lines 92--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--113
+Underfull \hbox (badness 10000) in paragraph at lines 92--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--113
+Underfull \hbox (badness 10000) in paragraph at lines 92--110
 
  []
 
 [2 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/alicebob.png>]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/exposure.png, id=397, 642.4pt x 2
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/exposure.png, id=429, 642.4pt x 2
 43.91125pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/exposure.png Graphic file (t
 ype png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/exposure.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/exposure.
-png used on input line 121.
+png used on input line 120.
 (pdftex.def)             Requested size: 438.17227pt x 166.37105pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--125
+Underfull \hbox (badness 10000) in paragraph at lines 112--124
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--125
+Underfull \hbox (badness 10000) in paragraph at lines 112--124
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--125
+Underfull \hbox (badness 10000) in paragraph at lines 112--124
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--124
 
  []
 
@@ -1745,56 +1754,51 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral.png> </Users/mikeca
 r/Desktop/Blockchain-dizzy/imgs/CCP.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 130--135
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 130--135
+Underfull \hbox (badness 10000) in paragraph at lines 129--134
 
  []
 
 [4 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/exposure.png>] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 151--154
+Underfull \hbox (badness 10000) in paragraph at lines 150--153
 
  []
 
 
-Overfull \hbox (9.08398pt too wide) in paragraph at lines 157--158
+Overfull \hbox (9.08398pt too wide) in paragraph at lines 156--157
 \OT1/bch/m/n/12 The bank-ing ecosys-tem is very com-plex and the idea of man-ag
 -ing a com-plete, industry-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--164
+Underfull \hbox (badness 10000) in paragraph at lines 160--163
 
  []
 
 [7]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/lcoat.png, id=477, 491.8375pt x 4
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/lcoat.png, id=510, 491.8375pt x 4
 21.575pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/lcoat.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/lcoat.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/lcoat.png
- used on input line 170.
+ used on input line 169.
 (pdftex.def)             Requested size: 394.35236pt x 338.03236pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/alice.png, id=480, 437.635pt x 30
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/alice.png, id=513, 437.635pt x 30
 0.12125pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/alice.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/alice.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/alice.png
- used on input line 183.
+ used on input line 182.
 (pdftex.def)             Requested size: 306.71924pt x 210.34447pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--187
+Underfull \hbox (badness 10000) in paragraph at lines 175--186
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--187
+Underfull \hbox (badness 10000) in paragraph at lines 175--186
 
  []
 
@@ -1802,38 +1806,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 176--187
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
-Underfull \hbox (badness 10000) in paragraph at lines 191--194
+Underfull \hbox (badness 10000) in paragraph at lines 190--193
 
  []
 
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral-rec.png, id=499, 351.31
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral-rec.png, id=532, 351.31
 25pt x 352.31625pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral-rec.png Graphic fi
 le (type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral-rec.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bilateral
--rec.png used on input line 204.
+-rec.png used on input line 203.
 (pdftex.def)             Requested size: 210.32082pt x 210.92905pt.
 
-Underfull \hbox (badness 6559) in paragraph at lines 205--205
+Underfull \hbox (badness 6559) in paragraph at lines 204--204
 []\OT1/bch/b/n/10.95 (a) |\OT1/bch/m/n/10.95 Bi-lat-eral rec-on-cil-i-a-tion of
  records,
  []
 
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/shared-ledger.png, id=500, 352.31
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/shared-ledger.png, id=533, 352.31
 625pt x 352.31625pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/shared-ledger.png Graphic fi
 le (type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/shared-ledger.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/shared-le
-dger.png used on input line 211.
+dger.png used on input line 210.
 (pdftex.def)             Requested size: 210.32082pt x 210.32156pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--218
+Underfull \hbox (badness 10000) in paragraph at lines 196--217
 
  []
 
@@ -1843,42 +1847,32 @@ Underfull \vbox (badness 2401) has occurred while \output is active []
  [10 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/alice.png>] [11 </Users/mike
 car/Desktop/Blockchain-dizzy/imgs/bilateral-rec.png> </Users/mikecar/Desktop/Bl
 ockchain-dizzy/imgs/shared-ledger.png>]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/freeriding.png, id=529, 612.2875p
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/freeriding.png, id=560, 612.2875p
 t x 190.7125pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/freeriding.png Graphic file 
 (type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/freeriding.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/freeridin
-g.png used on input line 232.
+g.png used on input line 231.
 (pdftex.def)             Requested size: 350.53915pt x 109.1845pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/nofreeriding.png, id=530, 622.325
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/nofreeriding.png, id=561, 622.325
 pt x 160.6pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/nofreeriding.png Graphic fil
 e (type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/nofreeriding.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/nofreerid
-ing.png used on input line 239.
+ing.png used on input line 238.
 (pdftex.def)             Requested size: 350.53915pt x 90.46225pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--252
+Underfull \hbox (badness 10000) in paragraph at lines 223--251
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--252
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 224--252
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 224--252
+Underfull \hbox (badness 10000) in paragraph at lines 223--251
 
  []
 
@@ -1887,67 +1881,67 @@ Underfull \vbox (badness 3098) has occurred while \output is active []
 
  [13 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/freeriding.png> </Users/mike
 car/Desktop/Blockchain-dizzy/imgs/nofreeriding.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--282
+Underfull \hbox (badness 10000) in paragraph at lines 254--281
 
  []
 
@@ -1958,57 +1952,47 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [16]
-
-LaTeX Warning: Reference `sub:bitcoincomp' on page 17 undefined on input line 2
-87.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 285--292
+Underfull \hbox (badness 10000) in paragraph at lines 284--291
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--292
+Underfull \hbox (badness 10000) in paragraph at lines 284--291
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--292
+Underfull \hbox (badness 10000) in paragraph at lines 284--291
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 295--300
+Underfull \hbox (badness 10000) in paragraph at lines 294--299
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--300
+Underfull \hbox (badness 10000) in paragraph at lines 294--299
 
  []
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 306--337
+Underfull \hbox (badness 10000) in paragraph at lines 305--336
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 306--337
+Underfull \hbox (badness 10000) in paragraph at lines 305--336
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 306--337
+Underfull \hbox (badness 10000) in paragraph at lines 305--336
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 306--337
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 306--337
+Underfull \hbox (badness 10000) in paragraph at lines 305--336
 
  []
 
@@ -2016,1108 +2000,1113 @@ Underfull \hbox (badness 10000) in paragraph at lines 306--337
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [20]
-
-LaTeX Warning: Reference `sub:bitcoincomp' on page 21 undefined on input line 3
-39.
-
-
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/comp.png, id=634, 656.4525pt x 33
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/comp.png, id=669, 656.4525pt x 33
 3.245pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/comp.png Graphic file (type 
 png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/comp.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/comp.png 
-used on input line 350.
+used on input line 349.
 (pdftex.def)             Requested size: 438.17227pt x 222.43906pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 339--354
+Underfull \hbox (badness 10000) in paragraph at lines 338--353
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 339--354
+Underfull \hbox (badness 10000) in paragraph at lines 338--353
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 339--354
+Underfull \hbox (badness 10000) in paragraph at lines 338--353
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 339--354
+Underfull \hbox (badness 10000) in paragraph at lines 338--353
 
  []
 
 [21]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/ripple.png, id=644, 847.165pt x 3
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/ripple.png, id=680, 847.165pt x 3
 25.215pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/ripple.png Graphic file (typ
 e png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/ripple.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/ripple.pn
-g used on input line 361.
+g used on input line 360.
 (pdftex.def)             Requested size: 438.17227pt x 168.20961pt.
 
 [22 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/comp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 367--374
+Underfull \hbox (badness 10000) in paragraph at lines 366--373
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 367--374
+Underfull \hbox (badness 10000) in paragraph at lines 366--373
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 367--374
+Underfull \hbox (badness 10000) in paragraph at lines 366--373
 
  []
 
-[23 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/ripple.png>]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/broadcast.png, id=682, 762.85pt x
+
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/broadcast.png, id=703, 762.85pt x
  405.515pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/broadcast.png Graphic file (
 type png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/broadcast.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/broadcast
-.png used on input line 384.
+.png used on input line 383.
 (pdftex.def)             Requested size: 438.17227pt x 232.9218pt.
 
-
-LaTeX Warning: Reference `sub:bitcoincomp' on page 24 undefined on input line 3
-97.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 376--403
+Underfull \hbox (badness 10000) in paragraph at lines 375--403
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--403
+Underfull \hbox (badness 10000) in paragraph at lines 375--403
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--403
+Underfull \hbox (badness 10000) in paragraph at lines 375--403
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--403
+Underfull \hbox (badness 10000) in paragraph at lines 375--403
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--403
+Underfull \hbox (badness 10000) in paragraph at lines 375--403
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--403
+Underfull \hbox (badness 10000) in paragraph at lines 375--403
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--403
+Underfull \hbox (badness 10000) in paragraph at lines 375--403
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--403
+Underfull \hbox (badness 10000) in paragraph at lines 375--403
 
  []
 
+[23 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/ripple.png>]
+Underfull \vbox (badness 1708) has occurred while \output is active []
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--403
-
- []
-
-[24]
+ [24]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [25 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/broadcast.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [26]
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+)
+Underfull \hbox (badness 10000) in paragraph at lines 408--417
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 408--417
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 408--417
+
+ []
+
+
+Overfull \hbox (0.15523pt too wide) in paragraph at lines 408--417
+\OT1/bch/m/n/12 The de-ci-sion was prompted first by choos-ing the plat-form (J
+VM) - a ``scal-able, thread-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 408--417
+
+ []
+
 [27]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/design.png, id=717, 795.97375pt x
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 417.
+ (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/java.m
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 4.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+))
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/kotlin.m) [28]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/design.png, id=785, 795.97375pt x
  458.71375pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/design.png Graphic file (typ
 e png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/design.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/design.pn
-g used on input line 417.
+g used on input line 429.
 (pdftex.def)             Requested size: 416.26231pt x 239.8834pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/designnode.png, id=720, 858.20625
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/designnode.png, id=788, 858.20625
 pt x 493.845pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/designnode.png Graphic file 
 (type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/designnode.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/designnod
-e.png used on input line 429.
+e.png used on input line 441.
 (pdftex.def)             Requested size: 350.53915pt x 201.71667pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Overfull \hbox (1.21835pt too wide) in paragraph at lines 412--454
+Overfull \hbox (1.21835pt too wide) in paragraph at lines 424--466
 \OT1/bch/m/n/12 one is to have it signed by other par-ties - we would con-vert 
 it to a []\OT1/cmtt/m/n/12 SignedTransaction
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--454
+Underfull \hbox (badness 10000) in paragraph at lines 424--466
 
  []
 
-[28 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/design.png>] [29 </Users/mike
+[29 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/design.png>] [30 </Users/mike
 car/Desktop/Blockchain-dizzy/imgs/designnode.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [30]
-[31]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/schema.png, id=749, 231.86626pt x
+ [31]
+[32]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/schema.png, id=818, 231.86626pt x
  232.87pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/schema.png Graphic file (typ
 e png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/schema.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/schema.pn
-g used on input line 467.
+g used on input line 479.
 (pdftex.def)             Requested size: 175.26622pt x 176.02718pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/db.png, id=751, 718.685pt x 194.7
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/db.png, id=820, 718.685pt x 194.7
 275pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/db.png Graphic file (type pn
 g)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/db.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/db.png us
-ed on input line 476.
+ed on input line 488.
 (pdftex.def)             Requested size: 438.17227pt x 118.72415pt.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2014/09/06 1.5e listings language file
-)
-Underfull \hbox (badness 10000) in paragraph at lines 460--486
+Underfull \hbox (badness 10000) in paragraph at lines 472--498
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--486
+Underfull \hbox (badness 10000) in paragraph at lines 472--498
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--486
+Underfull \hbox (badness 10000) in paragraph at lines 472--498
 
  []
 
 
-Overfull \hbox (2.0984pt too wide) in paragraph at lines 460--486
+Overfull \hbox (2.0984pt too wide) in paragraph at lines 472--498
 \OT1/bch/m/n/12 are the ac-tions that an agent can per-form with a given con-tr
 act. For a []\OT1/cmtt/m/n/12 ShareContract\OT1/bch/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--486
+Underfull \hbox (badness 10000) in paragraph at lines 472--498
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--486
+Underfull \hbox (badness 10000) in paragraph at lines 472--498
 
  []
 
-[32] [33 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/schema.png> </Users/mike
+[33] [34 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/schema.png> </Users/mike
 car/Desktop/Blockchain-dizzy/imgs/db.png>]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 486.
-
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/issue.m
-LaTeX Font Info:    Try loading font information for OML+bch on input line 1.
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omlbch.fd
-File: omlbch.fd 
-)
-LaTeX Font Info:    Font shape `OML/bch/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 1.
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 2.
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsbch.fd
-File: omsbch.fd 
-)
-LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 2.
-)
-Underfull \hbox (badness 10000) in paragraph at lines 487--494
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/issue.m)
+Underfull \hbox (badness 10000) in paragraph at lines 499--506
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 487--494
+Underfull \hbox (badness 10000) in paragraph at lines 499--506
 
  []
 
-[34] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/genIssue.m)
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/genMove.m [35])
-Overfull \hbox (1.71198pt too wide) in paragraph at lines 501--506
+[35] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/genIssue.m)
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/genMove.m [36])
+Overfull \hbox (1.71198pt too wide) in paragraph at lines 513--518
 \OT1/bch/m/n/12 busi-ness logic. These ac-tions are per-formed se-quen-tially, 
 ex-chang-ing mes-sages across
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 501--506
+Underfull \hbox (badness 10000) in paragraph at lines 513--518
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 501--506
+Underfull \hbox (badness 10000) in paragraph at lines 513--518
 
  []
 
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/notary.m) [36]
-Underfull \hbox (badness 10000) in paragraph at lines 509--512
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/notary.m) [37]
+Underfull \hbox (badness 10000) in paragraph at lines 521--524
 
  []
 
 (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/finality.m)
-Underfull \hbox (badness 10000) in paragraph at lines 516--519
+Underfull \hbox (badness 10000) in paragraph at lines 528--531
 
  []
 
-[37] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/cashissuance.m)
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/cashspend.png, id=878, 739.76375p
+[38] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/cashissuance.m)
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/cashspend.png, id=944, 739.76375p
 t x 357.335pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/cashspend.png Graphic file (
 type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/cashspend.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/cashspend
-.png used on input line 524.
+.png used on input line 536.
 (pdftex.def)             Requested size: 438.17227pt x 211.65459pt.
- [38]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/tptf.png, id=901, 863.225pt x 803
-.0pt>
+ [39]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/tptf.png, id=967, 670.505pt x 598
+.235pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/tptf.png Graphic file (type 
 png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/tptf.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/tptf.png 
-used on input line 536.
-(pdftex.def)             Requested size: 438.17227pt x 407.6009pt.
+used on input line 548.
+(pdftex.def)             Requested size: 438.17227pt x 390.93852pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/transdet.png, id=906, 1001.7425pt
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/transdet.png, id=972, 1001.7425pt
  x 533.995pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/transdet.png Graphic file (t
 ype png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/transdet.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/transdet.
-png used on input line 551.
+png used on input line 563.
 (pdftex.def)             Requested size: 438.17227pt x 233.57335pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 532--556
+Underfull \hbox (badness 10000) in paragraph at lines 544--568
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 532--556
+Underfull \hbox (badness 10000) in paragraph at lines 544--568
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 532--556
+Underfull \hbox (badness 10000) in paragraph at lines 544--568
 
  []
 
-[39 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/cashspend.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [40 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/tptf.png>]
-Overfull \hbox (4.22313pt too wide) in paragraph at lines 558--563
+[40 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/cashspend.png>] [41 </Users/m
+ikecar/Desktop/Blockchain-dizzy/imgs/tptf.png>]
+Overfull \hbox (4.22313pt too wide) in paragraph at lines 570--575
 \OT1/bch/m/n/12 build-ing blocks avail-able, they only partly em-u-late this tr
 ade (the []\OT1/cmtt/m/n/12 TwoPartyTradeFlow
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 558--563
+Underfull \hbox (badness 10000) in paragraph at lines 570--575
 
  []
 
-[41 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/transdet.png>]
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/stf.m
-Underfull \vbox (badness 5771) has occurred while \output is active []
-
- [42])
+[42 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/transdet.png>]
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/stf.m [43])
 (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/regs.m)
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/code.m) [43]
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/btf.m)
-Underfull \hbox (badness 10000) in paragraph at lines 570--577
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/code.m)
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/btf.m [44])
+Underfull \hbox (badness 10000) in paragraph at lines 582--589
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 570--577
+Underfull \hbox (badness 10000) in paragraph at lines 582--589
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 570--577
+Underfull \hbox (badness 10000) in paragraph at lines 582--589
 
  []
 
-[44] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/ser.kt)
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/innode.png, id=1047, 791.95876pt 
+[45] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/ser.kt)
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/innode.png, id=1112, 791.95876pt 
 x 496.85625pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/innode.png Graphic file (typ
 e png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/innode.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/innode.pn
-g used on input line 583.
+g used on input line 595.
 (pdftex.def)             Requested size: 438.17227pt x 274.90178pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/outnode.png, id=1048, 556.0775pt 
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/outnode.png, id=1113, 556.0775pt 
 x 207.77625pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/outnode.png Graphic file (ty
 pe png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/outnode.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/outnode.p
-ng used on input line 590.
+ng used on input line 602.
 (pdftex.def)             Requested size: 420.6459pt x 157.17604pt.
 
-Overfull \hbox (70.10675pt too wide) in paragraph at lines 590--591
+Overfull \hbox (70.10675pt too wide) in paragraph at lines 602--603
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 600--605
+Underfull \hbox (badness 10000) in paragraph at lines 612--615
+
+ []
+
+[46]
+Underfull \hbox (badness 10000) in paragraph at lines 619--626
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 600--605
+Underfull \hbox (badness 10000) in paragraph at lines 619--626
 
  []
 
-[45]
+
+Underfull \hbox (badness 10000) in paragraph at lines 619--626
+
+ []
+
+
 Underfull \vbox (badness 2503) has occurred while \output is active []
 
- [46 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/innode.png> </Users/mikecar/
+ [47 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/innode.png> </Users/mikecar/
 Desktop/Blockchain-dizzy/imgs/outnode.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 609--616
+Underfull \vbox (badness 1708) has occurred while \output is active []
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 609--616
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 609--616
-
- []
-
-[47] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/query.sql)
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/audit.png, id=1075, 621.32124pt x
+ [48]
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/query.sql)
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/audit.png, id=1142, 621.32124pt x
  325.71687pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/audit.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/audit.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/audit.png
- used on input line 621.
+ used on input line 631.
 (pdftex.def)             Requested size: 438.17227pt x 229.70497pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/auditdetails.png, id=1079, 640.39
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/auditdetails.png, id=1146, 640.39
 25pt x 99.37125pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/auditdetails.png Graphic fil
 e (type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/auditdetails.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/auditdeta
-ils.png used on input line 631.
+ils.png used on input line 641.
 (pdftex.def)             Requested size: 438.17227pt x 67.99307pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 617--636
+Underfull \hbox (badness 10000) in paragraph at lines 627--646
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 617--636
-
- []
-
-[48 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/audit.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 638--641
+Underfull \hbox (badness 10000) in paragraph at lines 627--646
 
  []
 
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/cash.png, id=1097, 313.17pt x 195
+Underfull \hbox (badness 10000) in paragraph at lines 648--651
+
+ []
+
+[49 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/audit.png>]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/cash.png, id=1163, 313.17pt x 195
 .73125pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/cash.png Graphic file (type 
 png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/cash.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/cash.png 
-used on input line 650.
+used on input line 660.
 (pdftex.def)             Requested size: 262.90604pt x 164.32053pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/shares.png, id=1098, 313.17pt x 1
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/shares.png, id=1164, 313.17pt x 1
 32.495pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/shares.png Graphic file (typ
 e png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/shares.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/shares.pn
-g used on input line 657.
+g used on input line 667.
 (pdftex.def)             Requested size: 262.90436pt x 111.23235pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 643--668
+Underfull \hbox (badness 10000) in paragraph at lines 653--678
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 643--668
+Underfull \hbox (badness 10000) in paragraph at lines 653--678
 
  []
 
-[49 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/auditdetails.png>] [50 </User
+[50 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/auditdetails.png>] [51 </User
 s/mikecar/Desktop/Blockchain-dizzy/imgs/cash.png> </Users/mikecar/Desktop/Block
 chain-dizzy/imgs/shares.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 670--673
+Underfull \hbox (badness 10000) in paragraph at lines 680--683
 
  []
 
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/gss.m [51])
-Underfull \hbox (badness 10000) in paragraph at lines 676--679
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/gss.m [52])
+Underfull \hbox (badness 10000) in paragraph at lines 686--689
 
  []
 
-[52] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/rst.m)
-Underfull \hbox (badness 10000) in paragraph at lines 682--685
+[53] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/rst.m)
+Underfull \hbox (badness 10000) in paragraph at lines 692--695
 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [53]
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/get.m)
+[54] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/get.m)
 (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/put.m)
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/node.png, id=1226, 705.13437pt x 
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/node.png, id=1292, 705.13437pt x 
 422.07687pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/node.png Graphic file (type 
 png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/node.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/node.png 
-used on input line 694.
+used on input line 704.
 (pdftex.def)             Requested size: 372.4491pt x 222.93971pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/exch.png, id=1227, 710.655pt x 46
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/exch.png, id=1293, 710.655pt x 46
 2.72874pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/exch.png Graphic file (type 
 png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/exch.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/exch.png 
-used on input line 701.
+used on input line 711.
 (pdftex.def)             Requested size: 372.4491pt x 242.51965pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 689--712
+Underfull \hbox (badness 10000) in paragraph at lines 699--722
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 689--712
+Underfull \hbox (badness 10000) in paragraph at lines 699--722
 
  []
 
-[54] [55 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/node.png> </Users/mikeca
-r/Desktop/Blockchain-dizzy/imgs/exch.png>] [56]
-
-LaTeX Warning: Reference `sec:UG' on page 57 undefined on input line 719.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 715--722
+[55] [56 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/node.png> </Users/mikeca
+r/Desktop/Blockchain-dizzy/imgs/exch.png>] [57]
+Underfull \hbox (badness 10000) in paragraph at lines 725--732
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 715--722
+Underfull \hbox (badness 10000) in paragraph at lines 725--732
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 715--722
+Underfull \hbox (badness 10000) in paragraph at lines 725--732
 
  []
 
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/archdiagramSHEX.png, id=1266, 772
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/archdiagramSHEX.png, id=1332, 772
 .8875pt x 435.6275pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/archdiagramSHEX.png Graphic 
 file (type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/archdiagramSHEX.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/archdiagr
-amSHEX.png used on input line 728.
+amSHEX.png used on input line 738.
 (pdftex.def)             Requested size: 438.17227pt x 246.96753pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/quote.png, id=1267, 306.14375pt x
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/quote.png, id=1333, 306.14375pt x
  147.55125pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/quote.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/quote.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/quote.png
- used on input line 738.
+ used on input line 748.
 (pdftex.def)             Requested size: 240.99608pt x 116.15218pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf1.png, id=1270, 654.445pt x 1
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf1.png, id=1336, 654.445pt x 1
 28.48pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf1.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf1.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf1.png
- used on input line 749.
+ used on input line 759.
 (pdftex.def)             Requested size: 438.17227pt x 86.02037pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/shareSale.png, id=1271, 619.31375
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/shareSale.png, id=1337, 619.31375
 pt x 455.7025pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/shareSale.png Graphic file (
 type png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/shareSale.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/shareSale
-.png used on input line 757.
+.png used on input line 767.
 (pdftex.def)             Requested size: 284.8093pt x 209.57701pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf3.png, id=1275, 601.24625pt x
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf3.png, id=1341, 601.24625pt x
  142.5325pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf3.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf3.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf3.png
- used on input line 770.
+ used on input line 780.
 (pdftex.def)             Requested size: 438.17227pt x 103.8782pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf2.png, id=1278, 958.58125pt x
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf2.png, id=1344, 958.58125pt x
  310.15875pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf2.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf2.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf2.png
- used on input line 779.
+ used on input line 789.
 (pdftex.def)             Requested size: 438.17227pt x 141.77554pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf4.png, id=1279, 630.355pt x 1
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf4.png, id=1345, 630.355pt x 1
 11.41624pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf4.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf4.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf4.png
- used on input line 787.
+ used on input line 797.
 (pdftex.def)             Requested size: 438.17227pt x 77.4485pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--792
+Underfull \hbox (badness 10000) in paragraph at lines 734--802
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--792
+Underfull \hbox (badness 10000) in paragraph at lines 734--802
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--792
+Underfull \hbox (badness 10000) in paragraph at lines 734--802
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--792
+Underfull \hbox (badness 10000) in paragraph at lines 734--802
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--792
+Underfull \hbox (badness 10000) in paragraph at lines 734--802
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--792
+Underfull \hbox (badness 10000) in paragraph at lines 734--802
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--792
+Underfull \hbox (badness 10000) in paragraph at lines 734--802
 
  []
 
-[57
-
-] [58 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/archdiagramSHEX.png> </User
-s/mikecar/Desktop/Blockchain-dizzy/imgs/quote.png>] [59 </Users/mikecar/Desktop
-/Blockchain-dizzy/imgs/conf1.png> </Users/mikecar/Desktop/Blockchain-dizzy/imgs
-/shareSale.png>]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/random.png, id=1302, 1284.8pt x 7
+[58] [59 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/archdiagramSHEX.png> </U
+sers/mikecar/Desktop/Blockchain-dizzy/imgs/quote.png>] [60 </Users/mikecar/Desk
+top/Blockchain-dizzy/imgs/conf1.png> </Users/mikecar/Desktop/Blockchain-dizzy/i
+mgs/shareSale.png>]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/random.png, id=1368, 1284.8pt x 7
 32.7375pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/random.png Graphic file (typ
 e png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/random.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/random.pn
-g used on input line 799.
+g used on input line 809.
 (pdftex.def)             Requested size: 438.17227pt x 249.88774pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/balances.png, id=1305, 752.8125pt
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/balances.png, id=1371, 752.8125pt
  x 323.2075pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/balances.png Graphic file (t
 ype png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/balances.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/balances.
-png used on input line 811.
+png used on input line 821.
 (pdftex.def)             Requested size: 438.17227pt x 188.12627pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 795--820
+Underfull \hbox (badness 10000) in paragraph at lines 805--830
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 795--820
+Underfull \hbox (badness 10000) in paragraph at lines 805--830
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 795--820
+Underfull \hbox (badness 10000) in paragraph at lines 805--830
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 795--820
+Underfull \hbox (badness 10000) in paragraph at lines 805--830
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 795--820
+Underfull \hbox (badness 10000) in paragraph at lines 805--830
 
  []
 
-[60 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf3.png> </Users/mikecar/De
-sktop/Blockchain-dizzy/imgs/conf2.png>] [61 </Users/mikecar/Desktop/Blockchain-
+[61 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/conf3.png> </Users/mikecar/De
+sktop/Blockchain-dizzy/imgs/conf2.png>] [62 </Users/mikecar/Desktop/Blockchain-
 dizzy/imgs/conf4.png> </Users/mikecar/Desktop/Blockchain-dizzy/imgs/random.png>
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 823--830
+Underfull \hbox (badness 10000) in paragraph at lines 833--840
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 823--830
+Underfull \hbox (badness 10000) in paragraph at lines 833--840
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 823--830
+Underfull \hbox (badness 10000) in paragraph at lines 833--840
 
  []
 
 
 Underfull \vbox (badness 1803) has occurred while \output is active []
 
- [62 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/balances.png>] [63]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/diffips.png, id=1337, 741.0084pt 
+ [63 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/balances.png>] [64]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/diffips.png, id=1404, 741.0084pt 
 x 251.9814pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/diffips.png Graphic file (ty
 pe png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/diffips.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/diffips.p
-ng used on input line 843.
+ng used on input line 853.
 (pdftex.def)             Requested size: 438.17227pt x 149.00223pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 838--847
+Underfull \hbox (badness 10000) in paragraph at lines 848--857
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 838--847
+Underfull \hbox (badness 10000) in paragraph at lines 848--857
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 838--847
+Underfull \hbox (badness 10000) in paragraph at lines 848--857
 
  []
 
-[64 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/diffips.png>]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank1.png, id=1345, 731.73375pt x
+[65 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/diffips.png>]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank1.png, id=1411, 731.73375pt x
  377.41pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank1.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank1.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank1.png
- used on input line 855.
+ used on input line 865.
 (pdftex.def)             Requested size: 438.17227pt x 225.99855pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank2.png, id=1348, 694.595pt x 4
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank2.png, id=1414, 694.595pt x 4
 01.5pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank2.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank2.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank2.png
- used on input line 867.
+ used on input line 877.
 (pdftex.def)             Requested size: 438.17227pt x 253.2894pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank3.png, id=1349, 722.7pt x 242
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank3.png, id=1415, 722.7pt x 242
 .9075pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank3.png Graphic file (type
  png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank3.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank3.png
- used on input line 875.
+ used on input line 885.
 (pdftex.def)             Requested size: 438.17227pt x 147.27638pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 851--884
+Underfull \hbox (badness 10000) in paragraph at lines 861--894
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 851--884
+Underfull \hbox (badness 10000) in paragraph at lines 861--894
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 851--884
+Underfull \hbox (badness 10000) in paragraph at lines 861--894
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 851--884
+Underfull \hbox (badness 10000) in paragraph at lines 861--894
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 851--884
+Underfull \hbox (badness 10000) in paragraph at lines 861--894
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 851--884
+Underfull \hbox (badness 10000) in paragraph at lines 861--894
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 851--884
+Underfull \hbox (badness 10000) in paragraph at lines 861--894
 
  []
 
-[65 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank1.png>] [66 </Users/mikec
+[66 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/bank1.png>] [67 </Users/mikec
 ar/Desktop/Blockchain-dizzy/imgs/bank2.png> </Users/mikecar/Desktop/Blockchain-
 dizzy/imgs/bank3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 887--892
+Underfull \hbox (badness 10000) in paragraph at lines 897--902
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 887--892
+Underfull \hbox (badness 10000) in paragraph at lines 897--902
+
+ []
+
+[68]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/issuers.png, id=1442, 538.01pt x 
+374.39874pt>
+File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/issuers.png Graphic file (ty
+pe png)
+ <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/issuers.png>
+Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/issuers.p
+ng used on input line 921.
+(pdftex.def)             Requested size: 438.17227pt x 304.92377pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 909--932
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 894--897
-
- []
-
-[67]
-
-LaTeX Warning: Reference `fig:issuers' on page 68 undefined on input line 919.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 899--920
+Underfull \hbox (badness 10000) in paragraph at lines 909--932
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 899--920
+Underfull \hbox (badness 10000) in paragraph at lines 909--932
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 899--920
+Underfull \hbox (badness 10000) in paragraph at lines 909--932
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 899--920
+Underfull \hbox (badness 10000) in paragraph at lines 909--932
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 899--920
+Underfull \hbox (badness 10000) in paragraph at lines 909--932
 
  []
 
-[68] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/issuance.m [69])
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/notaries.png, id=1401, 692.5875pt
+
+Underfull \hbox (badness 10000) in paragraph at lines 909--932
+
+ []
+
+[69] [70 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/issuers.png>]
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/issuance.m) [71]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/notaries.png, id=1487, 692.5875pt
  x 426.59375pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/notaries.png Graphic file (t
 ype png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/notaries.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/notaries.
-png used on input line 937.
+png used on input line 949.
 (pdftex.def)             Requested size: 438.17227pt x 269.8946pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 925--942
+Underfull \hbox (badness 10000) in paragraph at lines 937--954
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 925--942
+Underfull \hbox (badness 10000) in paragraph at lines 937--954
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 925--942
+Underfull \hbox (badness 10000) in paragraph at lines 937--954
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 925--942
+Underfull \hbox (badness 10000) in paragraph at lines 937--954
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 925--942
+Underfull \hbox (badness 10000) in paragraph at lines 937--954
 
  []
 
-[70]
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/singular.png, id=1419, 452.69125p
+[72]
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/singular.png, id=1493, 452.69125p
 t x 282.05376pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/singular.png Graphic file (t
 ype png)
 
 <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/singular.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/singular.
-png used on input line 948.
+png used on input line 960.
 (pdftex.def)             Requested size: 262.90604pt x 163.80647pt.
 
-</Users/mikecar/Desktop/Blockchain-dizzy/imgs/parallel.png, id=1420, 525.965pt 
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/parallel.png, id=1494, 525.965pt 
 x 269.005pt>
 File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/parallel.png Graphic file (t
 ype png)
  <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/parallel.png>
 Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/parallel.
-png used on input line 958.
+png used on input line 970.
 (pdftex.def)             Requested size: 262.90604pt x 134.46931pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 944--971
+Underfull \hbox (badness 10000) in paragraph at lines 956--983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 944--971
+Underfull \hbox (badness 10000) in paragraph at lines 956--983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 944--971
+Underfull \hbox (badness 10000) in paragraph at lines 956--983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 944--971
+Underfull \hbox (badness 10000) in paragraph at lines 956--983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 944--971
+Underfull \hbox (badness 10000) in paragraph at lines 956--983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 944--971
+Underfull \hbox (badness 10000) in paragraph at lines 956--983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 944--971
+Underfull \hbox (badness 10000) in paragraph at lines 956--983
 
  []
 
-[71]
-Underfull \vbox (badness 1072) has occurred while \output is active []
-
- [72 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/notaries.png> </Users/mikeca
-r/Desktop/Blockchain-dizzy/imgs/singular.png>] [73 </Users/mikecar/Desktop/Bloc
-kchain-dizzy/imgs/parallel.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 973--976
+[73 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/notaries.png>] [74 </Users/mi
+kecar/Desktop/Blockchain-dizzy/imgs/singular.png> </Users/mikecar/Desktop/Block
+chain-dizzy/imgs/parallel.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 985--988
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 977--986
+[75]
+Underfull \hbox (badness 10000) in paragraph at lines 989--998
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 977--986
+Underfull \hbox (badness 10000) in paragraph at lines 989--998
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 977--986
+Underfull \hbox (badness 10000) in paragraph at lines 989--998
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 977--986
+Underfull \hbox (badness 10000) in paragraph at lines 989--998
 
  []
 
-[74]
+[76]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [75]
-Underfull \hbox (badness 10000) in paragraph at lines 988--991
+ [77]
+Underfull \hbox (badness 10000) in paragraph at lines 1000--1003
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 993--998
+</Users/mikecar/Desktop/Blockchain-dizzy/imgs/reqtble.png, id=1533, 647.41875pt
+ x 422.57875pt>
+File: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/reqtble.png Graphic file (ty
+pe png)
+ <use /Users/mikecar/Desktop/Blockchain-dizzy/imgs/reqtble.png>
+Package pdftex.def Info: /Users/mikecar/Desktop/Blockchain-dizzy/imgs/reqtble.p
+ng used on input line 1014.
+(pdftex.def)             Requested size: 438.17227pt x 286.0021pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1005--1019
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 993--998
-
- []
-
-[76] [77]
-Underfull \hbox (badness 10000) in paragraph at lines 1002--1013
+Underfull \hbox (badness 10000) in paragraph at lines 1005--1019
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1002--1013
+Underfull \hbox (badness 10000) in paragraph at lines 1005--1019
+
+ []
+
+[78] [79 </Users/mikecar/Desktop/Blockchain-dizzy/imgs/reqtble.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1023--1034
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1002--1013
+Underfull \hbox (badness 10000) in paragraph at lines 1023--1034
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1002--1013
+Underfull \hbox (badness 10000) in paragraph at lines 1023--1034
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1002--1013
-
- []
-
-[78]
-Underfull \hbox (badness 10000) in paragraph at lines 1015--1020
+Underfull \hbox (badness 10000) in paragraph at lines 1023--1034
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1015--1020
+Underfull \hbox (badness 10000) in paragraph at lines 1023--1034
 
  []
 
-[79]
-Underfull \hbox (badness 10000) in paragraph at lines 1023--1036
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1023--1036
+[80]
+Underfull \hbox (badness 10000) in paragraph at lines 1036--1041
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1023--1036
+Underfull \hbox (badness 10000) in paragraph at lines 1036--1041
+
+ []
+
+[81]
+Underfull \hbox (badness 10000) in paragraph at lines 1044--1057
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1023--1036
+Underfull \hbox (badness 10000) in paragraph at lines 1044--1057
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1023--1036
+Underfull \hbox (badness 10000) in paragraph at lines 1044--1057
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1023--1036
+Underfull \hbox (badness 10000) in paragraph at lines 1044--1057
 
  []
 
-[80] [81] (./dizzy.bbl
-Underfull \hbox (badness 5460) in paragraph at lines 21--26
+
+Underfull \hbox (badness 10000) in paragraph at lines 1044--1057
+
+ []
+
+[82] [83] (./dizzy.bbl
+Underfull \hbox (badness 5460) in paragraph at lines 22--27
 []\OT1/bch/m/n/12 Karl Flinders.  []\OT1/bch/b/n/12 Big banks' legacy IT sys-te
 ms could kill them[]\OT1/bch/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 21--26
+Underfull \hbox (badness 10000) in paragraph at lines 22--27
 [][]$\OT1/cmtt/m/n/12 http : / / www . computerweekly . com / news / 2240212567
  / Big -[] banks -[] legacy -[]
  []
@@ -3128,83 +3117,95 @@ Missing character: There is no ˜ in font bchb7t!
 Missing character: There is no â in font bchb7t!
 Missing character: There is no € in font bchb7t!
 Missing character: There is no ™ in font bchb7t!
+
+Underfull \hbox (badness 1014) in paragraph at lines 43--47
+[]\OT1/bch/m/n/12 Investopedia.  []\OT1/bch/b/n/12 What do T+1, T+2 and T+3 mea
+n?[]  [][]$\OT1/cmtt/m/n/12 http : / / www .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--63
+[]\OT1/bch/m/n/12 Bertrand Dayer.  []\OT1/bch/b/n/12 Con-sid-er-a-tion of Hu-ma
+n Er-rors in Risk
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--63
+\OT1/bch/b/n/12 Man-age-ment[]\OT1/bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 https : 
+/ / pdfs . semanticscholar . org / e22e /
+ []
+
+
+Underfull \hbox (badness 4505) in paragraph at lines 59--63
+\OT1/cmtt/m/n/12 a9f240a49ed3b651332dd64b48668efc2d93 . pdf$[][]\OT1/bch/m/n/12
+ , 2006 (ac-cessed 14 June
+ []
+
 Missing character: There is no â in font bchb7t!
 Missing character: There is no ‚ in font bchb7t!
 Missing character: There is no ¬ in font bchb7t!
-
-Underfull \hbox (badness 4899) in paragraph at lines 89--93
+[84]
+Underfull \hbox (badness 4899) in paragraph at lines 98--102
 []\OT1/bch/b/n/12 DTCC Rec-om-mends Short-en-ing the U.S. Trade Set-tle-ment Cy
 -cle[]\OT1/bch/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--93
+Underfull \hbox (badness 10000) in paragraph at lines 98--102
 [][]$\OT1/cmtt/m/n/12 www . dtcc . com / [] / media / Files / Downloads / White
 Papers / T2 -[] Shortened -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--101
+Underfull \hbox (badness 10000) in paragraph at lines 104--110
 \OT1/cmtt/m/n/12 financial _ institutions _ information _ technology _ performa
 nce _ cost _
  []
 
-[82]
-Underfull \hbox (badness 1024) in paragraph at lines 103--108
-\OT1/bch/b/n/12 de-fined[]\OT1/bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 http : / / w
-ww . pwc . com / us / en / technology -[] forecast / blockchain /
- []
 
-
-Underfull \hbox (badness 1297) in paragraph at lines 124--128
-[]\OT1/bch/b/n/12 Ripple Doc-u-men-ta-tion - De-vel-op-ment Cen-ter[]\OT1/bch/m
-/n/12 .  [][]$\OT1/cmtt/m/n/12 https : / / ripple . com /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 147--151
+Underfull \hbox (badness 10000) in paragraph at lines 162--166
 []\OT1/bch/b/n/12 UK bank-ing in-dus-try slow to re-act to dig-i-tal de-vel-op-
 ments[]\OT1/bch/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--151
+Underfull \hbox (badness 10000) in paragraph at lines 162--166
 [][]$\OT1/cmtt/m/n/12 http : / / www . europeanceo . com / finance / uk -[] ban
 king -[] industry -[] slow -[] to -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--163
-[]\OT1/bch/b/n/12 Financial In-stru-ments[]\OT1/bch/m/n/12 .  [][]$\OT1/cmtt/m/
-n/12 http : / / www . investopedia . com / terms / f /
+Underfull \hbox (badness 1178) in paragraph at lines 175--179
+[]\OT1/bch/m/n/12 Investopedia.  []\OT1/bch/b/n/12 Fi-nan-cial In-stru-ments[]\
+OT1/bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 http : / / www . investopedia . com /
  []
 
-
-Underfull \hbox (badness 3058) in paragraph at lines 177--181
+[85]
+Underfull \hbox (badness 3058) in paragraph at lines 194--198
 \OT1/cmtt/m/n/12 com / understanding -[] the -[] trade -[] lifecycle/$[][]\OT1/
 bch/m/n/12 , 2016 (ac-cessed 6 Febru-ary
  []
 
-[83]
-Underfull \hbox (badness 1067) in paragraph at lines 193--198
+
+Underfull \hbox (badness 1067) in paragraph at lines 211--216
 []\OT1/bch/b/n/12 What does a CCP do? What are the pros and cons?[]  []In-ter-n
 a-
  []
 
 
-Underfull \hbox (badness 2495) in paragraph at lines 193--198
+Underfull \hbox (badness 2495) in paragraph at lines 211--216
 \OT1/bch/b/n/12 tional Cap-i-tal Mar-ket As-so-ci-a-tion[]\OT1/bch/m/n/12 , ac-
 cessed 28 May 2017.  [][]$\OT1/cmtt/m/n/12 http :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--198
+Underfull \hbox (badness 10000) in paragraph at lines 211--216
 \OT1/cmtt/m/n/12 / / www . icmagroup . org / Regulatory -[] Policy -[] and -[] 
 Market -[] Practice / repo -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--198
+Underfull \hbox (badness 10000) in paragraph at lines 211--216
 \OT1/cmtt/m/n/12 and -[] collateral -[] markets / frequently -[] asked -[] ques
 tions -[] on -[] repo / 27 -[]
  []
@@ -3213,229 +3214,229 @@ Missing character: There is no â in font bchb7t!
 Missing character: There is no € in font bchb7t!
 Missing character: There is no “ in font bchb7t!
 
-Underfull \hbox (badness 1803) in paragraph at lines 222--228
+Underfull \hbox (badness 1803) in paragraph at lines 242--248
 []\OT1/bch/m/n/12 Tom Spring-bett.  []\OT1/bch/b/n/12 EMIR  the obli-ga-tion to
  clear and mar-gin OTC
  []
 
 
-Underfull \hbox (badness 2884) in paragraph at lines 230--234
+Underfull \hbox (badness 2884) in paragraph at lines 250--254
 []\OT1/bch/b/n/12 I just bought a se-cu-rity in my cash ac-count. How soon can 
 I
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 252--258
+[86]
+Underfull \hbox (badness 10000) in paragraph at lines 272--278
 \OT1/cmtt/m/n/12 do -[] high -[] frequency -[] traders -[] make -[] so -[] many
  -[] trades -[] with -[] a -[] three -[] day -[]
  []
 
-[84]
-Underfull \hbox (badness 1565) in paragraph at lines 273--277
+
+Underfull \hbox (badness 2689) in paragraph at lines 295--300
 \OT1/bch/b/n/12 cil[]\OT1/bch/m/n/12 .  []\OT1/bch/b/n/12 Of-fi-cial Jour-nal o
-f the Eu-ro-pean Union[]\OT1/bch/m/n/12 , 2014.  [][]$\OT1/cmtt/m/n/12 http : /
- / eur -[]
+f the Eu-ro-pean Union[]\OT1/bch/m/n/12 , 2014 (ac-cessed 14
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--277
-\OT1/cmtt/m/n/12 lex . europa . eu / legal -[] content / EN / TXT / HTML / ?uri
- = CELEX \ protect \ kern +
+Underfull \hbox (badness 3098) in paragraph at lines 295--300
+\OT1/bch/m/n/12 June 2017).  [][]$\OT1/cmtt/m/n/12 http : / / eur -[] lex . eur
+opa . eu / legal -[] content / EN / TXT / HTML /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 284--289
+Underfull \hbox (badness 2582) in paragraph at lines 302--308
+[]\OT1/bch/m/n/12 M. Wal-port.  []\OT1/bch/b/n/12 Dis-tributed Ledger Tech-nol-
+ogy: Be-yond Blockchain[]\OT1/bch/m/n/12 .
+ []
+
+
+Underfull \hbox (badness 1796) in paragraph at lines 302--308
+[]\OT1/bch/b/n/12 UK Gov-ern-ment Of-fice for Sci-ence[]\OT1/bch/m/n/12 , 2016 
+(ac-cessed 14 June 2017).
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 302--308
+[][]$\OT1/cmtt/m/n/12 https : / / www . gov . uk / government / news / distribu
+ted -[] ledger -[] technology -[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 310--315
 []\OT1/bch/b/n/12 ESMA as-sesses use-ful-ness of dis-tributed ledger tech-nolo-
 gies[]\OT1/bch/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 284--289
+Underfull \hbox (badness 10000) in paragraph at lines 310--315
 [][]$\OT1/cmtt/m/n/12 https : / / www . esma . europa . eu / press -[] news / e
 sma -[] news / esma -[] assesses -[]
  []
 
 
-Underfull \hbox (badness 1112) in paragraph at lines 291--294
+Underfull \hbox (badness 1112) in paragraph at lines 317--322
 []\OT1/bch/m/n/12 Wei-Tek Tsai and Robert Blower et al.  []\OT1/bch/b/n/12 A Sy
 s-tem View of Fi-nan-cial
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 296--300
+Underfull \hbox (badness 10000) in paragraph at lines 324--328
 \OT1/cmtt/m/n/12 tumblr . com / post / 108952718025 / 56582 -[] transaction -[]
  messages -[] per -[]
  []
 
 
-Underfull \hbox (badness 3068) in paragraph at lines 307--311
-[]\OT1/bch/b/n/12 Internal Au-dit[]\OT1/bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 htt
-p : / / www . goldmansachs . com / careers / why -[] goldman -[]
+Underfull \hbox (badness 4886) in paragraph at lines 336--341
+\OT1/cmtt/m/n/12 com / careers / why -[] goldman -[] sachs / our -[] divisions 
+/ internal -[] audit/$[][]\OT1/bch/m/n/12 , 2017
+ []
+
+[87]
+Underfull \hbox (badness 6268) in paragraph at lines 364--369
+[]\OT1/bch/m/n/12 David Vorick.  []\OT1/bch/b/n/12 En-sur-ing Bit-coin Fun-gi-b
+il-ity in 2017 (And Be-
  []
 
 
-Underfull \hbox (badness 2126) in paragraph at lines 329--333
-[]\OT1/bch/b/n/12 Ensuring Bit-coin Fun-gi-bil-ity in 2017 (And Be-yond)[]\OT1/
-bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 http : / / www .
+Underfull \hbox (badness 4001) in paragraph at lines 364--369
+\OT1/bch/b/n/12 yond)[]\OT1/bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 http : / / www 
+. coindesk . com / ensuring -[] bitcoin -[] fungibility -[] in -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--333
-\OT1/cmtt/m/n/12 coindesk . com / ensuring -[] bitcoin -[] fungibility -[] in -
-[] 2017 -[] and -[] beyond/$[][]\OT1/bch/m/n/12 ,
- []
-
-[85]
-Underfull \hbox (badness 5607) in paragraph at lines 353--357
-[]\OT1/bch/m/n/12 Mike Hearn.  []\OT1/bch/b/n/12 Corda: A dis-tributed ledger[]
-\OT1/bch/m/n/12 .  []\OT1/bch/b/n/12 R3 CEV[]\OT1/bch/m/n/12 , 2016.
- []
-
-
-Underfull \hbox (badness 2334) in paragraph at lines 359--364
+Underfull \hbox (badness 2334) in paragraph at lines 396--401
 \OT1/cmtt/m/n/12 org / blog / proof -[] of -[] activity -[] proof -[] of -[] bu
 rn -[] proof -[] of -[] capacity/$[][]\OT1/bch/m/n/12 , 2015
  []
 
 
-Underfull \hbox (badness 6141) in paragraph at lines 370--374
-[]\OT1/bch/b/n/12 Bitcoin is the Sewer Rat of Cur-ren-cies[]\OT1/bch/m/n/12 .  
-[][]$\OT1/cmtt/m/n/12 https : / / medium . com /
+Underfull \hbox (badness 10000) in paragraph at lines 407--412
+[]\OT1/bch/m/n/12 Mark Frauen-felder.  []\OT1/bch/b/n/12 Bit-coin is the Sewer 
+Rat of Cur-ren-cies[]\OT1/bch/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 370--374
-\OT1/cmtt/m/n/12 institute -[] for -[] the -[] future / bitcoin -[] is -[] the 
--[] sewer -[] rat -[] of -[] currencies -[]
+Underfull \hbox (badness 10000) in paragraph at lines 407--412
+[][]$\OT1/cmtt/m/n/12 https : / / medium . com / institute -[] for -[] the -[] 
+future / bitcoin -[] is -[] the -[] sewer -[]
  []
 
+[88]
 Missing character: There is no â in font bchb7t!
 Missing character: There is no € in font bchb7t!
 Missing character: There is no ™ in font bchb7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 401--408
+Underfull \hbox (badness 10000) in paragraph at lines 439--446
 \OT1/cmtt/m/n/12 trading / bitcoin -[] dominance -[] drops -[] 50 -[] ripples -
 [] xrp -[] market -[] cap -[] tops -[]
  []
 
-[86]
-Underfull \hbox (badness 10000) in paragraph at lines 429--435
+
+Underfull \hbox (badness 3199) in paragraph at lines 468--474
 []\OT1/bch/m/n/12 Jo Lang.  []\OT1/bch/b/n/12 R3 Re-view: Rip-ple Labs - Con-si
-d-er-a-tions for
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 429--435
-\OT1/bch/b/n/12 Adop-tion by Large Fi-nan-cial In-sti-tu-tions[]\OT1/bch/m/n/12
- .  []\OT1/bch/b/n/12 R3CEV[]\OT1/bch/m/n/12 , 2015.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 429--435
-\OT1/bch/m/n/12 Https://static1.squarespace.com/static/55f73743e4b051cfcc0b02cf
-/t/
- []
-
-
-Underfull \hbox (badness 2237) in paragraph at lines 437--443
-[]\OT1/bch/m/n/12 Hudson Jame-son.  []\OT1/bch/b/n/12 FAQ: Up-com-ing Ethereum 
-Hard Fork[]\OT1/bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 https :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 437--443
-\OT1/cmtt/m/n/12 / / blog . ethereum . org / 2016 / 10 / 18 / faq -[] upcoming 
--[] ethereum -[] hard -[] fork/$[][]\OT1/bch/m/n/12 ,
+d-er-a-tions for Adop-
  []
 
 Missing character: There is no â in font bchb7t!
 Missing character: There is no € in font bchb7t!
 Missing character: There is no ™ in font bchb7t!
 
-Underfull \hbox (badness 2922) in paragraph at lines 467--474
+Underfull \hbox (badness 2922) in paragraph at lines 507--514
 []\OT1/bch/m/n/12 Joel Dud-ley.  []\OT1/bch/b/n/12 R3 se-cures largest ever in-
 vest-ment for dis-tributed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 467--474
+Underfull \hbox (badness 10000) in paragraph at lines 507--514
 [][]$\OT1/cmtt/m/n/12 https : / / www . corda . net / 2017 / 05 / r3 -[] secure
 s -[] largest -[] ever -[] investment -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 467--474
+Underfull \hbox (badness 10000) in paragraph at lines 507--514
 \OT1/cmtt/m/n/12 distributed -[] ledger -[] technology -[] usd -[] 107 -[] mill
 ion -[] 40 -[] institutions/$[][]\OT1/bch/m/n/12 ,
  []
 
+[89]
+Underfull \hbox (badness 2856) in paragraph at lines 531--536
+\OT1/cmtt/m/n/12 / / www . quora . com / Why -[] did -[] R3 -[] write -[] Corda
+ -[] Blockchain -[] in -[] Kotlin$[][]\OT1/bch/m/n/12 , 2017
+ []
 
-Underfull \hbox (badness 10000) in paragraph at lines 481--487
+
+Underfull \hbox (badness 10000) in paragraph at lines 538--544
 []\OT1/bch/m/n/12 Jose Coll.  []\OT1/bch/b/n/12 Corda net-work topol-ogy[]\OT1/
 bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 https : / / cdn -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 481--487
+Underfull \hbox (badness 10000) in paragraph at lines 538--544
 \OT1/cmtt/m/n/12 standard2 . discourse . org / uploads / corda / original / 1X 
 /
  []
 
 
-Underfull \hbox (badness 1199) in paragraph at lines 502--509
+Underfull \hbox (badness 10000) in paragraph at lines 538--544
+\OT1/cmtt/m/n/12 ab5a8506ecd170e1048159324e8e1eb4db8d3e33 . png$[][]\OT1/bch/m/
+n/12 , 2017 (ac-cessed 14
+ []
+
+
+Underfull \hbox (badness 1199) in paragraph at lines 559--566
 []\OT1/bch/m/n/12 HM Trea-sury.  []\OT1/bch/b/n/12 Anti-money laun-der-ing and 
 counter ter-ror-ist fi-nance
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 502--509
+Underfull \hbox (badness 10000) in paragraph at lines 559--566
 \OT1/cmtt/m/n/12 gov . uk / government / publications / anti -[] money -[] laun
 dering -[] and -[] counter -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 502--509
+Underfull \hbox (badness 10000) in paragraph at lines 559--566
 \OT1/cmtt/m/n/12 terrorist -[] finance -[] supervision -[] reports / anti -[] m
 oney -[] laundering -[] and -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 502--509
+Underfull \hbox (badness 10000) in paragraph at lines 559--566
 \OT1/cmtt/m/n/12 counter -[] terrorist -[] finance -[] supervision -[] report -
 [] 2012 -[] 13$[][]\OT1/bch/m/n/12 , 2016 (ac-
  []
 
-[87]
-Underfull \hbox (badness 10000) in paragraph at lines 518--523
+
+Underfull \hbox (badness 10000) in paragraph at lines 575--579
 []\OT1/bch/m/n/12 Blockchain.  []\OT1/bch/b/n/12 Blockchain Trans-ac-tion In-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 518--523
+Underfull \hbox (badness 10000) in paragraph at lines 575--579
 \OT1/bch/b/n/12 for-ma-tion[]\OT1/bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 https : /
  / blockchain . info / tx /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 518--523
+Underfull \hbox (badness 10000) in paragraph at lines 575--579
 \OT1/cmtt/m/n/12 7dff938918f07619abd38e4510890396b1cef4fbeca154fb7aafba8843295e
 a2$[][]\OT1/bch/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 534--539
+Underfull \hbox (badness 10000) in paragraph at lines 590--595
 \OT1/cmtt/m/n/12 leaders / 21722841 -[] latest -[] frenzy -[] tulipmania -[] go
 ld -[] rush -[] or -[] dotcom -[]
  []
 
 
-Underfull \hbox (badness 2134) in paragraph at lines 534--539
+Underfull \hbox (badness 2134) in paragraph at lines 590--595
 \OT1/cmtt/m/n/12 boom -[] what -[] if -[] bitcoin -[] bubble$[][]\OT1/bch/m/n/1
 2 , 2017 (ac-cessed 12 June 2017).  The
  []
 
-
-Underfull \hbox (badness 2005) in paragraph at lines 541--548
+[90]
+Underfull \hbox (badness 2005) in paragraph at lines 597--604
 \OT1/cmtt/m/n/12 uploads / 2016 / 01 / Digital _ Cash _ WebPrintReady _ 2016011
 3 . pdf$[][]\OT1/bch/m/n/12 , 2016 (ac-
  []
@@ -3444,13 +3445,13 @@ Missing character: There is no â in font bchb7t!
 Missing character: There is no € in font bchb7t!
 Missing character: There is no ™ in font bchb7t!
 
-Underfull \hbox (badness 7203) in paragraph at lines 550--556
+Underfull \hbox (badness 7203) in paragraph at lines 606--612
 []\OT1/bch/m/n/12 Mark Car-ney.  []\OT1/bch/b/n/12 Build-ing the In-fras-truc-t
 ure to Re-alise Fin-Techs
  []
 
 
-Underfull \hbox (badness 5274) in paragraph at lines 550--556
+Underfull \hbox (badness 5274) in paragraph at lines 606--612
 \OT1/bch/b/n/12 Promise[]\OT1/bch/m/n/12 .  [][]$\OT1/cmtt/m/n/12 http : / / ww
 w . bankofengland . co . uk / publications / Documents /
  []
@@ -3458,51 +3459,49 @@ w . bankofengland . co . uk / publications / Documents /
 Missing character: There is no Ã in font bchr7t!
 Missing character: There is no £ in font bchr7t!
 Missing character: There is no Ã in font bchb7t!
-[88]) [89] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/nodebad.m) [90]
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/nodegood.m) [91]
-(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/docker.m) [92]
+) [91] [92] (/Users/mikecar/Desktop/Blockchain-dizzy/imgs/nodebad.m) [93]
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/nodegood.m) [94]
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/ran_iss.m)
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/ran_trans.m) [95]
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/runT.m)
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/comp.m) [96]
+(/Users/mikecar/Desktop/Blockchain-dizzy/imgs/docker.m)
 \tf@thm=\write9
 \openout9 = `dizzy.thm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1099.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1099.
+ [97]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1114.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1114.
  (./dizzy.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1099.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1099.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1114.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1114.
 
 Package rerunfilecheck Info: File `dizzy.out' has not changed.
-(rerunfilecheck)             Checksum: 0D867CDACCA67CCCC2F0CC755F03596E;3853.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+(rerunfilecheck)             Checksum: 86B363F14B39B9FE6C94CDB1EC649F92;3995.
  ) 
 Here is how much of TeX's memory you used:
- 33875 strings out of 493089
- 636915 string characters out of 6134841
- 904518 words of memory out of 5000000
- 35902 multiletter control sequences out of 15000+600000
- 65611 words of font info for 121 fonts, out of 8000000 for 9000
+ 34064 strings out of 493089
+ 640222 string characters out of 6134841
+ 903923 words of memory out of 5000000
+ 35946 multiletter control sequences out of 15000+600000
+ 56074 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,12n,78p,10460b,1821s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2015/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/bitstrea/charter/bchbi8a.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/2
-015/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/2015
-/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/local/texlive/2015/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/tex
+ 64i,12n,78p,10460b,1818s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
+exlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/te
+xlive/2015/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/bitstrea/charter/bchbi8a.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/20
+15/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/2015/
+texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/local/texlive/2015/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2015/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/public/eurosym/feymr10.pfb></usr/local/texlive/2015/texmf-di
-st/fonts/type1/public/kpfonts/jkpsy.pfb>
-Output written on dizzy.pdf (95 pages, 4132532 bytes).
+st/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on dizzy.pdf (104 pages, 4277593 bytes).
 PDF statistics:
- 2013 PDF objects out of 2073 (max. 8388607)
- 1765 compressed objects within 18 object streams
- 761 named destinations out of 1000 (max. 500000)
- 778 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2232 PDF objects out of 2487 (max. 8388607)
+ 1970 compressed objects within 20 object streams
+ 884 named destinations out of 1000 (max. 500000)
+ 812 words of extra memory for PDF output out of 10000 (max. 10000000)
 
